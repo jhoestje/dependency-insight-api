@@ -1,5 +1,7 @@
 package org.johoco.depinsight.service;
 
-public interface ILanguageService {
+import org.johoco.depinsight.domain.Language;
 
+public interface ILanguageService {
+	Iterable<Language> findAll();
 }

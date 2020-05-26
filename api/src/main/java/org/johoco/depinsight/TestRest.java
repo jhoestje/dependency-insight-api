@@ -4,6 +4,7 @@ import org.johoco.depinsight.api.config.AppConfig;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.repository.LanguageRepository;
+import org.johoco.depinsight.service.ILanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,11 @@ public class TestRest {
 	private AppConfig appConfig;
 	
 	@Autowired
-	private LanguageRepository languageRepo;
+	private ILanguageService languageService;
 
 	
 	@GetMapping("/validate/")
-	public String testNeo() {
+	public Iterable<Language> testNeo() {
 		System.out.println("4444444444444444444444444444444444444444");
 		LOG.debug("whoooohoooowoooohoooowoooohoooowoooohoooo");
 		
@@ -33,9 +34,11 @@ public class TestRest {
 		GroupId gId1 = new GroupId();
 		gId1.setValue("org");
 		
+		gId1.setLanguage(javaLang);
+		
 		languageRepo.save(javaLang);
 		
-		return "asdfasdfasdfsadfsdaf";
+		return languageService.findAll();
 	}
 	
 	public void run() throws Exception {

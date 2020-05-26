@@ -12,9 +12,11 @@ import lombok.Data;
 @Data
 @NodeEntity
 public class Language {
-	@Id @GeneratedValue private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 	private String value;
-	
-	@Relationship(type = "GROUP_IDS")
-	  public Set<GroupId> groupIds;
+
+	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
+	public Set<GroupId> groupIds;
 }

@@ -2,6 +2,7 @@ package org.johoco.depinsight.domain;
 
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import lombok.Data;
 
@@ -12,4 +13,7 @@ public class ArtifactId {
 	
 	@Id
 	private String value;
+	
+	@Relationship(type="GROUP_ID")
+	private GroupId groupId;
 }
