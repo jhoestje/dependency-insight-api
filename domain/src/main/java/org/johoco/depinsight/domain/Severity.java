@@ -1,5 +1,7 @@
 package org.johoco.depinsight.domain;
 
-public class Severity extends Entity<KEY> {
+import org.johoco.depinsight.domain.key.StringKey;
+
+public class Severity extends Entity<StringKey> {
 
 }

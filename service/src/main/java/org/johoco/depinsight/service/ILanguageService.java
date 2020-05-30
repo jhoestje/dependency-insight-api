@@ -4,4 +4,6 @@ import org.johoco.depinsight.domain.Language;
 
 public interface ILanguageService {
 	Iterable<Language> findAll();
+
+	Language save(final Language language);
 }

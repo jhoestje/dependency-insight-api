@@ -1,5 +1,7 @@
 package org.johoco.depinsight.domain;
 
-public class Cpe extends Entity<KEY> {
+import org.johoco.depinsight.domain.key.StringKey;
+
+public class Cpe extends Entity<StringKey> {
 
 }

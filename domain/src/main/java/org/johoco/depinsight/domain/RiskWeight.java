@@ -1,5 +1,7 @@
 package org.johoco.depinsight.domain;
 
-public class RiskWeight extends Entity<KEY> {
+import org.johoco.depinsight.domain.key.StringKey;
+
+public class RiskWeight extends Entity<StringKey> {
 
 }

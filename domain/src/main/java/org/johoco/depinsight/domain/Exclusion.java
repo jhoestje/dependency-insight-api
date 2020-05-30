@@ -1,5 +1,7 @@
 package org.johoco.depinsight.domain;
 
-public class Exclusion extends Entity<KEY> {
+import org.johoco.depinsight.domain.key.ArtifactKey;
+
+public class Exclusion extends Entity<ArtifactKey> {
 
 }
