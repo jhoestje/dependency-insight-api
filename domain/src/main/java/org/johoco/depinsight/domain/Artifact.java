@@ -8,5 +8,6 @@ import lombok.Data;
 @Data
 @NodeEntity
 public class Artifact extends Entity<ArtifactKey> {
-
+	private Artifact parentArtifact;
+	private Artifact managingByArtifact;
 }
