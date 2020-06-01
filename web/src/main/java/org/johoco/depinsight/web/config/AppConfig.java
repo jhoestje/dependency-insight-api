@@ -1,4 +1,4 @@
-package org.johoco.depinsight.api.config;
+package org.johoco.depinsight.web.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

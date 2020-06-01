@@ -9,16 +9,16 @@
 		<artifactId>dependency-insight-api</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>dependency-insight-api-api</artifactId>
-	<name>api</name>
+	<artifactId>dependency-insight-web</artifactId>
+	<name>web</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>dependency-insight-api-service</artifactId>
+			<groupId>org.johoco.dependency-insight-api</groupId>
+			<artifactId>dependency-insight-api-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -27,4 +27,13 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+		<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
