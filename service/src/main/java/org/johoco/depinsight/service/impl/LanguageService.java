@@ -25,4 +25,9 @@ public class LanguageService implements ILanguageService {
 		return repo.save(language);
 	}
 
+	@Override
+	public Language save(final Language language) {
+		return repo.save(language);
+	}
+
 }
