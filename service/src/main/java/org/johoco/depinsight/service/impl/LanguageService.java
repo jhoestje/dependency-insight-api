@@ -20,10 +20,6 @@ public class LanguageService implements ILanguageService {
 	public Iterable<Language> findAll() {
 		return repo.findAll();
 	}
-	
-	public Language save(final Language language) {
-		return repo.save(language);
-	}
 
 	@Override
 	public Language save(final Language language) {
