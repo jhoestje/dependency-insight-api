@@ -1,4 +1,4 @@
-package org.johoco.depinsight.api;
+package org.johoco.depinsight.web;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

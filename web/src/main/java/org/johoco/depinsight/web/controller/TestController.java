@@ -1,25 +1,27 @@
-package org.johoco.depinsight;
+package org.johoco.depinsight.web.controller;
 
-import org.johoco.depinsight.api.config.AppConfig;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.service.ILanguageService;
+import org.johoco.depinsight.web.config.WebConfig;
+import org.johoco.depinsight.web.config.WebProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RefreshScope
 @RestController
-public class TestRest {
+public class TestController {
 
-	private final static Logger LOG = LoggerFactory.getLogger(TestRest.class);
+	private final static Logger LOG = LoggerFactory.getLogger(TestController.class);
 
 	@Autowired
-	private AppConfig appConfig;
+	private WebConfig appConfig;
+
+	@Autowired
+	private WebProperties appProperities;
 
 	@Autowired
 	private ILanguageService languageService;
@@ -52,7 +54,7 @@ public class TestRest {
 
 	public void run() throws Exception {
 		System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
-		System.out.println("using environment: " + appConfig.getEnvironment());
-		System.out.println("name: " + appConfig.getName());
+		System.out.println("using environment: " + appProperities.getEnvironment());
+		System.out.println("name: " + appProperities.getName());
 	}
 }
