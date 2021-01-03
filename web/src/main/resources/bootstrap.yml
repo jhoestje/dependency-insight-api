@@ -1,0 +1,10 @@
+spring:
+  application:
+      name: dependency-insight   
+  profiles:
+    active: local
+  cloud:
+    config:
+       uri: http://localhost:8888
+    vault:      token: ${VAULT_TOKEN}
+      scheme: http
