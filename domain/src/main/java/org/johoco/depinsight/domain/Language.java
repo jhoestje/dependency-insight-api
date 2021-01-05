@@ -11,8 +11,14 @@ import lombok.Data;
 @Data
 @NodeEntity
 public class Language extends Entity<LanguageKey> {
+
 	private String value;
+
+//	public Language(LanguageKey key) {
+//		super.setKey(key);
+//	}
 
 	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
 	public Set<GroupId> groupIds;
+
 }
