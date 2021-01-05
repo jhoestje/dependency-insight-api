@@ -1,12 +1,13 @@
 package org.johoco.depinsight.domain;
 
 import org.johoco.depinsight.domain.key.ArtifactKey;
-import org.neo4j.ogm.annotation.NodeEntity;
+import org.springframework.data.neo4j.core.schema.RelationshipProperties;
 
 import lombok.Data;
 
 @Data
-@NodeEntity
+// @NodeEntity
+@RelationshipProperties
 public class Artifact extends Entity<ArtifactKey> {
 	private Artifact parentArtifact;
 	private Artifact managingByArtifact;
