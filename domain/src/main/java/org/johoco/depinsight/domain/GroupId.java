@@ -2,15 +2,14 @@ package org.johoco.depinsight.domain;
 
 import java.util.Set;
 
-import org.springframework.data.neo4j.core.schema.Id;
-import org.springframework.data.neo4j.core.schema.Node;
-import org.springframework.data.neo4j.core.schema.Relationship;
-import org.springframework.data.neo4j.core.schema.Relationship.Direction;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import lombok.Data;
 
 @Data
-@Node
+@NodeEntity
 public class GroupId {
 //	@Id
 //	@GeneratedValue
@@ -23,7 +22,7 @@ public class GroupId {
 	@Relationship(type = "LANGUAGE")
 	private Language language;
 
-	@Relationship(type = "LANGUAGE_TYPE", direction = Direction.INCOMING)
+	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
 	private Set<ArtifactId> artifactIds;
 
 }

@@ -1,8 +1,8 @@
 package org.johoco.depinsight.domain;
 
 import org.johoco.depinsight.domain.key.Key;
-import org.springframework.data.neo4j.core.schema.GeneratedValue;
-import org.springframework.data.neo4j.core.schema.Id;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 
 public abstract class Entity<KEY extends Key> {
 
