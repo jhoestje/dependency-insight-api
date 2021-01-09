@@ -3,8 +3,6 @@ package org.johoco.depinsight.web.controller;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.service.ILanguageService;
-import org.johoco.depinsight.web.config.WebConfig;
-import org.johoco.depinsight.web.config.WebProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +15,11 @@ public class TestController {
 
 	private final static Logger LOG = LoggerFactory.getLogger(TestController.class);
 
-	@Autowired
-	private WebConfig appConfig;
+//	@Autowired
+//	private WebConfig appConfig;
 
-	@Autowired
-	private WebProperties appProperities;
+//	@Autowired
+//	private WebProperties appProperities;
 
 	@Autowired
 	private ILanguageService languageService;
@@ -53,9 +51,9 @@ public class TestController {
 		return this.message;
 	}
 
-	public void run() throws Exception {
-		System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
-		System.out.println("using environment: " + appProperities.getEnvironment());
-		System.out.println("name: " + appProperities.getName());
-	}
+//	public void run() throws Exception {
+//		System.out.println(";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;");
+//		System.out.println("using environment: " + appProperities.getEnvironment());
+//		System.out.println("name: " + appProperities.getName());
+//	}
 }
