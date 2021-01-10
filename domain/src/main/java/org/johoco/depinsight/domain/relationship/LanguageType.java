@@ -1,15 +1,32 @@
 package org.johoco.depinsight.domain.relationship;
 
-import org.johoco.depinsight.domain.Entity;
+import java.util.Date;
+
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
+import org.neo4j.ogm.annotation.EndNode;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.Property;
+import org.neo4j.ogm.annotation.RelationshipEntity;
+import org.neo4j.ogm.annotation.StartNode;
 
-//@RelationshipEntity(type = "LANGUAGE_TYPE")
-public class LanguageType extends Entity {
-	// @Property private String title;
-//	@StartNode
-	private GroupId actor;
-//	@EndNode
-	private Language movie;
+import lombok.Data;
+
+@Data
+@RelationshipEntity(type = "LANGUAGE_TYPE")
+public class LanguageType {
+
+	@Id
+	@GeneratedValue
+	private Long relationshipId;
+
+	@Property
+	private Date createdDate;
+	
+	@StartNode
+	private GroupId groupId;
+	@EndNode
+	private Language language;
 
 }

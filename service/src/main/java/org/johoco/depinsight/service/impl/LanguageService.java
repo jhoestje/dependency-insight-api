@@ -1,5 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
+import java.util.Optional;
+
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.repository.LanguageRepository;
 import org.johoco.depinsight.service.ILanguageService;
@@ -23,7 +25,11 @@ public class LanguageService implements ILanguageService {
 
 	@Override
 	public Language save(final Language language) {
-		return repo.save(language);
+		Optional<Language> existing = repo.findByValue(language.getValue());
+		if(existing.isEmpty()) {
+			return repo.save(language);	
+		}
+		return existing.get();
 	}
 
 }

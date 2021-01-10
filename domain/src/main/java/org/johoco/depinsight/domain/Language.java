@@ -1,6 +1,6 @@
 package org.johoco.depinsight.domain;
 
-import java.util.Set;
+import java.util.List;
 
 import org.johoco.depinsight.domain.key.LanguageKey;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -18,7 +18,7 @@ public class Language extends Entity<LanguageKey> {
 //		super.setKey(key);
 //	}
 
-	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
-	public Set<GroupId> groupIds;
+//	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
+//	public List<Lan> groupIds;
 
 }
