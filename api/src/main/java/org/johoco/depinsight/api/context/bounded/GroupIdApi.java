@@ -1,4 +1,4 @@
-package org.johoco.depinsight.api.bounded;
+package org.johoco.depinsight.api.context.bounded;
 
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.service.IGroupIdService;

@@ -12,8 +12,11 @@ import org.neo4j.ogm.annotation.RelationshipEntity;
 import org.neo4j.ogm.annotation.StartNode;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @RelationshipEntity(type = "LANGUAGE_TYPE")
 public class LanguageType {
 
