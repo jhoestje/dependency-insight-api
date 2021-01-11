@@ -17,6 +17,7 @@ public class GroupId {
 //	@Property(name = "value")
 	@Id
 	private String value;
+	
 	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.OUTGOING)
 	private LanguageType language;
 

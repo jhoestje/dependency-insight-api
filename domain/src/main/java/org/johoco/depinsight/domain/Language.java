@@ -1,17 +1,15 @@
 package org.johoco.depinsight.domain;
 
-import java.util.List;
-
-import org.johoco.depinsight.domain.key.LanguageKey;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 
 import lombok.Data;
 
 @Data
 @NodeEntity
-public class Language extends Entity<LanguageKey> {
+public class Language { //extends Entity<LanguageKey> {
 
+	@Id
 	private String value;
 
 //	public Language(LanguageKey key) {

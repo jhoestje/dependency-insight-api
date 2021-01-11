@@ -3,9 +3,11 @@ package org.johoco.depinsight.web.controller;
 import java.util.Date;
 
 import org.johoco.depinsight.api.context.bounded.GroupIdApi;
+import org.johoco.depinsight.domain.ArtifactId;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.domain.relationship.LanguageType;
+import org.johoco.depinsight.domain.relationship.PartOfGroupId;
 import org.johoco.depinsight.service.ILanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,10 +43,10 @@ public class TestController {
 
 		// LanguageKey lk = new LanguageKey("JAVA");
 		Language javaLang = new Language();
-		javaLang.setValue("COBOL");
+		javaLang.setValue("SMALLTALK");
 
 		GroupId gId1 = new GroupId();
-		gId1.setValue("cobgid2");
+		gId1.setValue("st2");
 		
 		LanguageType lt = new LanguageType();
 		lt.setGroupId(gId1);
@@ -52,6 +54,16 @@ public class TestController {
 		lt.setCreatedDate(new Date());
 
 		gId1.setLanguage(lt);
+		
+		ArtifactId aid1 = new ArtifactId();
+		aid1.setValue("aid1");
+		
+		PartOfGroupId pgid = new PartOfGroupId();
+		pgid.setArtifactId(aid1);
+		pgid.setGroupId(gId1);
+		pgid.setCreatedDate(new Date());
+		
+		aid1.setPartOfGroupId(pgid);
 		
 		groupIdApi.save(gId1);
 		
