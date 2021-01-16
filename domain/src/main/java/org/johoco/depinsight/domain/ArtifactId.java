@@ -18,6 +18,10 @@ public class ArtifactId {
 
 	@Id
 	private String value;
+	
+	// not sure about how to do/if need to do keys (lang + gid + aid)
+//	@org.neo4j.ogm.annotation.Transient
+//	private String key;
 
 	@Relationship(type = "PART_OF_GROUP", direction = Relationship.OUTGOING)
 	private PartOfGroupId partOfGroupId;

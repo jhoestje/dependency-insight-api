@@ -16,4 +16,6 @@ public class Gavp {
 	private String artifactId;
 	private String version;
 	private String packageType;
+	
+	
 }
