@@ -88,6 +88,15 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
+		<!-- dont know if the maven model is needed
+		<dependency>
+		    <groupId>org.apache.maven.resolver</groupId>
+		    <artifactId>maven-resolver-api</artifactId>
+		    <version>1.6.1</version>
+		</dependency>
+ -->
+		
 	</dependencies>
 
 	<modules>
