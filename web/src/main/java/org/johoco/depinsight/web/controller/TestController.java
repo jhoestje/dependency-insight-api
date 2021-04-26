@@ -29,7 +29,7 @@ public class TestController {
 
 	@Autowired
 	private ILanguageService languageService;
-	
+
 	@Autowired
 	private GroupIdApi groupIdApi;
 
@@ -47,31 +47,30 @@ public class TestController {
 
 		GroupId gId1 = new GroupId();
 		gId1.setValue("st2");
-		
+
 		LanguageType lt = new LanguageType();
 		lt.setGroupId(gId1);
 		lt.setLanguage(javaLang);
 		lt.setCreatedDate(new Date());
 
 		gId1.setLanguage(lt);
-		
+
 		ArtifactId aid1 = new ArtifactId();
 		aid1.setValue("aid1");
-		
+
 		PartOfGroupId pgid = new PartOfGroupId();
 		pgid.setArtifactId(aid1);
 		pgid.setGroupId(gId1);
 		pgid.setCreatedDate(new Date());
-		
+
 		aid1.setPartOfGroupId(pgid);
-		
-		groupIdApi.save(gId1);
-		
+
+		GroupId savedgid = groupIdApi.save(gId1);
+
 //		List<GroupId> gids = new ArrayList<>();
 //		gids.add(gId1);
-		
+
 //		javaLang.setGroupIds(gids);
-		
 
 //		languageService.save(javaLang);
 
