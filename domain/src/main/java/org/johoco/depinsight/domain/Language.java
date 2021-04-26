@@ -1,15 +1,16 @@
 package org.johoco.depinsight.domain;
 
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
+import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
 
 @Data
-@NodeEntity
-public class Language { //extends Entity<LanguageKey> {
+//NodeEntity
+@Document
+public class Language { // extends Entity<LanguageKey> {
 
-	@Id
+	// neo4j attributes
+//	@Id
 	private String value;
 
 //	public Language(LanguageKey key) {

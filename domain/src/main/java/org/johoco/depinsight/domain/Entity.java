@@ -1,9 +1,12 @@
 package org.johoco.depinsight.domain;
 
-import org.johoco.depinsight.domain.key.Key;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
+import java.util.Date;
 
+import org.johoco.depinsight.domain.key.Key;
+
+import lombok.Data;
+
+@Data
 public abstract class Entity<KEY extends Key> {
 
 //	@Id
@@ -19,8 +22,10 @@ public abstract class Entity<KEY extends Key> {
 //	public KEY getKey() {
 //		return key;
 //	}
-	@Id
-	@GeneratedValue
+
+	// neo4j attributes
+//	@Id
+//	@GeneratedValue
 	private Long id;
 
 //	@Id
@@ -29,6 +34,8 @@ public abstract class Entity<KEY extends Key> {
 //
 //	@Property
 //	private KEY key;
+
+	private Date createdDate;
 //
 //	public Long getId() {
 //		return id;

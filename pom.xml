@@ -38,17 +38,14 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
-			<!-- <dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-neo4j</artifactId>
-				
-			</dependency> -->
-			
-			      <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-data-neo4j</artifactId>
-	        <version>${spring-boot.version}</version>
-	      </dependency>
+			<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-neo4j</artifactId> 
+				</dependency> -->
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-data-neo4j</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -88,15 +85,10 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
-		<!-- dont know if the maven model is needed
-		<dependency>
-		    <groupId>org.apache.maven.resolver</groupId>
-		    <artifactId>maven-resolver-api</artifactId>
-		    <version>1.6.1</version>
-		</dependency>
- -->
-		
+
+		<!-- dont know if the maven model is needed <dependency> <groupId>org.apache.maven.resolver</groupId> 
+			<artifactId>maven-resolver-api</artifactId> <version>1.6.1</version> </dependency> -->
+
 	</dependencies>
 
 	<modules>

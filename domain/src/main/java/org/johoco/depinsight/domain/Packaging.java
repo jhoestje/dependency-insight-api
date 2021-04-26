@@ -1,16 +1,16 @@
 package org.johoco.depinsight.domain;
 
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
+import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
-@NodeEntity
-public class Packaging extends GraphData {
-	
-	@Id
+//@EqualsAndHashCode(callSuper = true)
+//NodeEntity
+@Document
+public class Packaging { // extends GraphData {
+
+	// neo4j attributes
+//	@Id
 	private String value;
 }
