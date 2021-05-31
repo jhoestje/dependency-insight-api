@@ -9,6 +9,7 @@ import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.domain.relationship.LanguageType;
 import org.johoco.depinsight.domain.relationship.PartOfGroupId;
 import org.johoco.depinsight.service.ILanguageService;
+import org.johoco.depinsight.service.ILanguageTypeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class TestController {
 	private ILanguageService languageService;
 
 	@Autowired
+	private ILanguageTypeService languageTypeService;
+
+	@Autowired
 	private GroupIdApi groupIdApi;
 
 	@Value("${messagez:Hello default}")
@@ -44,16 +48,12 @@ public class TestController {
 		// LanguageKey lk = new LanguageKey("JAVA");
 		Language javaLang = new Language();
 		javaLang.setValue("SMALLTALK");
+		javaLang = languageService.save(javaLang);
 
 		GroupId gId1 = new GroupId();
 		gId1.setValue("st2");
 
-		LanguageType lt = new LanguageType();
-		lt.setGroupId(gId1);
-		lt.setLanguage(javaLang);
-		lt.setCreatedDate(new Date());
-
-		gId1.setLanguage(lt);
+		// gId1.setLanguage(javaLang);
 
 		ArtifactId aid1 = new ArtifactId();
 		aid1.setValue("aid1");
@@ -66,6 +66,12 @@ public class TestController {
 		aid1.setPartOfGroupId(pgid);
 
 		GroupId savedgid = groupIdApi.save(gId1);
+
+		LanguageType lt = new LanguageType(savedgid, javaLang);
+//		lt.setGroupId(gId1);
+//		lt.setLanguage(javaLang);
+		lt.setCreatedDate(new Date());
+		languageTypeService.save(lt);
 
 //		List<GroupId> gids = new ArrayList<>();
 //		gids.add(gId1);

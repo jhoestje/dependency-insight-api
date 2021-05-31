@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GroupIdService implements IGroupIdService {
-	
+
 	private GroupIdRepository repo;
-	
+
 	@Autowired
 	public GroupIdService(final GroupIdRepository repo) {
 		this.repo = repo;
@@ -25,9 +25,11 @@ public class GroupIdService implements IGroupIdService {
 
 	@Override
 	public GroupId save(final GroupId groupId) {
+		// TODO: move to business rule
+		assert groupId.getValue() != null;
 		Optional<GroupId> existing = repo.findByValue(groupId.getValue());
-		if(existing.isEmpty()) {
-			return repo.save(groupId);	
+		if (existing.isEmpty()) {
+			return repo.save(groupId);
 		}
 		return existing.get();
 	}

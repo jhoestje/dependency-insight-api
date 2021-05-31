@@ -14,23 +14,26 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<arango.spring.data>3.5.0</arango.spring.data>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>dependency-insight-api-domain</artifactId>
 			<version>${project.version}</version>
-			<classifier>arangodb</classifier>
+			<!-- <classifier>arangodb</classifier> -->
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.arangodb</groupId>
 			<artifactId>arangodb-spring-boot-starter</artifactId>
 			<version>2.3.3.RELEASE</version>
-		</dependency>
-
-
-
+		</dependency> -->
+		<dependency>
+            <groupId>com.arangodb</groupId>
+            <artifactId>arangodb-spring-data</artifactId>
+            <version>${arango.spring.data}</version>
+        </dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
@@ -39,7 +42,7 @@
 		</dependency>
 	</dependencies>
 
-	<build>
+	<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -51,5 +54,5 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 </project>

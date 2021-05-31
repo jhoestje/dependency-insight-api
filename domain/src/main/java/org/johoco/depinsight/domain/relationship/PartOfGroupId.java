@@ -4,15 +4,16 @@ import org.johoco.depinsight.domain.ArtifactId;
 import org.johoco.depinsight.domain.GraphData;
 import org.johoco.depinsight.domain.GroupId;
 
-import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.Edge;
+import com.arangodb.springframework.annotation.From;
+import com.arangodb.springframework.annotation.To;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Getter
-@Setter
-//@RelationshipEntity(type = "PART_OF_GROUP")
-@Document("partOfGroupId")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Edge("partOfGroupId")
 public class PartOfGroupId extends GraphData {
 
 	// neo4j annotations
@@ -20,10 +21,10 @@ public class PartOfGroupId extends GraphData {
 //	@GeneratedValue
 //	private Long relationshipId;
 //
-//	@StartNode
+	@From
 	private ArtifactId artifactId;
 //
-//	@EndNode
+	@To
 	private GroupId groupId;
 
 }

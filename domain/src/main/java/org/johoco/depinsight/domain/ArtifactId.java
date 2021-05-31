@@ -4,6 +4,7 @@ import org.johoco.depinsight.domain.relationship.PartOfGroupId;
 import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.To;
 
 //import org.neo4j.ogm.annotation.Id;
 //import org.neo4j.ogm.annotation.NodeEntity;
@@ -13,11 +14,12 @@ import lombok.Data;
 
 @Data
 //NodeEntity
-@Document("artifactId")
+@Document("artifactIds")
 public class ArtifactId {
-//	@Id @GeneratedValue private Long id;
-
 	@Id
+//	@GeneratedValue
+	private String id;
+
 	private String value;
 
 	// not sure about how to do/if need to do keys (lang + gid + aid)
@@ -25,5 +27,6 @@ public class ArtifactId {
 //	private String key;
 
 //	@Relationship(type = "PART_OF_GROUP", direction = Relationship.OUTGOING)
+	@To
 	private PartOfGroupId partOfGroupId;
 }

@@ -14,7 +14,7 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring-cloud.version>Hoxton.SR5</spring-cloud.version>
+		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>

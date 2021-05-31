@@ -20,7 +20,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>dependency-insight-api-repository</artifactId>
 			<version>${project.version}</version>
-			<classifier>arangodb</classifier>
+			<!-- <classifier>arangodb</classifier> -->
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

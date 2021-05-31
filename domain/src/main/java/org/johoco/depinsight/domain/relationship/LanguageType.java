@@ -4,25 +4,25 @@ import org.johoco.depinsight.domain.GraphData;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
 
-import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.Edge;
+import com.arangodb.springframework.annotation.From;
+import com.arangodb.springframework.annotation.To;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
-@Getter
-@Setter
-//@RelationshipEntity(type = "LANGUAGE_TYPE")
-@Document("language_type")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Edge("language_type")
 public class LanguageType extends GraphData {
 
-// neo4j attributes
-//	@Id
-//	@GeneratedValue
-//	private Long relationshipId;
-//
-//	@StartNode
+	@From
+	@NonNull
 	private GroupId groupId;
-//	@EndNode
+
+	@To
+	@NonNull
 	private Language language;
 
 }

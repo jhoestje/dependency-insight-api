@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 //@EqualsAndHashCode(callSuper = true)
 //NodeEntity
-@Document
+@Document("packagings")
 public class Packaging { // extends GraphData {
 
 	// neo4j attributes

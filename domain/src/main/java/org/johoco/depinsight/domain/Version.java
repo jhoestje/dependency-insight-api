@@ -1,18 +1,28 @@
 package org.johoco.depinsight.domain;
 
+import org.springframework.data.annotation.Id;
+
 import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.To;
 
 import lombok.Data;
 
 @Data
 //@EqualsAndHashCode(callSuper = true)
 //NodeEntity
-@Document("version")
+@Document("versions")
 public class Version { // extends GraphData {
+
+	@Id
+//	@GeneratedValue
+	private String id;
 
 	// neo4j attributes
 //	@Id
 	private String value;
+
+	@To
+	private ArtifactId artifactId;
 
 	// not sure about how to do/if need to do keys (lang + gid + aid)
 //	@org.neo4j.ogm.annotation.Transient
