@@ -6,8 +6,8 @@ import org.johoco.depinsight.api.context.bounded.GroupIdApi;
 import org.johoco.depinsight.domain.ArtifactId;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
-import org.johoco.depinsight.domain.relationship.LanguageType;
-import org.johoco.depinsight.domain.relationship.PartOfGroupId;
+import org.johoco.depinsight.domain.relationship.OfLanguage;
+import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.johoco.depinsight.service.ILanguageService;
 import org.johoco.depinsight.service.ILanguageTypeService;
 import org.slf4j.Logger;
@@ -58,7 +58,7 @@ public class TestController {
 		ArtifactId aid1 = new ArtifactId();
 		aid1.setValue("aid1");
 
-		PartOfGroupId pgid = new PartOfGroupId();
+		OfGroupId pgid = new OfGroupId();
 		pgid.setArtifactId(aid1);
 		pgid.setGroupId(gId1);
 		pgid.setCreatedDate(new Date());
@@ -67,7 +67,7 @@ public class TestController {
 
 		GroupId savedgid = groupIdApi.save(gId1);
 
-		LanguageType lt = new LanguageType(savedgid, javaLang);
+		OfLanguage lt = new OfLanguage(savedgid, javaLang);
 //		lt.setGroupId(gId1);
 //		lt.setLanguage(javaLang);
 		lt.setCreatedDate(new Date());

@@ -24,6 +24,10 @@ public class Version { // extends GraphData {
 	@To
 	private ArtifactId artifactId;
 
+	public static String getName() {
+		return "versions";
+	}
+
 	// not sure about how to do/if need to do keys (lang + gid + aid)
 //	@org.neo4j.ogm.annotation.Transient
 //	private String key;

@@ -8,14 +8,13 @@ import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
-@Edge("language_type")
-public class LanguageType extends GraphData {
+//@RelationshipEntity(type = "PART_OF_GROUP")
+@Edge("ofVersion")
+public class OfVersion extends GraphData implements GraphEdge {
 
 	@From
 	@NonNull
@@ -24,5 +23,28 @@ public class LanguageType extends GraphData {
 	@To
 	@NonNull
 	private Language language;
+
+	public static String getName() {
+		return "ofVersion";
+	}
+
+	public static String getFromName() {
+		return GroupId.getName();
+	}
+
+	public static String getToName() {
+		return Language.getName();
+	}
+
+	// neo4j annotations
+//	@Id
+//	@GeneratedValue
+//	private Long relationshipId;
+//	
+//	@StartNode
+//	private Packaging packaging;
+//	
+//	@EndNode
+//	private Version version;
 
 }

@@ -2,7 +2,7 @@ package org.johoco.depinsight.service.impl;
 
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.relationship.LanguageType;
+import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.johoco.depinsight.repository.LanguageTypeRepository;
 import org.johoco.depinsight.service.ILanguageTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +19,13 @@ public class LanguageTypeService implements ILanguageTypeService {
 	}
 
 	@Override
-	public Iterable<LanguageType> findAll() {
+	public Iterable<OfLanguage> findAll() {
 		return repo.findAll();
 	}
 
 	@Override
-	public LanguageType save(final LanguageType languageType) {
-		Optional<LanguageType> existing = repo.findByGroupIdAndLanguage(languageType.getGroupId(),
+	public OfLanguage save(final OfLanguage languageType) {
+		Optional<OfLanguage> existing = repo.findByGroupIdAndLanguage(languageType.getGroupId(),
 				languageType.getLanguage());
 		if (existing.isEmpty()) {
 			return repo.save(languageType);

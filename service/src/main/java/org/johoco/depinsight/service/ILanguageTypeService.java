@@ -1,9 +1,9 @@
 package org.johoco.depinsight.service;
 
-import org.johoco.depinsight.domain.relationship.LanguageType;
+import org.johoco.depinsight.domain.relationship.OfLanguage;
 
 public interface ILanguageTypeService {
-	Iterable<LanguageType> findAll();
+	Iterable<OfLanguage> findAll();
 
-	LanguageType save(final LanguageType languageType);
+	OfLanguage save(final OfLanguage languageType);
 }

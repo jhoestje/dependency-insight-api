@@ -1,6 +1,6 @@
 package org.johoco.depinsight.domain;
 
-import org.johoco.depinsight.domain.relationship.PartOfGroupId;
+import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.Document;
@@ -28,5 +28,9 @@ public class ArtifactId {
 
 //	@Relationship(type = "PART_OF_GROUP", direction = Relationship.OUTGOING)
 	@To
-	private PartOfGroupId partOfGroupId;
+	private OfGroupId partOfGroupId;
+
+	public static String getName() {
+		return "artifactIds";
+	}
 }

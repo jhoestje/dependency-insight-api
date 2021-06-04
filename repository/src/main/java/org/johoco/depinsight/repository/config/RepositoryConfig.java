@@ -2,10 +2,11 @@ package org.johoco.depinsight.repository.config;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
-import org.johoco.depinsight.domain.relationship.LanguageType;
+import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import com.arangodb.ArangoDB;
 import com.arangodb.ArangoDBException;
 import com.arangodb.ArangoDatabase;
+import com.arangodb.ArangoGraph;
 import com.arangodb.entity.EdgeDefinition;
-import com.arangodb.entity.GraphEntity;
 import com.arangodb.springframework.annotation.EnableArangoRepositories;
 import com.arangodb.springframework.config.ArangoConfiguration;
 import com.arangodb.springframework.core.ArangoOperations;
@@ -44,6 +45,10 @@ public class RepositoryConfig implements ArangoConfiguration {
 		return "depinsight";
 	}
 
+	public String graph() {
+		return "manifest";
+	}
+
 	@Override
 	@Bean
 	public ArangoOperations arangoTemplate() throws Exception {
@@ -55,21 +60,35 @@ public class RepositoryConfig implements ArangoConfiguration {
 
 		createDatabase(arangoDatabase);
 
-//		CollectionEntity myArangoCollection = arangoDatabase.createCollection("collectionName");
-
-		final Collection<EdgeDefinition> edgeDefinitions = new ArrayList<>();
-		final EdgeDefinition edgeDefinition = new EdgeDefinition().collection("EDGE_COLLECTION_NAME")
-				.from("VERTEXT_COLLECTION_NAME").to("VERTEXT_COLLECTION_NAME");
-		edgeDefinitions.add(edgeDefinition);
-		arangoDatabase.createGraph("GRAPH_NAME", edgeDefinitions, null);
-
-		// check if graph is created
-		Collection<GraphEntity> graphs = arangoDatabase.getGraphs();
-		graphs.isEmpty();
-
 		setupDatabase(operations);
 
+		createGraph(arangoDatabase);
+
 		return operations;
+	}
+
+	private Collection<EdgeDefinition> buildEdgeDefinitions(final ArangoGraph graph) {
+		final Set<String> names = Set.copyOf(graph.getEdgeDefinitions());
+
+		final Collection<EdgeDefinition> newEdgeDefinitions = new ArrayList<>();
+
+		if (!names.contains(OfLanguage.getName())) {
+			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfLanguage.getName())
+					.from(OfLanguage.getFromName()).to(OfLanguage.getToName());
+			graph.addEdgeDefinition(edgeDefinition);
+		}
+
+		return newEdgeDefinitions;
+	}
+
+	private void createGraph(final ArangoDatabase arangoDatabase) {
+		ArangoGraph graph = arangoDatabase.graph(graph());
+
+		if (!graph.exists()) {
+			arangoDatabase.createGraph(graph(), new ArrayList<EdgeDefinition>(), null);
+		}
+
+		buildEdgeDefinitions(graph);
 	}
 
 	private void createDatabase(final ArangoDatabase arangoDatabase) {
@@ -93,23 +112,16 @@ public class RepositoryConfig implements ArangoConfiguration {
 	}
 
 	/**
-	 * Create the Collections if they don't already exist.
+	 * Create the Collections if they don't already exist. They may or may not be
+	 * part of a graph.
 	 * 
 	 * @param operations
 	 */
 	public void setupDatabase(final ArangoOperations operations) {
 
 		operations.collection(Language.class);
-		operations.collection(LanguageType.class);
+		operations.collection(OfLanguage.class);
 		operations.collection(GroupId.class);
 	}
-
-//	@Resource
-//	public void setupDatabase(ArangoMappingContext arangoContext) {
-////		boolean exists = template.exists("some-id", MyObject.class)
-//
-//		Collection<DefaultArangoPersistentEntity<?>> entities = arangoContext.getPersistentEntities();
-//		System.out.println(entities.size());
-//	}
 
 }
