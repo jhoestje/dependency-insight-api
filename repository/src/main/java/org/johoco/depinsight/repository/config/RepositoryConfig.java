@@ -1,11 +1,12 @@
 package org.johoco.depinsight.repository.config;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Set;
 
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
+import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
@@ -67,18 +68,34 @@ public class RepositoryConfig implements ArangoConfiguration {
 		return operations;
 	}
 
-	private Collection<EdgeDefinition> buildEdgeDefinitions(final ArangoGraph graph) {
+	/**
+	 * Staring from the Top of the graph to the bottom via Edges.
+	 * 
+	 * @param graph - the graph to add Edges to
+	 */
+	private void buildEdgeDefinitions(final ArangoGraph graph) {
 		final Set<String> names = Set.copyOf(graph.getEdgeDefinitions());
 
-		final Collection<EdgeDefinition> newEdgeDefinitions = new ArrayList<>();
-
+		// GroupId > Language
 		if (!names.contains(OfLanguage.getName())) {
 			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfLanguage.getName())
 					.from(OfLanguage.getFromName()).to(OfLanguage.getToName());
 			graph.addEdgeDefinition(edgeDefinition);
 		}
 
-		return newEdgeDefinitions;
+		// ArtifactID > GroupId
+		if (!names.contains(OfGroupId.getName())) {
+			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfGroupId.getName())
+					.from(OfGroupId.getFromName()).to(OfGroupId.getToName());
+			graph.addEdgeDefinition(edgeDefinition);
+		}
+
+		// Version > ArtifactID
+		if (!names.contains(OfArtifactId.getName())) {
+			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfArtifactId.getName())
+					.from(OfArtifactId.getFromName()).to(OfArtifactId.getToName());
+			graph.addEdgeDefinition(edgeDefinition);
+		}
 	}
 
 	private void createGraph(final ArangoDatabase arangoDatabase) {
