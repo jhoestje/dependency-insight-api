@@ -17,11 +17,11 @@ public class OfArtifactId extends GraphData implements GraphEdge {
 
 	@From
 	@NonNull
-	private Version groupId;
+	private Version version;
 
 	@To
 	@NonNull
-	private ArtifactId language;
+	private ArtifactId artifactId;
 
 	public static String getName() {
 		return "ofArtifactId";
@@ -35,14 +35,4 @@ public class OfArtifactId extends GraphData implements GraphEdge {
 		return ArtifactId.getName();
 	}
 
-	// neo4j annotations
-//	@Id
-//	@GeneratedValue
-//	private Long relationshipId;
-//	
-//	@StartNode
-//	private Version version;
-//	
-//	@EndNode
-//	private ArtifactId artifactId;
 }

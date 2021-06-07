@@ -16,5 +16,6 @@ public abstract class GraphData {
 //    private String arangoId;
 
 	private Date createdDate;
+	private Date lastUpdatedDate;
 
 }

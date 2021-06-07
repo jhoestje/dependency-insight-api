@@ -1,38 +1,25 @@
 package org.johoco.depinsight.domain;
 
-import org.springframework.data.annotation.Id;
+import org.johoco.depinsight.domain.relationship.OfArtifactId;
 
 import com.arangodb.springframework.annotation.Document;
-import com.arangodb.springframework.annotation.To;
+import com.arangodb.springframework.annotation.Relations;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-//@EqualsAndHashCode(callSuper = true)
-//NodeEntity
+@EqualsAndHashCode(callSuper = true)
 @Document("versions")
-public class Version { // extends GraphData {
+public class Version extends GraphData {
 
-	@Id
-//	@GeneratedValue
-	private String id;
-
-	// neo4j attributes
-//	@Id
 	private String value;
 
-	@To
+	@Relations(edges = OfArtifactId.class, lazy = false)
 	private ArtifactId artifactId;
 
 	public static String getName() {
 		return "versions";
 	}
 
-	// not sure about how to do/if need to do keys (lang + gid + aid)
-//	@org.neo4j.ogm.annotation.Transient
-//	private String key;
-
-	// neo4j attributes
-//	@Relationship(type = "PART_OF_ARTIFACTID", direction = Relationship.OUTGOING)
-	// private PartOfArtifactId partOfGroupId;
 }

@@ -1,50 +1,40 @@
 package org.johoco.depinsight.domain.relationship;
 
 import org.johoco.depinsight.domain.GraphData;
-import org.johoco.depinsight.domain.GroupId;
-import org.johoco.depinsight.domain.Language;
+import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.Version;
 
 import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
+@Data
 @EqualsAndHashCode(callSuper = true)
-//@RelationshipEntity(type = "PART_OF_GROUP")
 @Edge("ofVersion")
 public class OfVersion extends GraphData implements GraphEdge {
 
 	@From
 	@NonNull
-	private GroupId groupId;
+	private Packaging packaging;
 
 	@To
 	@NonNull
-	private Language language;
+	private Version version;
 
 	public static String getName() {
-		return "ofVersion";
+		return "ofArtifactId";
 	}
 
 	public static String getFromName() {
-		return GroupId.getName();
+		return Packaging.getName();
 	}
 
 	public static String getToName() {
-		return Language.getName();
+		return Version.getName();
 	}
-
-	// neo4j annotations
-//	@Id
-//	@GeneratedValue
-//	private Long relationshipId;
-//	
-//	@StartNode
-//	private Packaging packaging;
-//	
-//	@EndNode
-//	private Version version;
 
 }

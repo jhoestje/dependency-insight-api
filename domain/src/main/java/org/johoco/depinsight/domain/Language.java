@@ -2,10 +2,11 @@ package org.johoco.depinsight.domain;
 
 import com.arangodb.springframework.annotation.Document;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+@Data
 @EqualsAndHashCode(callSuper = true)
-//NodeEntity
 @Document("languages")
 public class Language extends GraphData { // extends Entity<LanguageKey> {
 

@@ -3,14 +3,16 @@ package org.johoco.depinsight.domain;
 import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-//@EqualsAndHashCode(callSuper = true)
-//NodeEntity
+@EqualsAndHashCode(callSuper = true)
 @Document("packagings")
-public class Packaging { // extends GraphData {
+public class Packaging extends GraphData {
 
-	// neo4j attributes
-//	@Id
 	private String value;
+
+	public static String getName() {
+		return "packagings";
+	}
 }

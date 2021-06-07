@@ -1,4 +1,4 @@
-package org.johoco.depinsight.domain.key;
+package org.johoco.depinsight.domain.composite.key;
 
 import lombok.Data;
 

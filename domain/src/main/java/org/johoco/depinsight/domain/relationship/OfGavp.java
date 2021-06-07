@@ -1,8 +1,8 @@
 package org.johoco.depinsight.domain.relationship;
 
 import org.johoco.depinsight.domain.GraphData;
-import org.johoco.depinsight.domain.GroupId;
-import org.johoco.depinsight.domain.Language;
+import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.composite.Artifact;
 
 import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
@@ -14,27 +14,27 @@ import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Edge("ofLanguage")
-public class OfLanguage extends GraphData implements GraphEdge {
+@Edge("OfGavp")
+public class OfGavp extends GraphData implements GraphEdge {
 
 	@From
 	@NonNull
-	private GroupId groupId;
+	private Artifact artifact;
 
 	@To
 	@NonNull
-	private Language language;
+	private Packaging packaging;
 
 	public static String getName() {
-		return "ofLanguage";
+		return "OfGavp";
 	}
 
 	public static String getFromName() {
-		return GroupId.getName();
+		return Artifact.getName();
 	}
 
 	public static String getToName() {
-		return Language.getName();
+		return Packaging.getName();
 	}
 
 }

@@ -8,9 +8,10 @@ import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-//@Data
+@Data
 @EqualsAndHashCode(callSuper = true)
 @Edge("ofGroupId")
 public class OfGroupId extends GraphData implements GraphEdge {

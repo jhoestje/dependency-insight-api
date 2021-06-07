@@ -1,4 +1,4 @@
-package org.johoco.depinsight.domain.key;
+package org.johoco.depinsight.domain.composite.key;
 
 public class LanguageKey extends AbstractKey {
 //	private String value;

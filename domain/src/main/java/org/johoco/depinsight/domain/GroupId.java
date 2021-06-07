@@ -5,20 +5,14 @@ import org.johoco.depinsight.domain.relationship.OfLanguage;
 import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.Relations;
 
-//@EqualsAndHashCode(callSuper = true)
-//NodeEntity
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Document("groupIds")
-//@HashIndex(fields = { "value", "language" }, unique = true)
-//@PersistentIndex(fields = {"surname"})
 public class GroupId extends GraphData {
-//	@Id /// db document field: _key
-////	@GeneratedValue
-//	private String id;
 
-//	@ArangoId // db document field: _id
-//	private String arangoId;
-
-//	@Id
 	private String value;
 
 	@Relations(edges = OfLanguage.class, lazy = false)

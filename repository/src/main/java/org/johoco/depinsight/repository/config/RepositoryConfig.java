@@ -3,11 +3,22 @@ package org.johoco.depinsight.repository.config;
 import java.util.ArrayList;
 import java.util.Set;
 
+import org.johoco.depinsight.domain.ArtifactId;
+import org.johoco.depinsight.domain.Classifier;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
+import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.Version;
+import org.johoco.depinsight.domain.composite.Artifact;
+import org.johoco.depinsight.domain.composite.Dependency;
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.domain.relationship.OfGavp;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
+import org.johoco.depinsight.domain.relationship.OfVersion;
+import org.johoco.depinsight.domain.relationship.OfClassifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +38,8 @@ import com.arangodb.springframework.core.template.ArangoTemplate;
 @EnableArangoRepositories(basePackages = "org.johoco.depinsight.repository")
 @EntityScan(basePackages = "org.johoco.depinsight.domain")
 public class RepositoryConfig implements ArangoConfiguration {
+
+	private final static Logger LOG = LoggerFactory.getLogger(RepositoryConfig.class);
 
 	// from example
 	@Override
@@ -96,11 +109,34 @@ public class RepositoryConfig implements ArangoConfiguration {
 					.from(OfArtifactId.getFromName()).to(OfArtifactId.getToName());
 			graph.addEdgeDefinition(edgeDefinition);
 		}
+
+		// Packaging > Version
+		if (!names.contains(OfVersion.getName())) {
+			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfVersion.getName())
+					.from(OfVersion.getFromName()).to(OfVersion.getToName());
+			graph.addEdgeDefinition(edgeDefinition);
+		}
+
+		// Classifier > Version
+		if (!names.contains(OfClassifier.getName())) {
+			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfClassifier.getName())
+					.from(OfClassifier.getFromName()).to(OfClassifier.getToName());
+			graph.addEdgeDefinition(edgeDefinition);
+		}
+
+		// Artifact > Packaging (GAVP)
+		if (!names.contains(OfGavp.getName())) {
+			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfGavp.getName())
+					.from(OfGavp.getFromName()).to(OfGavp.getToName());
+			graph.addEdgeDefinition(edgeDefinition);
+		}
+
 	}
 
 	private void createGraph(final ArangoDatabase arangoDatabase) {
 		ArangoGraph graph = arangoDatabase.graph(graph());
 
+		LOG.debug(String.format("=== ArangoDB Database exists:  %b", graph.exists()));
 		if (!graph.exists()) {
 			arangoDatabase.createGraph(graph(), new ArrayList<EdgeDefinition>(), null);
 		}
@@ -110,20 +146,19 @@ public class RepositoryConfig implements ArangoConfiguration {
 
 	private void createDatabase(final ArangoDatabase arangoDatabase) {
 		Boolean databaseExists = arangoDatabase.exists();
-		System.out.println("=== Does ArangoDB Database exist:  " + databaseExists.toString());
+		LOG.debug(String.format("=== Does ArangoDB Database exist:  %b", databaseExists.toString()));
 
 		if (Boolean.FALSE.equals(databaseExists)) {
-			System.out.println("=== ArangoDB Database does not exist");
 			try {
-
 				if (arangoDatabase.create()) {
-					System.out.println("=== Created ArangoDB Database");
+					LOG.debug("=== Created ArangoDB Database");
 				} else {
-					System.out.println("===!!!! Did not create ArangoDB Database");
+					LOG.debug("===!!!! Did not create ArangoDB Database");
 				}
 			} catch (ArangoDBException adbe) {
-				System.out.println("===!!!! ArangoDBException ArangoDBException ArangoDBException ArangoDBException "
+				LOG.error("===!!!! ArangoDBException ArangoDBException ArangoDBException ArangoDBException "
 						+ adbe.getErrorMessage());
+				throw adbe;
 			}
 		}
 	}
@@ -135,10 +170,14 @@ public class RepositoryConfig implements ArangoConfiguration {
 	 * @param operations
 	 */
 	public void setupDatabase(final ArangoOperations operations) {
-
 		operations.collection(Language.class);
-		operations.collection(OfLanguage.class);
 		operations.collection(GroupId.class);
+		operations.collection(ArtifactId.class);
+		operations.collection(Version.class);
+		operations.collection(Packaging.class);
+		operations.collection(Classifier.class);
+		operations.collection(Artifact.class);
+		operations.collection(Dependency.class);
 	}
 
 }
