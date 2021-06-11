@@ -14,7 +14,7 @@ import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Edge("ofVersion")
+@Edge("ofClassifier")
 public class OfClassifier extends GraphData implements GraphEdge {
 
 	@From
@@ -26,7 +26,7 @@ public class OfClassifier extends GraphData implements GraphEdge {
 	private Artifact artifact;
 
 	public static String getName() {
-		return "ofArtifactId";
+		return "ofClassifier";
 	}
 
 	public static String getFromName() {

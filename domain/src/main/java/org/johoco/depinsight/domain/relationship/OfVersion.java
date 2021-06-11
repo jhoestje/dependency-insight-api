@@ -26,7 +26,7 @@ public class OfVersion extends GraphData implements GraphEdge {
 	private Version version;
 
 	public static String getName() {
-		return "ofArtifactId";
+		return "ofVersion";
 	}
 
 	public static String getFromName() {

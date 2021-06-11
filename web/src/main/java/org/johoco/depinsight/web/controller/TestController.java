@@ -63,7 +63,7 @@ public class TestController {
 		pgid.setGroupId(gId1);
 		pgid.setCreatedDate(new Date());
 
-		aid1.setPartOfGroupId(pgid);
+		//aid1.setGroupId(pgid);
 
 		GroupId savedgid = groupIdApi.save(gId1);
 

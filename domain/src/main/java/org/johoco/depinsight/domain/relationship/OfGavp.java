@@ -14,7 +14,7 @@ import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Edge("OfGavp")
+@Edge("ofGavp")
 public class OfGavp extends GraphData implements GraphEdge {
 
 	@From
@@ -26,7 +26,7 @@ public class OfGavp extends GraphData implements GraphEdge {
 	private Packaging packaging;
 
 	public static String getName() {
-		return "OfGavp";
+		return "ofGavp";
 	}
 
 	public static String getFromName() {
