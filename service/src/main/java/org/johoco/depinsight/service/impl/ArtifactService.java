@@ -2,7 +2,7 @@ package org.johoco.depinsight.service.impl;
 
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
-import org.johoco.depinsight.repository.composite.ArtifactRepository;
+import org.johoco.depinsight.repository.ArtifactRepository;
 import org.johoco.depinsight.service.IArtifactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

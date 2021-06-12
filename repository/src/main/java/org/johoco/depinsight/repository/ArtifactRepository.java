@@ -1,4 +1,4 @@
-package org.johoco.depinsight.repository.composite;
+package org.johoco.depinsight.repository;
 
 import org.johoco.depinsight.domain.composite.Artifact;
 

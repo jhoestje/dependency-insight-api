@@ -12,16 +12,17 @@ import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.Dependency;
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.domain.relationship.OfClassifier;
 import org.johoco.depinsight.domain.relationship.OfGavp;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.johoco.depinsight.domain.relationship.OfVersion;
-import org.johoco.depinsight.domain.relationship.OfClassifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 
 import com.arangodb.ArangoDB;
 import com.arangodb.ArangoDBException;
@@ -37,6 +38,7 @@ import com.arangodb.springframework.core.template.ArangoTemplate;
 //@ComponentScan(basePackages = "org.johoco.depinsight.repository")
 @EnableArangoRepositories(basePackages = "org.johoco.depinsight.repository")
 @EntityScan(basePackages = "org.johoco.depinsight.domain")
+@ImportResource("classpath:database.queries.spring.xml")
 public class RepositoryConfig implements ArangoConfiguration {
 
 	private final static Logger LOG = LoggerFactory.getLogger(RepositoryConfig.class);
