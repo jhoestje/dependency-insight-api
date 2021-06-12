@@ -15,7 +15,7 @@ public class GroupIdApi {
 		this.service = service;
 	}
 	
-	public GroupId findGroupId(final GroupId groupId) {
+	public GroupId findGroupId(final String groupId) {
 		return service.findGroupId(groupId);
 	}
 

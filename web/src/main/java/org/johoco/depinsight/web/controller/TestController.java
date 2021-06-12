@@ -1,15 +1,13 @@
 package org.johoco.depinsight.web.controller;
 
-import java.util.Date;
-
 import org.johoco.depinsight.api.context.bounded.GroupIdApi;
 import org.johoco.depinsight.domain.ArtifactId;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
-import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
+import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.johoco.depinsight.service.ILanguageService;
-import org.johoco.depinsight.service.ILanguageTypeService;
+import org.johoco.depinsight.service.IOfLanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class TestController {
 	private ILanguageService languageService;
 
 	@Autowired
-	private ILanguageTypeService languageTypeService;
+	private IOfLanguageService languageTypeService;
 
 	@Autowired
 	private GroupIdApi groupIdApi;
@@ -61,7 +59,6 @@ public class TestController {
 		OfGroupId pgid = new OfGroupId();
 		pgid.setArtifactId(aid1);
 		pgid.setGroupId(gId1);
-		pgid.setCreatedDate(new Date());
 
 		//aid1.setGroupId(pgid);
 
@@ -70,7 +67,6 @@ public class TestController {
 		OfLanguage lt = new OfLanguage(savedgid, javaLang);
 //		lt.setGroupId(gId1);
 //		lt.setLanguage(javaLang);
-		lt.setCreatedDate(new Date());
 		languageTypeService.save(lt);
 
 //		List<GroupId> gids = new ArrayList<>();

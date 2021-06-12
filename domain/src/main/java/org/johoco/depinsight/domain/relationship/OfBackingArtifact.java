@@ -14,7 +14,7 @@ import lombok.NonNull;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Edge("OfBackingArtifact")
+@Edge("ofBackingArtifact")
 public class OfBackingArtifact extends GraphData implements GraphEdge {
 
 	@From
@@ -26,7 +26,7 @@ public class OfBackingArtifact extends GraphData implements GraphEdge {
 	private Artifact backingArtifact;
 
 	public static String getName() {
-		return "OfBackingArtifact";
+		return "ofBackingArtifact";
 	}
 
 	public static String getFromName() {

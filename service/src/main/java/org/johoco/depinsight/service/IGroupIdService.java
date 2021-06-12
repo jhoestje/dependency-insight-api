@@ -7,5 +7,5 @@ public interface IGroupIdService {
 
 	GroupId save(final GroupId groupdId);
 	
-	GroupId findGroupId(final GroupId groupId);
+	GroupId findGroupId(final String groupId);
 }

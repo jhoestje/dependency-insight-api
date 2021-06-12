@@ -1,7 +1,5 @@
 package org.johoco.depinsight.service.impl;
 
-import java.util.Optional;
-
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.repository.GroupIdRepository;
 import org.johoco.depinsight.service.IGroupIdService;
@@ -9,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class GroupIdService implements IGroupIdService {
+public class GroupIdService extends BaseService<GroupId> implements IGroupIdService {
 
 	private GroupIdRepository repo;
 
@@ -27,16 +25,19 @@ public class GroupIdService implements IGroupIdService {
 	public GroupId save(final GroupId groupId) {
 		// TODO: move to business rule
 		assert groupId.getValue() != null;
-		Optional<GroupId> existing = repo.findByValue(groupId.getValue());
-		if (existing.isEmpty()) {
-			return repo.save(groupId);
-		}
-		return existing.get();
+		super.preSave(groupId);
+		//upsert
+		return repo.save(groupId);
+//		Optional<GroupId> existing = repo.findByValue(groupId.getValue());
+//		if (existing.isEmpty()) {
+//			return repo.save(groupId);
+//		}
+//		return existing.get();
 	}
 
 	@Override
-	public GroupId findGroupId(GroupId groupId) {
-		return repo.findByValue(groupId.getValue()).orElse(null);
+	public GroupId findGroupId(final String groupId) {
+		return repo.findByValue(groupId).orElse(null);
 	}
 
 }
