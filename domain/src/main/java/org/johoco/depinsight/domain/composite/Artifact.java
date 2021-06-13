@@ -7,9 +7,11 @@ import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Getter
 @Document("artifacts")
 public class Artifact extends Entity<ArtifactKey> {
 	private Artifact parentArtifact;

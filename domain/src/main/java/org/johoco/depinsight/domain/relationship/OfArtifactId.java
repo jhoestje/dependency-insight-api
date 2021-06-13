@@ -9,9 +9,15 @@ import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
+@RequiredArgsConstructor
+@ToString
 @EqualsAndHashCode(callSuper = true)
+@Getter
 @Edge("ofArtifactId")
 public class OfArtifactId extends GraphData implements GraphEdge {
 

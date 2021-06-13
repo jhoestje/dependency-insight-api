@@ -8,12 +8,16 @@ import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-@Data
+@RequiredArgsConstructor
+@ToString
 @EqualsAndHashCode(callSuper = true)
+@Getter
 @Edge("ofLanguage")
 public class OfLanguage extends GraphData implements GraphEdge {
 

@@ -1,13 +1,14 @@
 package org.johoco.depinsight.web.controller;
 
-import org.johoco.depinsight.api.context.bounded.GroupIdApi;
+import org.johoco.depinsight.api.context.gateway.ArtifactApi;
 import org.johoco.depinsight.domain.ArtifactId;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
-import org.johoco.depinsight.domain.relationship.OfGroupId;
-import org.johoco.depinsight.domain.relationship.OfLanguage;
+import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.Version;
+import org.johoco.depinsight.domain.composite.Artifact;
+import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.service.ILanguageService;
-import org.johoco.depinsight.service.IOfLanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +31,7 @@ public class TestController {
 	private ILanguageService languageService;
 
 	@Autowired
-	private IOfLanguageService languageTypeService;
-
-	@Autowired
-	private GroupIdApi groupIdApi;
+	private ArtifactApi artifactApi;
 
 	@Value("${messagez:Hello default}")
 	private String message;
@@ -51,30 +49,24 @@ public class TestController {
 		GroupId gId1 = new GroupId();
 		gId1.setValue("st2");
 
-		// gId1.setLanguage(javaLang);
-
 		ArtifactId aid1 = new ArtifactId();
 		aid1.setValue("aid1");
 
-		OfGroupId pgid = new OfGroupId();
-		pgid.setArtifactId(aid1);
-		pgid.setGroupId(gId1);
+		Version v = new Version();
+		v.setValue("1.0.0");
 
-		//aid1.setGroupId(pgid);
+		Packaging p = new Packaging();
+		p.setValue("JAR");
 
-		GroupId savedgid = groupIdApi.save(gId1);
+		ArtifactKey akey = new ArtifactKey(gId1, aid1, v, p);
+		Artifact art = new Artifact(akey);
 
-		OfLanguage lt = new OfLanguage(savedgid, javaLang);
-//		lt.setGroupId(gId1);
-//		lt.setLanguage(javaLang);
-		languageTypeService.save(lt);
-
-//		List<GroupId> gids = new ArrayList<>();
-//		gids.add(gId1);
-
-//		javaLang.setGroupIds(gids);
-
-//		languageService.save(javaLang);
+		try {
+			artifactApi.save(javaLang, art);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return languageService.findAll();
 	}

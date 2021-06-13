@@ -1,5 +1,6 @@
 package org.johoco.depinsight.domain;
 
+import org.johoco.depinsight.domain.key.GroupIdKey;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
 
 import com.arangodb.springframework.annotation.Document;
@@ -11,7 +12,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Document("groupIds")
-public class GroupId extends GraphData {
+public class GroupId extends Entity<GroupIdKey> {
 
 	private String value;
 

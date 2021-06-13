@@ -1,23 +1,23 @@
 package org.johoco.depinsight.service.impl;
 
-import org.johoco.depinsight.domain.relationship.OfLanguage;
-import org.johoco.depinsight.repository.OfLanguageRepository;
-import org.johoco.depinsight.service.IofLanguageService;
+import org.johoco.depinsight.domain.relationship.OfGroupId;
+import org.johoco.depinsight.repository.OfGroupIdRepository;
+import org.johoco.depinsight.service.IofGroupIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OfLanguageService extends BaseService<OfLanguage> implements IofLanguageService {
+public class OfGroupIdService extends BaseService<OfGroupId> implements IofGroupIdService {
 
-	private OfLanguageRepository repo;
+	private OfGroupIdRepository repo;
 
 	@Autowired
-	public OfLanguageService(OfLanguageRepository repo) {
+	public OfGroupIdService(OfGroupIdRepository repo) {
 		this.repo = repo;
 	}
 
 	@Override
-	public OfLanguage save(final OfLanguage ofLanguage) {
+	public OfGroupId save(final OfGroupId ofLanguage) {
 		// TODO: move to business rule
 //		assert ofLanguage.getValue() != null;
 		// upsert
@@ -29,12 +29,6 @@ public class OfLanguageService extends BaseService<OfLanguage> implements IofLan
 //			return repo.save(ofLanguage);
 //		}
 //		return existing.get();
-	}
-
-	@Override
-	public Iterable<OfLanguage> findAll() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

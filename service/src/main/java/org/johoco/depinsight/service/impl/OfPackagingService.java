@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OfLanguageService extends BaseService<OfLanguage> implements IofLanguageService {
+public class OfPackagingService extends BaseService<OfLanguage> implements IofLanguageService {
 
 	private OfLanguageRepository repo;
 
 	@Autowired
-	public OfLanguageService(OfLanguageRepository repo) {
+	public OfPackagingService(OfLanguageRepository repo) {
 		this.repo = repo;
+	}
+
+	@Override
+	public Iterable<OfLanguage> findAll() {
+		return repo.findAll();
 	}
 
 	@Override
@@ -29,12 +34,6 @@ public class OfLanguageService extends BaseService<OfLanguage> implements IofLan
 //			return repo.save(ofLanguage);
 //		}
 //		return existing.get();
-	}
-
-	@Override
-	public Iterable<OfLanguage> findAll() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

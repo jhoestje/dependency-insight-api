@@ -5,8 +5,10 @@ import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Packaging;
 import org.johoco.depinsight.domain.Version;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 /**
  * Unique identity for an Artifact.
@@ -14,7 +16,9 @@ import lombok.NonNull;
  * @author John Hoestje
  *
  */
-@Data
+@RequiredArgsConstructor
+@ToString
+@Getter
 public class ArtifactKey implements Key {
 	@NonNull
 	private GroupId groupId;

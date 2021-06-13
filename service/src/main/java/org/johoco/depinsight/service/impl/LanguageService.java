@@ -1,5 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
+import java.util.Optional;
+
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.repository.LanguageRepository;
 import org.johoco.depinsight.service.ILanguageService;
@@ -21,20 +23,28 @@ public class LanguageService extends BaseService<Language> implements ILanguageS
 		return repo.findAll();
 	}
 
+	/**
+	 * TODO: change exception to daoexception
+	 */
+	@Override
+	public Language findByValue(String value) throws Exception {
+		Optional<Language> lang = repo.findByValue(value);
+		if (lang.isEmpty()) {
+			throw new Exception("no lanuage for " + value);
+		}
+		return lang.get();
+	}
+
+	/**
+	 * This needs to be protected so only an admin can perform it
+	 */
 	@Override
 	public Language save(final Language language) {
 		// TODO: move to business rule
 		assert language.getValue() != null;
 		super.preSave(language);
-		//upsert
+		// upsert
 		return repo.save(language);
-		
-		
-//		Optional<Language> existing = repo.findByValue(language.getValue());
-//		if(existing.isEmpty()) {
-//			return repo.save(language);	
-//		}
-//		return existing.get();
 	}
 
 }

@@ -8,11 +8,16 @@ import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
 import com.arangodb.springframework.annotation.To;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-@Data
+@RequiredArgsConstructor
+@ToString
 @EqualsAndHashCode(callSuper = true)
+@Getter
 @Edge("ofGroupId")
 public class OfGroupId extends GraphData implements GraphEdge {
 
@@ -22,9 +27,11 @@ public class OfGroupId extends GraphData implements GraphEdge {
 //	private Long relationshipId;
 //
 	@From
+	@NonNull
 	private ArtifactId artifactId;
 //
 	@To
+	@NonNull
 	private GroupId groupId;
 
 	public static String getName() {
