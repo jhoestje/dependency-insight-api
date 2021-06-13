@@ -1,7 +1,5 @@
 package org.johoco.depinsight.domain.key;
 
-import org.johoco.depinsight.domain.GroupId;
-import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.domain.composite.key.Key;
 
 import lombok.Getter;
@@ -15,8 +13,8 @@ import lombok.ToString;
 public class GroupIdKey implements Key {
 
 	@NonNull
-	private Language language;
+	private String language;
 
 	@NonNull
-	private GroupId groupId;
+	private String groupIdValue;
 }

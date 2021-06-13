@@ -1,5 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
+import java.util.Optional;
+
 import org.johoco.depinsight.domain.Packaging;
 import org.johoco.depinsight.repository.PackagingRepository;
 import org.johoco.depinsight.service.IPackagingService;
@@ -23,9 +25,19 @@ public class PackagingService implements IPackagingService {
 	}
 
 	@Override
-	public Packaging findPackagingByValue(String value) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Packaging> findPackagingByValue(String packaging) {
+		return this.repository.findByValue(packaging);
+	}
+
+	@Override
+	public Packaging save(@NonNull String packaging) {
+		Optional<Packaging> existing = this.repository.findByValue(packaging);
+		if (existing.isEmpty()) {
+			Packaging aid = new Packaging();
+			aid.setValue(packaging);
+			return this.repository.save(aid);
+		}
+		return existing.get();
 	}
 
 }

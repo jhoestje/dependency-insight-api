@@ -76,7 +76,7 @@ public class ArtifactApi {
 		try {
 			Language savedLanguage = languageService.findByValue(language.getValue());
 			// save the documents
-			final GroupId groupid = gidService.save(artifact.getKey().getGroupId());
+			final GroupId groupid = gidService.save(language, artifact.getKey().getGroupId());
 			final ArtifactId artifactId = aidService.save(artifact.getKey().getArtifactId());
 			final Version version = versionService.save(artifact.getKey().getVersion());
 			final Packaging packaging = packagingService.save(artifact.getKey().getPackaging());

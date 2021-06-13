@@ -5,13 +5,13 @@ import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 
 import com.arangodb.springframework.annotation.Document;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
 @Getter
+@ToString
 @Document("artifacts")
 public class Artifact extends Entity<ArtifactKey> {
 	private Artifact parentArtifact;

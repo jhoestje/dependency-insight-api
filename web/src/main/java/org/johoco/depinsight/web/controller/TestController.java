@@ -8,6 +8,7 @@ import org.johoco.depinsight.domain.Packaging;
 import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
+import org.johoco.depinsight.domain.key.GroupIdKey;
 import org.johoco.depinsight.service.ILanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,8 +47,8 @@ public class TestController {
 		javaLang.setValue("SMALLTALK");
 		javaLang = languageService.save(javaLang);
 
-		GroupId gId1 = new GroupId();
-		gId1.setValue("st2");
+		GroupIdKey gidKey = new GroupIdKey(javaLang.getValue(), "st2");
+		GroupId gId1 = new GroupId(gidKey);
 
 		ArtifactId aid1 = new ArtifactId();
 		aid1.setValue("aid1");
@@ -58,7 +59,8 @@ public class TestController {
 		Packaging p = new Packaging();
 		p.setValue("JAR");
 
-		ArtifactKey akey = new ArtifactKey(gId1, aid1, v, p);
+		ArtifactKey akey = new ArtifactKey(gId1.getKey().getGroupIdValue(), aid1.getValue(), v.getValue(),
+				p.getValue());
 		Artifact art = new Artifact(akey);
 
 		try {

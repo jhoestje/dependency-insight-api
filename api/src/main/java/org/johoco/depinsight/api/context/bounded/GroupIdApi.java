@@ -14,12 +14,12 @@ public class GroupIdApi {
 	public GroupIdApi(final IGroupIdService service) {
 		this.service = service;
 	}
-	
-	public GroupId findGroupId(final String groupId) {
-		return service.findGroupId(groupId);
+
+	public GroupId findByGroupId(final String groupId) {
+		return service.findByGroupId(groupId).get();
 	}
 
-	//this may need to get moved to a gateway
+	// this may need to get moved to a gateway
 	public GroupId save(GroupId groupId) {
 		return service.save(groupId);
 	}

@@ -2,12 +2,14 @@ package org.johoco.depinsight.domain;
 
 import org.johoco.depinsight.domain.composite.key.Key;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
+@RequiredArgsConstructor
+@ToString
+@Getter
 public abstract class Entity<KEY extends Key> extends GraphData {
 
 	@NonNull

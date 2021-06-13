@@ -1,5 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
+import java.util.Optional;
+
 import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.repository.VersionRepository;
 import org.johoco.depinsight.service.IVersionService;
@@ -23,9 +25,19 @@ public class VersionService implements IVersionService {
 	}
 
 	@Override
-	public Version findVersionByValue(String value) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Version> findVersionByValue(final String version) {
+		return this.repository.findByValue(version);
+	}
+
+	@Override
+	public Version save(@NonNull final String version) {
+		Optional<Version> existing = this.repository.findByValue(version);
+		if (existing.isEmpty()) {
+			Version v = new Version();
+			v.setValue(version);
+			return this.repository.save(v);
+		}
+		return existing.get();
 	}
 
 }
