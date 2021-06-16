@@ -17,7 +17,8 @@ import lombok.EqualsAndHashCode;
 public class DependencyManagement extends Entity<DependencyKey> {
 
 	private Artifact managedBy;
-	private Artifact transitiveOf; // or dependency??
+	// or Artifact.. prob dep for scope and additional metadata
+	private Dependency transitiveOf;
 	private Boolean directDependecy;
 	private Boolean inherited;
 	private Boolean optional;
