@@ -74,7 +74,10 @@ public class ArtifactApi {
 
 		// language
 		try {
-			Language savedLanguage = languageService.findByValue(language.getValue());
+			// change to finding later
+//			Language savedLanguage = languageService.findByValue(language.getValue());
+			Language savedLanguage = languageService.save(language);
+
 			// save the documents
 			final GroupId groupid = gidService.save(language, artifact.getKey().getGroupId());
 			final ArtifactId artifactId = aidService.save(artifact.getKey().getArtifactId());
@@ -100,5 +103,10 @@ public class ArtifactApi {
 			throw e;
 		}
 
+	}
+
+	public Artifact find(ArtifactKey key) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

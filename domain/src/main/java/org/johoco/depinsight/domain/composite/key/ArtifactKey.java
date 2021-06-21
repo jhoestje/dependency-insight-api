@@ -15,6 +15,7 @@ import lombok.ToString;
 @ToString
 @Getter
 public class ArtifactKey implements Key {
+	// TODO: include language??
 	@NonNull
 	private String groupId;
 	@NonNull
