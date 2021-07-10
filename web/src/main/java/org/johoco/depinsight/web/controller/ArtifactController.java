@@ -4,7 +4,8 @@ import org.johoco.depinsight.api.context.gateway.ArtifactApi;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
-import org.johoco.depinsight.web.dto.ArtifactDTO;
+import org.johoco.depinsight.dto.ArtifactKeyDTO;
+import org.johoco.depinsight.dto.Pom;
 import org.johoco.depinsight.web.dto.converter.ArtifactConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,18 +33,28 @@ public class ArtifactController {
 	}
 
 	@GetMapping("/find/language/{lang}/g/{groupId}/a/{artifactId}/v/{version}/p/{packaging}")
-	public ArtifactDTO getArtifact(@PathVariable("lang") final String language,
+	public ArtifactKeyDTO getArtifact(@PathVariable("lang") final String language,
 			@PathVariable("groupId") final String groupId, @PathVariable("artifactId") final String artifactId,
 			@PathVariable("version") final String version, @PathVariable("packaging") final String packaging) {
-		final ArtifactKey key = new ArtifactKey(groupId, artifactId, version, packaging);
-		ArtifactDTO found = ArtifactConverter.convert(this.api.find(key));
+		final ArtifactKey key = new ArtifactKey(language, groupId, artifactId, version, packaging);
+		ArtifactKeyDTO found = ArtifactConverter.convert(this.api.find(key));
+		// return 404 otherwise 200
+		return found;
+	}
+
+	@GetMapping("/pom/find/language/{lang}/g/{groupId}/a/{artifactId}/v/{version}/p/{packaging}")
+	public Pom getArtifactPom(@PathVariable("lang") final String language,
+			@PathVariable("groupId") final String groupId, @PathVariable("artifactId") final String artifactId,
+			@PathVariable("version") final String version, @PathVariable("packaging") final String packaging) {
+		final ArtifactKey key = new ArtifactKey(language, groupId, artifactId, version, packaging);
+		Pom found = ArtifactConverter.convert(this.api.find(key));
 		// return 404 otherwise 200
 		return found;
 	}
 
 	@PostMapping("/create")
 	@ResponseStatus(HttpStatus.CREATED)
-	public ArtifactDTO createArtifact(@RequestBody final ArtifactDTO artifactDto) {
+	public Pom createArtifact(@RequestBody final ArtifactKeyDTO artifactDto) {
 		Artifact artifact = ArtifactConverter.convert(artifactDto);
 
 		Language lang = new Language();
@@ -60,8 +71,8 @@ public class ArtifactController {
 	}
 
 	@PutMapping("/update")
-	public ArtifactDTO updateArtifact(@RequestBody final ArtifactDTO artifactDto) {
-		Artifact artifact = ArtifactConverter.convert(artifactDto);
+	public ArtifactKeyDTO updateArtifact(@RequestBody final ArtifactKeyDTO artifactDto) {
+		Pom artifact = ArtifactConverter.convert(artifactDto);
 
 		Language lang = new Language();
 		lang.setValue(artifactDto.getLanguage());
