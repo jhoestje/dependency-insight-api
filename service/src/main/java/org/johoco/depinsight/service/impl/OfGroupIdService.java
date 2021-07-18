@@ -1,7 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
 import org.johoco.depinsight.domain.relationship.OfGroupId;
-import org.johoco.depinsight.repository.OfGroupIdRepository;
+import org.johoco.depinsight.repository.arangodb.OfGroupIdArangoRepository;
 import org.johoco.depinsight.service.IofGroupIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class OfGroupIdService extends BaseService<OfGroupId> implements IofGroupIdService {
 
-	private OfGroupIdRepository repo;
+	private OfGroupIdArangoRepository repo;
 
 	@Autowired
-	public OfGroupIdService(OfGroupIdRepository repo) {
+	public OfGroupIdService(OfGroupIdArangoRepository repo) {
 		this.repo = repo;
 	}
 

@@ -34,11 +34,11 @@ public class OfClassifier extends GraphData implements GraphEdge {
 	}
 
 	public static String getFromName() {
-		return Classifier.getName();
+		return Classifier.getDocumentName();
 	}
 
 	public static String getToName() {
-		return Artifact.getName();
+		return Artifact.getDocumentName();
 	}
 
 }

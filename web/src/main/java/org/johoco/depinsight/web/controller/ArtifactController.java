@@ -7,6 +7,7 @@ import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.dto.ArtifactKeyDTO;
 import org.johoco.depinsight.dto.Pom;
 import org.johoco.depinsight.web.dto.converter.ArtifactConverter;
+import org.johoco.depinsight.web.dto.converter.PomConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/artifact")
 public class ArtifactController {
 
-	private final static Logger LOG = LoggerFactory.getLogger(ArtifactController.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(ArtifactController.class);
 	private ArtifactApi api;
 
 	@Autowired
@@ -37,24 +38,24 @@ public class ArtifactController {
 			@PathVariable("groupId") final String groupId, @PathVariable("artifactId") final String artifactId,
 			@PathVariable("version") final String version, @PathVariable("packaging") final String packaging) {
 		final ArtifactKey key = new ArtifactKey(language, groupId, artifactId, version, packaging);
-		ArtifactKeyDTO found = ArtifactConverter.convert(this.api.find(key));
+		ArtifactKeyDTO found = ArtifactConverter.convertToKey(this.api.find(key));
 		// return 404 otherwise 200
 		return found;
 	}
 
-	@GetMapping("/pom/find/language/{lang}/g/{groupId}/a/{artifactId}/v/{version}/p/{packaging}")
+	@GetMapping("/find/pom/language/{lang}/g/{groupId}/a/{artifactId}/v/{version}/p/{packaging}")
 	public Pom getArtifactPom(@PathVariable("lang") final String language,
 			@PathVariable("groupId") final String groupId, @PathVariable("artifactId") final String artifactId,
 			@PathVariable("version") final String version, @PathVariable("packaging") final String packaging) {
 		final ArtifactKey key = new ArtifactKey(language, groupId, artifactId, version, packaging);
-		Pom found = ArtifactConverter.convert(this.api.find(key));
+		Pom found = PomConverter.convert(this.api.find(key));
 		// return 404 otherwise 200
 		return found;
 	}
 
 	@PostMapping("/create")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Pom createArtifact(@RequestBody final ArtifactKeyDTO artifactDto) {
+	public ArtifactKeyDTO createArtifactByKey(@RequestBody final ArtifactKeyDTO artifactDto) {
 		Artifact artifact = ArtifactConverter.convert(artifactDto);
 
 		Language lang = new Language();
@@ -64,26 +65,49 @@ public class ArtifactController {
 		try {
 			saved = this.api.save(lang, artifact);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGR.error("Bad create", e);
 		}
-		return ArtifactConverter.convert(saved);
+		return ArtifactConverter.convertToKey(saved);
+	}
+
+	/**
+	 * POM may not be a good vehicle since a lot of dependency information isn't in
+	 * the POM but inherited. Maybe save everything except the dependencies.
+	 * 
+	 * @param artifactDto
+	 * @return
+	 */
+	@PostMapping("/create/pom")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Pom createArtifactByPom(@RequestBody final Pom pomDto) {
+		LOGR.debug("received request to create artifact by Pom");
+		Artifact artifact = ArtifactConverter.convert(pomDto);
+
+		Language lang = new Language();
+		lang.setValue(pomDto.getLanguage());
+
+		Artifact saved = null;
+		try {
+			saved = this.api.save(lang, artifact);
+		} catch (Exception e) {
+			LOGR.error("Bad create", e);
+		}
+		return PomConverter.convert(saved);
 	}
 
 	@PutMapping("/update")
 	public ArtifactKeyDTO updateArtifact(@RequestBody final ArtifactKeyDTO artifactDto) {
-		Pom artifact = ArtifactConverter.convert(artifactDto);
+		Artifact artifact = null; // PomConverter.convert(artifactDto);
 
 		Language lang = new Language();
 		lang.setValue(artifactDto.getLanguage());
 
 		Artifact saved = null;
 		try {
-			saved = this.api.save(lang, artifact);
+			saved = null;// this.api.save(lang, artifact);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOGR.error("Bad update", e);
 		}
-		return ArtifactConverter.convert(saved);
+		return null; // ArtifactConverter.convert(saved);
 	}
 }

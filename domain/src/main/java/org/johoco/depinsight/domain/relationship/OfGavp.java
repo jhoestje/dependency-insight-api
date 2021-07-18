@@ -34,11 +34,11 @@ public class OfGavp extends GraphData implements GraphEdge {
 	}
 
 	public static String getFromName() {
-		return Artifact.getName();
+		return Artifact.getDocumentName();
 	}
 
 	public static String getToName() {
-		return Packaging.getName();
+		return Packaging.getDocumentName();
 	}
 
 }

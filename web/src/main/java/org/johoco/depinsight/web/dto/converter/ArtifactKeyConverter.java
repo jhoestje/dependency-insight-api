@@ -1,5 +1,6 @@
 package org.johoco.depinsight.web.dto.converter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.dto.ArtifactKeyDTO;
 import org.johoco.depinsight.dto.Pom;
@@ -9,7 +10,20 @@ public class ArtifactKeyConverter {
 		return new ArtifactKey("java", dto.getGroupId(), dto.getArtifactId(), dto.getVersion(), dto.getPackaging());
 	}
 
+	/**
+	 * Some values may be inherited.
+	 * 
+	 * @param dto
+	 * @return
+	 */
 	public static ArtifactKey convert(final Pom dto) {
+		if (StringUtils.isBlank(dto.getGroupId()) && dto.getParent() != null) {
+			dto.setGroupId(dto.getParent().getGroupId());
+		}
+		if (StringUtils.isBlank(dto.getVersion()) && dto.getParent() != null) {
+			dto.setVersion(dto.getParent().getVersion());
+		}
+
 		return new ArtifactKey("java", dto.getGroupId(), dto.getArtifactId(), dto.getVersion(), dto.getPackaging());
 	}
 

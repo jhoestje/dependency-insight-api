@@ -34,11 +34,11 @@ public class OfVersion extends GraphData implements GraphEdge {
 	}
 
 	public static String getFromName() {
-		return Packaging.getName();
+		return Packaging.getDocumentName();
 	}
 
 	public static String getToName() {
-		return Version.getName();
+		return Version.getDocumentName();
 	}
 
 }

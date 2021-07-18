@@ -15,7 +15,7 @@ public class Packaging extends GraphData {
 
 	private String value;
 
-	public static String getName() {
+	public static String getDocumentName() {
 		return "packagings";
 	}
 	

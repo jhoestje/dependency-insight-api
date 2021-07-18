@@ -1,7 +1,5 @@
 package org.johoco.depinsight.service.impl;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
 import org.johoco.depinsight.domain.GraphData;
 
@@ -18,12 +16,11 @@ public abstract class BaseService<E extends GraphData> {
 	 * @return
 	 */
 	protected E preSave(final E data) {
-		final DateTime dt = new DateTime();
-		final Date d = dt.toDate();
+		final DateTime dt = DateTime.now();
 		if (data.getCreatedDate() == null) {
-			data.setCreatedDate(d);
+			data.setCreatedDate(dt);
 		}
-		data.setLastUpdatedDate(d);
+		data.setLastUpdatedDate(dt);
 		return data;
 	}
 

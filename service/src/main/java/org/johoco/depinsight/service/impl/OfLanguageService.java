@@ -1,7 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
 import org.johoco.depinsight.domain.relationship.OfLanguage;
-import org.johoco.depinsight.repository.OfLanguageRepository;
+import org.johoco.depinsight.repository.arangodb.OfLanguageArangoRepository;
 import org.johoco.depinsight.service.IofLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class OfLanguageService extends BaseService<OfLanguage> implements IofLanguageService {
 
-	private OfLanguageRepository repo;
+	private OfLanguageArangoRepository repo;
 
 	@Autowired
-	public OfLanguageService(OfLanguageRepository repo) {
+	public OfLanguageService(OfLanguageArangoRepository repo) {
 		this.repo = repo;
 	}
 

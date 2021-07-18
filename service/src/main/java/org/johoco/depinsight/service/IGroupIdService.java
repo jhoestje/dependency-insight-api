@@ -1,18 +1,16 @@
 package org.johoco.depinsight.service;
 
-import java.util.Optional;
-
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
+import org.johoco.depinsight.domain.key.GroupIdKey;
 
 import lombok.NonNull;
 
 public interface IGroupIdService {
-//	Iterable<GroupId> findAll();
 
 	GroupId save(final GroupId groupdId);
 
-	Optional<GroupId> findByGroupId(final String groupId);
+	GroupId findByKey(final GroupIdKey key);
 
 	GroupId save(@NonNull final Language language, @NonNull final String groupId);
 }

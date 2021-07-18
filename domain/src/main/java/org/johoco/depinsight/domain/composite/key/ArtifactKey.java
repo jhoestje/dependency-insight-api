@@ -1,5 +1,6 @@
 package org.johoco.depinsight.domain.composite.key;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 @Getter
+@Builder
 public class ArtifactKey implements Key {
 	// TODO: include language??
 	@NonNull

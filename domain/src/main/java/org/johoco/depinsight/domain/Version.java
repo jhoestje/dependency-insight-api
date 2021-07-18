@@ -18,7 +18,7 @@ public class Version extends GraphData {
 	@Relations(edges = OfArtifactId.class, lazy = false)
 	private ArtifactId artifactId;
 
-	public static String getName() {
+	public static String getDocumentName() {
 		return "versions";
 	}
 

@@ -29,7 +29,7 @@ public class Dependency extends Entity<DependencyKey> {
 		super(key);
 	}
 
-	public static String getName() {
+	public static String getDocumentName() {
 		return "dependencies";
 	}
 

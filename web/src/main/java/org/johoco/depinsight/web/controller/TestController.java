@@ -59,7 +59,7 @@ public class TestController {
 		Packaging p = new Packaging();
 		p.setValue("JAR");
 
-		ArtifactKey akey = new ArtifactKey(gId1.getKey().getGroupIdValue(), aid1.getValue(), v.getValue(),
+		ArtifactKey akey = new ArtifactKey("java", gId1.getKey().getGroupIdValue(), aid1.getValue(), v.getValue(),
 				p.getValue());
 		Artifact art = new Artifact(akey);
 

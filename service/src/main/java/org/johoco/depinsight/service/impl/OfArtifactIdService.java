@@ -1,7 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
-import org.johoco.depinsight.repository.OfArtifactIdRepository;
+import org.johoco.depinsight.repository.arangodb.OfArtifactIdArangoRepository;
 import org.johoco.depinsight.service.IofArtifactIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class OfArtifactIdService extends BaseService<OfArtifactId> implements IofArtifactIdService {
 
-	private OfArtifactIdRepository repo;
+	private OfArtifactIdArangoRepository repo;
 
 	@Autowired
-	public OfArtifactIdService(OfArtifactIdRepository repo) {
+	public OfArtifactIdService(OfArtifactIdArangoRepository repo) {
 		this.repo = repo;
 	}
 

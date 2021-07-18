@@ -1,10 +1,10 @@
-package org.johoco.depinsight.repository;
+package org.johoco.depinsight.repository.arangodb;
 
 import org.johoco.depinsight.domain.GroupId;
 
 import com.arangodb.springframework.repository.ArangoRepository;
 
-public interface GroupIdRepository extends ArangoRepository<GroupId, String> {
+public interface GroupIdArangoRepository extends ArangoRepository<GroupId, String> {
 
 //	Optional<GroupId> findByValue(@NonNull String groupId);
 }

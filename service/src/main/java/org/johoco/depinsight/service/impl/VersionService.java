@@ -3,7 +3,7 @@ package org.johoco.depinsight.service.impl;
 import java.util.Optional;
 
 import org.johoco.depinsight.domain.Version;
-import org.johoco.depinsight.repository.VersionRepository;
+import org.johoco.depinsight.repository.arangodb.VersionArangoRepository;
 import org.johoco.depinsight.service.IVersionService;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +12,9 @@ import lombok.NonNull;
 @Service
 public class VersionService implements IVersionService {
 
-	private VersionRepository repository;
+	private VersionArangoRepository repository;
 
-	public VersionService(final VersionRepository repository) {
+	public VersionService(final VersionArangoRepository repository) {
 		this.repository = repository;
 	}
 

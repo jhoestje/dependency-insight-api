@@ -12,7 +12,7 @@ public class Classifier extends GraphData {
 
 	private String value;
 
-	public static String getName() {
+	public static String getDocumentName() {
 		return "classifiers";
 	}
 }

@@ -34,11 +34,11 @@ public class OfBackingArtifact extends GraphData implements GraphEdge {
 	}
 
 	public static String getFromName() {
-		return Dependency.getName();
+		return Dependency.getDocumentName();
 	}
 
 	public static String getToName() {
-		return Artifact.getName();
+		return Artifact.getDocumentName();
 	}
 
 }

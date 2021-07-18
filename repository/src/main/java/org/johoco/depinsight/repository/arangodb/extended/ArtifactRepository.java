@@ -1,11 +1,11 @@
-package org.johoco.depinsight.repository.aql;
+package org.johoco.depinsight.repository.arangodb.extended;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
-import org.johoco.depinsight.repository.ArtifactRepository;
+import org.johoco.depinsight.repository.arangodb.ArtifactArangoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -23,13 +23,13 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class ArtifactSuperRepository extends BaseCompositeRepository {
+public class ArtifactRepository extends BaseCompositeRepository {
 
-	private ArtifactRepository artifactRepository;
+	private ArtifactArangoRepository artifactRepository;
 
 	@Autowired
-	public ArtifactSuperRepository(@Value("#{artifactqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final ArtifactRepository artifactRepository) {
+	public ArtifactRepository(@Value("#{artifactqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final ArtifactArangoRepository artifactRepository) {
 		super(queries, aranngoDB);
 		this.artifactRepository = artifactRepository;
 	}

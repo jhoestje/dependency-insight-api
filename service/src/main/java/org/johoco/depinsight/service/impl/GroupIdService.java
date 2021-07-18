@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.domain.key.GroupIdKey;
-import org.johoco.depinsight.repository.GroupIdRepository;
+import org.johoco.depinsight.repository.arangodb.extended.GroupIdRepository;
 import org.johoco.depinsight.service.IGroupIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,23 +28,25 @@ public class GroupIdService extends BaseService<GroupId> implements IGroupIdServ
 		assert groupId.getKey().getGroupIdValue() != null;
 		super.preSave(groupId);
 		// upsert
-		return repository.save(groupId);
+		Optional<GroupId> existing = Optional.of(this.findByKey(groupId.getKey()));
+		if (existing.isEmpty()) {
+			return this.repository.save(groupId);
+		}
+		return existing.get();
+
+//		return repository.save(groupId);
 	}
 
 	@Override
-	public Optional<GroupId> findByGroupId(final String groupId) {
-		return Optional.empty();// repository.findByValue(groupId).orElse(null);
+	public GroupId findByKey(final GroupIdKey key) {
+		return repository.findByKey(key).get();
 	}
 
 	@Override
 	public GroupId save(@NonNull final Language language, @NonNull final String groupId) {
-		Optional<GroupId> existing = this.findByGroupId(groupId);
-		if (existing.isEmpty()) {
-			final GroupIdKey key = new GroupIdKey(language.getValue(), groupId);
-			GroupId gid = new GroupId(key);
-			return this.repository.save(gid);
-		}
-		return existing.get();
+		final GroupIdKey key = new GroupIdKey(language.getValue(), groupId);
+		return this.save(new GroupId(key));
+
 	}
 
 }

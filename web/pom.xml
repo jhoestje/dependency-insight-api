@@ -27,10 +27,10 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-                <groupId>org.johoco.dependency-insight-api</groupId>
-                <artifactId>dependency-insight-api-dto</artifactId>
-                <version>${depinsightdto.version}</version>
-            </dependency>
+				<groupId>org.johoco.dependency-insight-api</groupId>
+				<artifactId>dependency-insight-api-dto</artifactId>
+				<version>${depinsightdto.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
@@ -40,9 +40,9 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-            <groupId>org.johoco.dependency-insight-api</groupId>
-            <artifactId>dependency-insight-api-dto</artifactId>
-        </dependency>
+			<groupId>org.johoco.dependency-insight-api</groupId>
+			<artifactId>dependency-insight-api-dto</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -55,23 +55,22 @@
 			</dependency> <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-security</artifactId> 
 			</dependency> -->
 
-		<!-- temp remove <dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency> -->
+		<!-- temp remove <dependency> <groupId>org.springframework.boot</groupId> 
+			<artifactId>spring-boot-starter-security</artifactId> </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
 
 		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-starter-vault-config</artifactId> 
 			</dependency> -->
-		<!--temp remove  <dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency> -->
+		<!--temp remove <dependency> <groupId>org.springframework.security</groupId> 
+			<artifactId>spring-security-test</artifactId> <scope>test</scope> </dependency> -->
 
 	</dependencies>
 

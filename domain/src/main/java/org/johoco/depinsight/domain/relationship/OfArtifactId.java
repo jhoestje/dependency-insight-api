@@ -34,11 +34,11 @@ public class OfArtifactId extends GraphData implements GraphEdge {
 	}
 
 	public static String getFromName() {
-		return Version.getName();
+		return Version.getDocumentName();
 	}
 
 	public static String getToName() {
-		return ArtifactId.getName();
+		return ArtifactId.getDocumentName();
 	}
 
 }

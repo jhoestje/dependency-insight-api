@@ -11,14 +11,6 @@ public class ArtifactConverter {
 		return new Artifact(key);
 	}
 
-	public static Pom convert(final Artifact a) {
-		// .language("")
-		// .createdDate(a.getCreatedDate())
-		// .lastUpdatedDate(a.getLastUpdatedDate())
-		return Pom.builder().groupId(a.getKey().getGroupId()).artifactId(a.getKey().getArtifactId())
-				.version(a.getKey().getVersion()).packaging(a.getKey().getPackaging()).build();
-	}
-
 	public static ArtifactKeyDTO convertToKey(final Artifact a) {
 		return ArtifactKeyDTO.builder().language("").groupId(a.getKey().getGroupId())
 				.artifactId(a.getKey().getArtifactId()).version(a.getKey().getVersion())
@@ -27,7 +19,10 @@ public class ArtifactConverter {
 	}
 
 	public static Artifact convert(ArtifactKeyDTO artifactDto) {
-		// TODO Auto-generated method stub
-		return null;
+		ArtifactKey ak = ArtifactKey.builder().groupId(artifactDto.getGroupId()).artifactId(artifactDto.getArtifactId())
+				.version(artifactDto.getVersion()).language(artifactDto.getLanguage())
+				.packaging(artifactDto.getPackaging()).build();
+
+		return new Artifact(ak);
 	}
 }

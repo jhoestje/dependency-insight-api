@@ -34,11 +34,11 @@ public class OfLanguage extends GraphData implements GraphEdge {
 	}
 
 	public static String getFromName() {
-		return GroupId.getName();
+		return GroupId.getDocumentName();
 	}
 
 	public static String getToName() {
-		return Language.getName();
+		return Language.getDocumentName();
 	}
 
 }

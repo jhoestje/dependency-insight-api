@@ -80,7 +80,7 @@ public class ArtifactApi {
 
 			// save the documents
 			final GroupId groupid = gidService.save(language, artifact.getKey().getGroupId());
-			final ArtifactId artifactId = aidService.save(artifact.getKey().getArtifactId());
+			final ArtifactId artifactId = aidService.save(language, groupid, artifact.getKey().getArtifactId());
 			final Version version = versionService.save(artifact.getKey().getVersion());
 			final Packaging packaging = packagingService.save(artifact.getKey().getPackaging());
 

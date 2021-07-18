@@ -39,11 +39,11 @@ public class OfGroupId extends GraphData implements GraphEdge {
 	}
 
 	public static String getFromName() {
-		return ArtifactId.getName();
+		return ArtifactId.getDocumentName();
 	}
 
 	public static String getToName() {
-		return GroupId.getName();
+		return GroupId.getDocumentName();
 	}
 
 }

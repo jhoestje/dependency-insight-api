@@ -21,7 +21,7 @@ public class Language extends GraphData { // extends Entity<LanguageKey> {
 //	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
 //	public List<Lan> groupIds;
 
-	public static String getName() {
+	public static String getDocumentName() {
 		return "languages";
 	}
 
