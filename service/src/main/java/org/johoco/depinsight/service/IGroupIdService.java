@@ -10,7 +10,9 @@ public interface IGroupIdService {
 
 	GroupId save(final GroupId groupdId);
 
-	GroupId findByKey(final GroupIdKey key);
+	GroupId getByKey(final GroupIdKey key);
 
 	GroupId save(@NonNull final Language language, @NonNull final String groupId);
+
+	GroupId getByGroupId(final GroupId groupId);
 }

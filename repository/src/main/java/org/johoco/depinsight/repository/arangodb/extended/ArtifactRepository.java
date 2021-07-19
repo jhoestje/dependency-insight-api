@@ -6,6 +6,8 @@ import java.util.Map;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.repository.arangodb.ArtifactArangoRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -23,20 +25,19 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class ArtifactRepository extends BaseCompositeRepository {
+public class ArtifactRepository extends BaseCompositeRepository<Artifact, ArtifactArangoRepository> {
 
-	private ArtifactArangoRepository artifactRepository;
+	private final static Logger LOGR = LoggerFactory.getLogger(ArtifactRepository.class);
 
 	@Autowired
 	public ArtifactRepository(@Value("#{artifactqueries}") final Map<String, String> queries,
 			final ArangoOperations aranngoDB, final ArtifactArangoRepository artifactRepository) {
-		super(queries, aranngoDB);
-		this.artifactRepository = artifactRepository;
+		super(queries, aranngoDB, artifactRepository);
 	}
 
 	public Artifact findByKey(final ArtifactKey key) {
 		try {
-			String query = getQuery("findByKey");
+			String query = getQuery("getByKey");
 			Map<String, Object> bindVars = new HashMap<String, Object>();
 			bindVars.put("groupId", key.getGroupId());
 			bindVars.put("artifactId", key.getArtifactId());
@@ -54,7 +55,8 @@ public class ArtifactRepository extends BaseCompositeRepository {
 	}
 
 	public Artifact save(final Artifact artifact) {
-		return this.artifactRepository.save(artifact);
+		LOGR.debug("Saving Artifact id {} - from {} to {}:  ", artifact.getId(), artifact.getKey());
+		return this.getRepository().save(artifact);
 	}
 
 	public void delete(final ArtifactKey key) {
@@ -73,7 +75,7 @@ public class ArtifactRepository extends BaseCompositeRepository {
 	}
 
 	public void delete(final Artifact artifact) {
-		this.artifactRepository.delete(artifact);
+		this.getRepository().delete(artifact);
 	}
 
 	public void update() {

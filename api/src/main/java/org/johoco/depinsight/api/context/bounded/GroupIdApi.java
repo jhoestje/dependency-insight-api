@@ -17,7 +17,7 @@ public class GroupIdApi {
 	}
 
 	public GroupId findByGroupId(final String language, final String groupId) {
-		return service.findByGroupId(new GroupIdKey(language, groupId));
+		return service.getByKey(new GroupIdKey(language, groupId));
 	}
 
 	// this may need to get moved to a gateway

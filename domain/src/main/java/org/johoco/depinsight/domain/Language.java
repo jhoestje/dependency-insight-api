@@ -5,6 +5,12 @@ import com.arangodb.springframework.annotation.Document;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Document("languages")

@@ -13,6 +13,6 @@ public interface IArtifactIdService {
 
 	ArtifactId save(@NonNull final Language language, @NonNull final GroupId groupId, @NonNull final String artifactId);
 
-	ArtifactId findByKey(final ArtifactIdKey artifactIdKey);
+	ArtifactId getByKey(final ArtifactIdKey artifactIdKey);
 
 }

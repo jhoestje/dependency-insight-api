@@ -9,6 +9,12 @@ import com.arangodb.springframework.annotation.Relations;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Document("artifactIds")

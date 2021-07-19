@@ -14,6 +14,12 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @RequiredArgsConstructor
 @ToString
 @EqualsAndHashCode(callSuper = true)

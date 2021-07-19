@@ -24,6 +24,12 @@ import org.johoco.depinsight.service.IofVersionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class ArtifactApi {
 

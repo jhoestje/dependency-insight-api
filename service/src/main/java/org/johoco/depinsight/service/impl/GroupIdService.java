@@ -12,6 +12,12 @@ import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class GroupIdService extends BaseService<GroupId> implements IGroupIdService {
 
@@ -26,20 +32,31 @@ public class GroupIdService extends BaseService<GroupId> implements IGroupIdServ
 	public GroupId save(final GroupId groupId) {
 		// TODO: move to business rule
 		assert groupId.getKey().getGroupIdValue() != null;
-		super.preSave(groupId);
-		// upsert
-		Optional<GroupId> existing = Optional.of(this.findByKey(groupId.getKey()));
-		if (existing.isEmpty()) {
-			return this.repository.save(groupId);
+		GroupId save = groupId;
+		Optional<GroupId> existing = Optional.ofNullable(this.getByKey(groupId.getKey()));
+		if (!existing.isEmpty()) {
+			save = existing.get();
 		}
-		return existing.get();
-
-//		return repository.save(groupId);
+		super.preSave(save);
+		// upsert - save new or save with last updated timestamp
+		return this.repository.save(save);
 	}
 
 	@Override
-	public GroupId findByKey(final GroupIdKey key) {
-		return repository.findByKey(key).get();
+	public GroupId getByKey(final GroupIdKey key) {
+		return repository.getByKey(key).orElse(null);
+	}
+
+	@Override
+	public GroupId getByGroupId(final GroupId groupId) {
+		GroupId existing = null;
+		if (groupId.getId() != null) {
+			existing = this.repository.get(groupId).get();
+		}
+		if (groupId.getKey() == null) {
+			existing = this.repository.getByKey(groupId.getKey()).get();
+		}
+		return existing;
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import org.johoco.depinsight.domain.Packaging;
 import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
+import org.johoco.depinsight.domain.key.ArtifactIdKey;
 import org.johoco.depinsight.domain.key.GroupIdKey;
 import org.johoco.depinsight.service.ILanguageService;
 import org.slf4j.Logger;
@@ -50,8 +51,8 @@ public class TestController {
 		GroupIdKey gidKey = new GroupIdKey(javaLang.getValue(), "st2");
 		GroupId gId1 = new GroupId(gidKey);
 
-		ArtifactId aid1 = new ArtifactId();
-		aid1.setValue("aid1");
+		ArtifactIdKey aidKey = new ArtifactIdKey(gidKey.getLanguage(), gidKey.getGroupIdValue(), "aid1");
+		ArtifactId aid1 = new ArtifactId(aidKey);
 
 		Version v = new Version();
 		v.setValue("1.0.0");

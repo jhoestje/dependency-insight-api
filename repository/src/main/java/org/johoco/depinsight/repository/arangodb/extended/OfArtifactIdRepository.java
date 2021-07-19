@@ -4,11 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.ArtifactId;
-import org.johoco.depinsight.domain.GroupId;
-import org.johoco.depinsight.domain.key.ArtifactIdKey;
-import org.johoco.depinsight.domain.key.GroupIdKey;
-import org.johoco.depinsight.repository.arangodb.ArtifactIdArangoRepository;
+import org.johoco.depinsight.domain.composite.key.ArtifactKey;
+import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.repository.arangodb.OfArtifactIdArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,34 +25,28 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class ArtifactIdRepository extends BaseCompositeRepository<ArtifactId, ArtifactIdArangoRepository> {
+public class OfArtifactIdRepository extends BaseCompositeRepository<OfArtifactId, OfArtifactIdArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(ArtifactIdRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(OfArtifactIdRepository.class);
 
 	@Autowired
-	public ArtifactIdRepository(@Value("#{artifactidqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final ArtifactIdArangoRepository artifactdIdRepository) {
-		super(queries, aranngoDB, artifactdIdRepository);
+	public OfArtifactIdRepository(@Value("#{ofartifactidqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final OfArtifactIdArangoRepository ofArtifactIdArangoRepository) {
+		super(queries, aranngoDB, ofArtifactIdArangoRepository);
 	}
 
-	/**
-	 * 
-	 * @param key
-	 * @return
-	 */
-	public Optional<ArtifactId> getByKey(final ArtifactIdKey key) {
-//		try {
-		String query = getQuery("getByKey");
-		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("language", key.getLanguage());
-		bindVars.put("groupId", key.getGroupIdValue());
-		bindVars.put("artifactId", key.getArtifactIdValue());
+	public Iterable<OfArtifactId> findAll() {
+		return this.getRepository().findAll();
+	}
 
-		ArangoCursor<ArtifactId> cursor = getArangoDb().query(query, bindVars, null, ArtifactId.class);
-//		cursor.forEachRemaining(aDocument -> {
-//			System.out.println("Key: " + aDocument.getKey());
-//		});
-//		return Optional.of(cursor.next());
+	public Optional<OfArtifactId> getByVertexIds(final OfArtifactId ofArtifactId) {
+//		try {
+		String query = getQuery("getByVertexIds");
+		Map<String, Object> bindVars = new HashMap<String, Object>();
+		bindVars.put("groupId", ofArtifactId.getArtifactId().getArangoId());
+		bindVars.put("artifactId", ofArtifactId.getVersion().getArangoId());
+
+		ArangoCursor<OfArtifactId> cursor = getArangoDb().query(query, bindVars, null, OfArtifactId.class);
 		if (cursor.hasNext()) {
 			return Optional.of(cursor.next());
 		}
@@ -62,15 +54,16 @@ public class ArtifactIdRepository extends BaseCompositeRepository<ArtifactId, Ar
 //		} catch (ArangoDBException e) {
 //			System.err.println("Failed to execute query. " + e.getMessage());
 //		}
-//		return Optional.empty();
+//		return null;
 	}
 
-	public ArtifactId save(final ArtifactId artifactId) {
-		LOGR.debug("Saving ArtifactId id {} - from {} to {}:  ", artifactId.getId(), artifactId.getKey());
-		return this.getRepository().save(artifactId);
+	public OfArtifactId save(final OfArtifactId ofArtifactId) {
+		LOGR.debug("Saving OfArtifactId id {} - from {} to {}:  ", ofArtifactId.getId(), ofArtifactId.getGroupId(),
+				ofArtifactId.getLanguage());
+		return this.getRepository().save(ofArtifactId);
 	}
 
-	public void delete(final GroupIdKey key) {
+	public void delete(final ArtifactKey key) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
@@ -85,8 +78,8 @@ public class ArtifactIdRepository extends BaseCompositeRepository<ArtifactId, Ar
 		// }
 	}
 
-	public void delete(final GroupId groupId) {
-		this.delete(groupId.getKey());
+	public void delete(final OfArtifactId ofArtifactId) {
+		this.getRepository().delete(ofArtifactId);
 	}
 
 	public void update() {

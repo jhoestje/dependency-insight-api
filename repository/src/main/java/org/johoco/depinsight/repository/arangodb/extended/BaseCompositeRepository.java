@@ -7,6 +7,12 @@ import org.johoco.depinsight.domain.GraphData;
 import com.arangodb.springframework.core.ArangoOperations;
 import com.arangodb.springframework.repository.ArangoRepository;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 public abstract class BaseCompositeRepository<T extends GraphData, R extends ArangoRepository<T, String>> {
 
 	private Map<String, String> queries;
