@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
-import org.johoco.depinsight.domain.relationship.OfArtifactId;
-import org.johoco.depinsight.repository.arangodb.OfArtifactIdArangoRepository;
+import org.johoco.depinsight.domain.relationship.OfVersion;
+import org.johoco.depinsight.repository.arangodb.OfVersionArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,28 +25,28 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class OfArtifactIdRepository extends BaseCompositeRepository<OfArtifactId, OfArtifactIdArangoRepository> {
+public class OfVersionRepository extends BaseCompositeRepository<OfVersion, OfVersionArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(OfArtifactIdRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(OfVersionRepository.class);
 
 	@Autowired
-	public OfArtifactIdRepository(@Value("#{ofartifactidqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final OfArtifactIdArangoRepository ofArtifactIdArangoRepository) {
-		super(queries, aranngoDB, ofArtifactIdArangoRepository);
+	public OfVersionRepository(@Value("#{OfVersionqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final OfVersionArangoRepository ofVersionArangoRepository) {
+		super(queries, aranngoDB, ofVersionArangoRepository);
 	}
 
-	public Iterable<OfArtifactId> findAll() {
+	public Iterable<OfVersion> findAll() {
 		return this.getRepository().findAll();
 	}
 
-	public Optional<OfArtifactId> getByVertexIds(final OfArtifactId ofArtifactId) {
+	public Optional<OfVersion> getByVertexIds(final OfVersion ofVersion) {
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("artifactId", ofArtifactId.getArtifactId().getArangoId());
-		bindVars.put("versionId", ofArtifactId.getVersion().getArangoId());
+		bindVars.put("versionId", ofVersion.getVersion().getArangoId());
+		bindVars.put("packagingId", ofVersion.getPackaging().getArangoId());
 
-		ArangoCursor<OfArtifactId> cursor = getArangoDb().query(query, bindVars, null, OfArtifactId.class);
+		ArangoCursor<OfVersion> cursor = getArangoDb().query(query, bindVars, null, OfVersion.class);
 		if (cursor.hasNext()) {
 			return Optional.of(cursor.next());
 		}
@@ -57,10 +57,10 @@ public class OfArtifactIdRepository extends BaseCompositeRepository<OfArtifactId
 //		return null;
 	}
 
-	public OfArtifactId save(final OfArtifactId ofArtifactId) {
-		LOGR.debug("Saving OfArtifactId id {} - from {} to {}:  ", ofArtifactId.getId(), ofArtifactId.getVersion(),
-				ofArtifactId.getArtifactId());
-		return this.getRepository().save(ofArtifactId);
+	public OfVersion save(final OfVersion ofVersion) {
+		LOGR.debug("Saving OfVersion id {} - from {} to {}:  ", ofVersion.getId(), ofVersion.getPackaging(),
+				ofVersion.getVersion());
+		return this.getRepository().save(ofVersion);
 	}
 
 	public void delete(final ArtifactKey key) {
@@ -78,8 +78,8 @@ public class OfArtifactIdRepository extends BaseCompositeRepository<OfArtifactId
 		// }
 	}
 
-	public void delete(final OfArtifactId ofArtifactId) {
-		this.getRepository().delete(ofArtifactId);
+	public void delete(final OfVersion ofVersion) {
+		this.getRepository().delete(ofVersion);
 	}
 
 	public void update() {

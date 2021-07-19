@@ -1,5 +1,6 @@
 package org.johoco.depinsight.domain;
 
+import org.johoco.depinsight.domain.key.VersionKey;
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
 
 import com.arangodb.springframework.annotation.Document;
@@ -11,12 +12,16 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Document("versions")
-public class Version extends GraphData {
+public class Version extends Entity<VersionKey> {
 
 	private String value;
 
 	@Relations(edges = OfArtifactId.class, lazy = false)
 	private ArtifactId artifactId;
+
+	public Version(VersionKey key) {
+		super(key);
+	}
 
 	public static String getDocumentName() {
 		return "versions";

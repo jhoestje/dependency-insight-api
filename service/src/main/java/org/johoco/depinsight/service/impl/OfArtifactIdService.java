@@ -1,7 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
-import org.johoco.depinsight.repository.arangodb.OfArtifactIdArangoRepository;
+import org.johoco.depinsight.repository.arangodb.extended.OfArtifactIdRepository;
 import org.johoco.depinsight.service.IofArtifactIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,16 +9,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class OfArtifactIdService extends BaseService<OfArtifactId> implements IofArtifactIdService {
 
-	private OfArtifactIdArangoRepository repo;
+	private OfArtifactIdRepository repository;
 
 	@Autowired
-	public OfArtifactIdService(OfArtifactIdArangoRepository repo) {
-		this.repo = repo;
+	public OfArtifactIdService(OfArtifactIdRepository repository) {
+		this.repository = repository;
 	}
 
 	@Override
 	public Iterable<OfArtifactId> findAll() {
-		return repo.findAll();
+		return repository.findAll();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class OfArtifactIdService extends BaseService<OfArtifactId> implements Io
 //		assert ofLanguage.getValue() != null;
 		// upsert
 		super.preSave(ofArtifactId);
-		return repo.save(ofArtifactId);
+		return repository.save(ofArtifactId);
 //		Optional<OfLanguage> existing = repo.findByGroupIdAndLanguage(ofLanguage.getGroupId(),
 //				ofLanguage.getLanguage());
 //		if (existing.isEmpty()) {
