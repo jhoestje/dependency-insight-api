@@ -14,6 +14,6 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <import resource="oflanguage.aql.spring.xml"/>
     <import resource="ofgroupid.aql.spring.xml"/>
     <import resource="ofartifactid.aql.spring.xml"/>
-    <import resource="ofversionid.aql.spring.xml"/>
+    <import resource="ofversion.aql.spring.xml"/>
  
 </beans>

@@ -6,7 +6,7 @@
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<util:map id="artifactidqueries" map-class="java.util.HashMap"
+	<util:map id="versionqueries" map-class="java.util.HashMap"
 		key-type="java.lang.String" value-type="java.lang.String">
 
 		<entry>

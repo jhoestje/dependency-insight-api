@@ -30,7 +30,7 @@ public class OfVersionRepository extends BaseCompositeRepository<OfVersion, OfVe
 	private final static Logger LOGR = LoggerFactory.getLogger(OfVersionRepository.class);
 
 	@Autowired
-	public OfVersionRepository(@Value("#{OfVersionqueries}") final Map<String, String> queries,
+	public OfVersionRepository(@Value("#{ofversionqueries}") final Map<String, String> queries,
 			final ArangoOperations aranngoDB, final OfVersionArangoRepository ofVersionArangoRepository) {
 		super(queries, aranngoDB, ofVersionArangoRepository);
 	}
