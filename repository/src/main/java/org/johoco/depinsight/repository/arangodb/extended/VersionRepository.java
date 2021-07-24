@@ -49,7 +49,7 @@ public class VersionRepository extends BaseCompositeRepository<Version, VersionA
 		bindVars.put("language", key.getLanguage());
 		bindVars.put("groupId", key.getGroupIdValue());
 		bindVars.put("artifactId", key.getArtifactIdValue());
-		bindVars.put("version", key.getVersionValue());
+		bindVars.put("versionId", key.getVersionValue());
 
 		ArangoCursor<Version> cursor = getArangoDb().query(query, bindVars, null, Version.class);
 //		cursor.forEachRemaining(aDocument -> {

@@ -17,7 +17,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			 <![CDATA[
 				WITH versions, ofArtifactId, artifactIds
 				FOR v IN versions
-				    FILTER v.key.versionValue == @version
+				    FILTER v.key.versionValue == @versionId
 				    FOR aid in 1..1 OUTBOUND v ofArtifactId
 				        FILTER aid.key.groupIdValue == @groupId
 				            AND aid.key.artifactIdValue == @artifactId

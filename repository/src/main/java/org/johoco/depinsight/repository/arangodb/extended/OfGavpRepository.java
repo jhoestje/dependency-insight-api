@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
-import org.johoco.depinsight.repository.arangodb.ArtifactArangoRepository;
+import org.johoco.depinsight.domain.relationship.OfGavp;
+import org.johoco.depinsight.repository.arangodb.OfGavpArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,42 +25,38 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class ArtifactRepository extends BaseCompositeRepository<Artifact, ArtifactArangoRepository> {
+public class OfGavpRepository extends BaseCompositeRepository<OfGavp, OfGavpArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(ArtifactRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(OfGavpRepository.class);
 
 	@Autowired
-	public ArtifactRepository(@Value("#{artifactqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final ArtifactArangoRepository artifactRepository) {
-		super(queries, aranngoDB, artifactRepository);
+	public OfGavpRepository(@Value("#{ofgavpqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final OfGavpArangoRepository ofGavpArangoRepository) {
+		super(queries, aranngoDB, ofGavpArangoRepository);
 	}
 
-	public Optional<Artifact> getByKey(final ArtifactKey key) {
+	public Optional<OfGavp> getByVertexIds(final OfGavp ofGavp) {
 //		try {
-		String query = getQuery("getByKey");
+		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("groupId", key.getGroupId());
-		bindVars.put("artifactId", key.getArtifactId());
-		bindVars.put("version", key.getVersion());
-		bindVars.put("packaging", key.getPackaging());
+		bindVars.put("packagingId", ofGavp.getPackaging().getArangoId());
+		bindVars.put("artifact", ofGavp.getArtifact().getArangoId());
 
-		ArangoCursor<Artifact> cursor = getArangoDb().query(query, bindVars, null, Artifact.class);
+		ArangoCursor<OfGavp> cursor = getArangoDb().query(query, bindVars, null, OfGavp.class);
 		if (cursor.hasNext()) {
 			return Optional.of(cursor.next());
 		}
 		return Optional.empty();
-//			cursor.forEachRemaining(aDocument -> {
-//				System.out.println("Key: " + aDocument.getKey());
-//			});
 //		} catch (ArangoDBException e) {
 //			System.err.println("Failed to execute query. " + e.getMessage());
 //		}
 //		return null;
 	}
 
-	public Artifact save(final Artifact artifact) {
-		LOGR.debug("Saving Artifact id {} key {}:  ", artifact.getId(), artifact.getKey());
-		return this.getRepository().save(artifact);
+	public OfGavp save(final OfGavp ofGavp) {
+		LOGR.debug("Saving OfGavp id {} - from {} to {}:  ", ofGavp.getId(), ofGavp.getArtifact(),
+				ofGavp.getPackaging());
+		return this.getRepository().save(ofGavp);
 	}
 
 	public void delete(final ArtifactKey key) {
@@ -78,8 +74,8 @@ public class ArtifactRepository extends BaseCompositeRepository<Artifact, Artifa
 		// }
 	}
 
-	public void delete(final Artifact artifact) {
-		this.getRepository().delete(artifact);
+	public void delete(final OfGavp ofGavp) {
+		this.getRepository().delete(ofGavp);
 	}
 
 	public void update() {

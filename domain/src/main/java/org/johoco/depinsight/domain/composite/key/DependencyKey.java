@@ -12,7 +12,7 @@ public class DependencyKey implements Key {
 	@NonNull
 	private Artifact backingArtifact;
 	@NonNull
-	private Artifact dependencyOf; // or dependency??
+	private DependencyKey dependencyOf; // key or dependency or artifact??
 	@NonNull
 	private Scope scope;
 }

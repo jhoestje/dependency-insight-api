@@ -7,5 +7,5 @@ public interface IArtifactService {
 
 	Artifact save(final Artifact artifact);
 
-	Artifact find(final ArtifactKey key);
+	Artifact getByKey(final ArtifactKey key);
 }

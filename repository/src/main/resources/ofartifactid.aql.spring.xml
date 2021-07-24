@@ -18,7 +18,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 	            WITH ofArtifactId, artifactIds, versions
 				FOR ofAid IN ofArtifactId
 				    FILTER ofAid._to == @artifactId
-				    AND ofAid._from == @version
+				    AND ofAid._from == @versionId
 				    RETURN ofAid
 			  ]]>
 			</value>

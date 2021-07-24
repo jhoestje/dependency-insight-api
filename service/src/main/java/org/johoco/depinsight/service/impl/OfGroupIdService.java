@@ -18,17 +18,13 @@ public class OfGroupIdService extends BaseService<OfGroupId> implements IofGroup
 
 	@Override
 	public OfGroupId save(final OfGroupId ofGroupId) {
-		// TODO: move to business rule
-//		assert ofLanguage.getValue() != null;
 		// upsert
-		super.preSave(ofGroupId);
-		return repository.save(ofGroupId);
-//		Optional<OfLanguage> existing = repo.findByGroupIdAndLanguage(ofLanguage.getGroupId(),
-//				ofLanguage.getLanguage());
-//		if (existing.isEmpty()) {
-//			return repo.save(ofLanguage);
-//		}
-//		return existing.get();
+		OfGroupId toSave = ofGroupId;
+		if (ofGroupId.getId() == null) {
+			toSave = this.repository.getByVertexIds(ofGroupId).orElse(ofGroupId);
+		}
+		super.preSave(toSave);
+		return repository.save(toSave);
 	}
 
 }

@@ -19,7 +19,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				FOR ofGid IN ofGroupId
 				    FILTER ofGid._to == @groupId
 				    AND ofGid._from == @artifactId
-				    RETURN ofGid_from == @artifactId
+				    RETURN ofGid
 			  ]]>
 			</value>
 		</entry>

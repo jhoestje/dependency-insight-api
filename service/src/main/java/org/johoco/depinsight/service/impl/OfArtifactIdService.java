@@ -23,17 +23,12 @@ public class OfArtifactIdService extends BaseService<OfArtifactId> implements Io
 
 	@Override
 	public OfArtifactId save(final OfArtifactId ofArtifactId) {
-		// TODO: move to business rule
-//		assert ofLanguage.getValue() != null;
-		// upsert
-		super.preSave(ofArtifactId);
-		return repository.save(ofArtifactId);
-//		Optional<OfLanguage> existing = repo.findByGroupIdAndLanguage(ofLanguage.getGroupId(),
-//				ofLanguage.getLanguage());
-//		if (existing.isEmpty()) {
-//			return repo.save(ofLanguage);
-//		}
-//		return existing.get();
+		OfArtifactId toSave = ofArtifactId;
+		if (ofArtifactId.getId() == null) {
+			toSave = this.repository.getByVertexIds(ofArtifactId).orElse(ofArtifactId);
+		}
+		super.preSave(toSave);
+		return repository.save(toSave);
 	}
 
 }

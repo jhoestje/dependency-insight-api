@@ -15,11 +15,11 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			</key>
 			<value>
 			 <![CDATA[
-	            WITH ofLanguage, groupIds, artifactIds
-				FOR ofl IN ofLanguage
-				    FILTER ofl._to == @languageId
-				    AND ofl._from == @groupId
-				    RETURN ofl
+	            WITH ofVersion
+				FOR ofV IN ofVersion
+				    FILTER ofV._to == @versionId
+				    AND ofV._from == @packagingId
+				    RETURN ofV
 			  ]]>
 			</value>
 		</entry>

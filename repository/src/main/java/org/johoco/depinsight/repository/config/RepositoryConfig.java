@@ -133,6 +133,8 @@ public class RepositoryConfig implements ArangoConfiguration {
 			graph.addEdgeDefinition(edgeDefinition);
 		}
 
+		// Dependency > Backing Artifact
+
 	}
 
 	private void createGraph(final ArangoDatabase arangoDatabase) {

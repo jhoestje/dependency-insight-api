@@ -1,5 +1,7 @@
 package org.johoco.depinsight.service.impl;
 
+import java.util.Optional;
+
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.repository.arangodb.extended.ArtifactRepository;
@@ -20,15 +22,27 @@ public class ArtifactService extends BaseService<Artifact> implements IArtifactS
 	// TODO Change to upsert??
 	@Override
 	public Artifact save(final Artifact artifact) {
+
 		// TODO: move to business rule
-//		assert artifact.getValue() != null;
-		super.preSave(artifact);
-		return repository.save(artifact);
+		Artifact save = artifact;
+		Optional<Artifact> existing = Optional.ofNullable(this.getByKey(artifact.getKey()));
+		if (!existing.isEmpty()) {
+			save = existing.get();
+		}
+		super.preSave(save);
+		// upsert - save new or save with last updated timestamp
+		return this.repository.save(save);
+
 	}
 
 	@Override
-	public Artifact find(final ArtifactKey key) {
-		return this.repository.findByKey(key);
+	public Artifact getByKey(final ArtifactKey artifactKey) {
+		return this.repository.getByKey(artifactKey).orElse(null);
 	}
+
+//	@Override
+//	public Artifact getByKey(final ArtifactKey key) {
+//		return this.repository.findByKey(key);
+//	}
 
 }

@@ -8,6 +8,7 @@ import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.domain.relationship.OfGavp;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.johoco.depinsight.domain.relationship.OfVersion;
@@ -18,6 +19,7 @@ import org.johoco.depinsight.service.ILanguageService;
 import org.johoco.depinsight.service.IPackagingService;
 import org.johoco.depinsight.service.IVersionService;
 import org.johoco.depinsight.service.IofArtifactIdService;
+import org.johoco.depinsight.service.IofGavpService;
 import org.johoco.depinsight.service.IofGroupIdService;
 import org.johoco.depinsight.service.IofLanguageService;
 import org.johoco.depinsight.service.IofVersionService;
@@ -43,13 +45,15 @@ public class ArtifactApi {
 	private IofGroupIdService ofGidService;
 	private IofArtifactIdService ofAidService;
 	private IofVersionService ofVersionService;
+	private IofGavpService ofGavpService;
 
 	@Autowired
 	public ArtifactApi(final IArtifactService service, final IGroupIdService gidService,
 			final IArtifactIdService aidService, final IVersionService versionService,
 			final IPackagingService packagingService, final ILanguageService languaageService,
 			final IofLanguageService ofLanguageService, final IofGroupIdService ofGroupIdService,
-			final IofArtifactIdService ofArtifactIdService, final IofVersionService ofVersionService) {
+			final IofArtifactIdService ofArtifactIdService, final IofVersionService ofVersionService,
+			final IofGavpService ofGavpService) {
 		this.service = service;
 		this.gidService = gidService;
 		this.aidService = aidService;
@@ -60,10 +64,11 @@ public class ArtifactApi {
 		this.ofGidService = ofGroupIdService;
 		this.ofAidService = ofArtifactIdService;
 		this.ofVersionService = ofVersionService;
+		this.ofGavpService = ofGavpService;
 	}
 
-	public Artifact findGroupId(final ArtifactKey key) {
-		return service.find(key);
+	public Artifact getArtifactByKey(final ArtifactKey key) {
+		return service.getByKey(key);
 	}
 
 	/**
@@ -100,6 +105,11 @@ public class ArtifactApi {
 			this.ofGidService.save(ofGid);
 			this.ofAidService.save(ofAid);
 			this.ofVersionService.save(ofV);
+
+			final Artifact savedArtifact = service.save(artifact);
+
+			final OfGavp ofGavp = new OfGavp(savedArtifact, packaging);
+			ofGavpService.save(ofGavp);
 
 			// save the document itself
 			return service.save(artifact);
