@@ -6,6 +6,12 @@ import org.johoco.depinsight.service.IofGroupIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class OfGroupIdService extends BaseService<OfGroupId> implements IofGroupIdService {
 

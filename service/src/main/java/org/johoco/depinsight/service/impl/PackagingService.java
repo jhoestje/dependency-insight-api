@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class PackagingService implements IPackagingService {
 

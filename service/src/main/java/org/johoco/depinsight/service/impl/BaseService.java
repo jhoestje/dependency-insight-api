@@ -3,6 +3,12 @@ package org.johoco.depinsight.service.impl;
 import org.joda.time.DateTime;
 import org.johoco.depinsight.domain.GraphData;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 public abstract class BaseService<E extends GraphData> {
 
 	/**

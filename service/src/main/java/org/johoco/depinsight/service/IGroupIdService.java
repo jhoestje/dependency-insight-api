@@ -6,6 +6,12 @@ import org.johoco.depinsight.domain.key.GroupIdKey;
 
 import lombok.NonNull;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 public interface IGroupIdService {
 
 	GroupId save(final GroupId groupdId);

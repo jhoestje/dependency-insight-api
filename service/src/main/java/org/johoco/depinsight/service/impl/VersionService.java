@@ -13,6 +13,12 @@ import org.springframework.stereotype.Service;
 
 import lombok.NonNull;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class VersionService extends BaseService<Version> implements IVersionService {
 

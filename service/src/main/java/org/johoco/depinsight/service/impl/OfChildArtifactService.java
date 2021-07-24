@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class OfVersionService extends BaseService<OfVersion> implements IofVersionService {
+public class OfChildArtifactService extends BaseService<OfVersion> implements IofVersionService {
 
 	private OfVersionRepository repository;
 
 	@Autowired
-	public OfVersionService(OfVersionRepository repository) {
+	public OfChildArtifactService(OfVersionRepository repository) {
 		this.repository = repository;
 	}
 

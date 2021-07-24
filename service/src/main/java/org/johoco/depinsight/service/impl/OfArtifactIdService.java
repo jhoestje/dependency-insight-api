@@ -6,6 +6,12 @@ import org.johoco.depinsight.service.IofArtifactIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class OfArtifactIdService extends BaseService<OfArtifactId> implements IofArtifactIdService {
 

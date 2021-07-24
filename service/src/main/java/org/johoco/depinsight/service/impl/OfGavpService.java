@@ -6,6 +6,11 @@ import org.johoco.depinsight.service.IofGavpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class OfGavpService extends BaseService<OfGavp> implements IofGavpService {
 

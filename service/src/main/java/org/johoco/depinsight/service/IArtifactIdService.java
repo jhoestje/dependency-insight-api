@@ -7,6 +7,12 @@ import org.johoco.depinsight.domain.key.ArtifactIdKey;
 
 import lombok.NonNull;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 public interface IArtifactIdService {
 
 	ArtifactId save(final ArtifactId artifactId);

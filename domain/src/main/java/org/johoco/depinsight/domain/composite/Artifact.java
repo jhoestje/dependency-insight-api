@@ -13,6 +13,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * 
+ * @author John Hoestje
+ *
+ */
 @EqualsAndHashCode(callSuper = true)
 @Getter
 @Setter

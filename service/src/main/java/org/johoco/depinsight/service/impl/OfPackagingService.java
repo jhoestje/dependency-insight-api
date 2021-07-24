@@ -6,6 +6,12 @@ import org.johoco.depinsight.service.IofLanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Service
 public class OfPackagingService extends BaseService<OfLanguage> implements IofLanguageService {
 

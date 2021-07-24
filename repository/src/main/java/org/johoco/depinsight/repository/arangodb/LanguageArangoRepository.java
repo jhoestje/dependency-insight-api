@@ -6,6 +6,12 @@ import org.johoco.depinsight.domain.Language;
 
 import com.arangodb.springframework.repository.ArangoRepository;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 public interface LanguageArangoRepository extends ArangoRepository<Language, String> {
 
 	// @Query("MATCH (:Actor {name:$name})-[:ACTED_IN]->(m:Movie) return m")

@@ -8,6 +8,12 @@ import org.johoco.depinsight.domain.key.VersionKey;
 
 import lombok.NonNull;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 public interface IVersionService {
 
 	Version save(final @NonNull Version version);

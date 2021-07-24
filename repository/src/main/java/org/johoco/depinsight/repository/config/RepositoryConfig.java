@@ -12,6 +12,7 @@ import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.Dependency;
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.domain.relationship.OfChildArtifact;
 import org.johoco.depinsight.domain.relationship.OfClassifier;
 import org.johoco.depinsight.domain.relationship.OfGavp;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
@@ -34,6 +35,12 @@ import com.arangodb.springframework.config.ArangoConfiguration;
 import com.arangodb.springframework.core.ArangoOperations;
 import com.arangodb.springframework.core.template.ArangoTemplate;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Configuration
 //@ComponentScan(basePackages = "org.johoco.depinsight.repository")
 @EnableArangoRepositories(basePackages = "org.johoco.depinsight.repository")
@@ -130,6 +137,13 @@ public class RepositoryConfig implements ArangoConfiguration {
 		if (!names.contains(OfGavp.getName())) {
 			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfGavp.getName())
 					.from(OfGavp.getFromName()).to(OfGavp.getToName());
+			graph.addEdgeDefinition(edgeDefinition);
+		}
+
+		// Child > Parent POM/artifact
+		if (!names.contains(OfChildArtifact.getName())) {
+			final EdgeDefinition edgeDefinition = new EdgeDefinition().collection(OfChildArtifact.getName())
+					.from(OfChildArtifact.getFromName()).to(OfChildArtifact.getToName());
 			graph.addEdgeDefinition(edgeDefinition);
 		}
 

@@ -18,8 +18,6 @@ import com.arangodb.springframework.core.ArangoOperations;
 
 /**
  * 
- * Using AQL literal queries instead of @Query annotation on the method in order
- * to be able to use the same query in the AQL query runner.
  * 
  * @author John Hoestje
  *
