@@ -1,6 +1,6 @@
 package org.johoco.depinsight.service;
 
-import org.johoco.depinsight.domain.relationship.OfVersion;
+import org.johoco.depinsight.domain.relationship.OfChildArtifact;
 
 /**
  * 
@@ -10,6 +10,6 @@ import org.johoco.depinsight.domain.relationship.OfVersion;
  */
 public interface IofChildArtifactService {
 
-	OfVersion save(final OfVersion ofVersion);
+	OfChildArtifact save(final OfChildArtifact ofChildArtifact);
 
 }

@@ -31,7 +31,7 @@ public class OfChildArtifactRepository
 	private final static Logger LOGR = LoggerFactory.getLogger(OfChildArtifactRepository.class);
 
 	@Autowired
-	public OfChildArtifactRepository(@Value("#{ofchildartifactpqueries}") final Map<String, String> queries,
+	public OfChildArtifactRepository(@Value("#{ofchildartifactqueries}") final Map<String, String> queries,
 			final ArangoOperations aranngoDB, final OfChildArtifactArangoRepository ofChildArtifactArangoRepository) {
 		super(queries, aranngoDB, ofChildArtifactArangoRepository);
 	}

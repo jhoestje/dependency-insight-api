@@ -19,6 +19,7 @@ import org.johoco.depinsight.service.ILanguageService;
 import org.johoco.depinsight.service.IPackagingService;
 import org.johoco.depinsight.service.IVersionService;
 import org.johoco.depinsight.service.IofArtifactIdService;
+import org.johoco.depinsight.service.IofChildArtifactService;
 import org.johoco.depinsight.service.IofGavpService;
 import org.johoco.depinsight.service.IofGroupIdService;
 import org.johoco.depinsight.service.IofLanguageService;
@@ -46,6 +47,7 @@ public class ArtifactApi {
 	private IofArtifactIdService ofAidService;
 	private IofVersionService ofVersionService;
 	private IofGavpService ofGavpService;
+	private IofChildArtifactService ofChildArtifactService;
 
 	@Autowired
 	public ArtifactApi(final IArtifactService service, final IGroupIdService gidService,
@@ -53,7 +55,7 @@ public class ArtifactApi {
 			final IPackagingService packagingService, final ILanguageService languaageService,
 			final IofLanguageService ofLanguageService, final IofGroupIdService ofGroupIdService,
 			final IofArtifactIdService ofArtifactIdService, final IofVersionService ofVersionService,
-			final IofGavpService ofGavpService) {
+			final IofGavpService ofGavpService, final IofChildArtifactService ofChildArtifactService) {
 		this.service = service;
 		this.gidService = gidService;
 		this.aidService = aidService;
