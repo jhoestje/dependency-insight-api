@@ -90,8 +90,8 @@ public class ArtifactApi {
 			Language savedLanguage = languageService.save(language);
 
 			// save the documents
-			final GroupId groupid = gidService.save(language, artifact.getKey().getGroupId());
-			final ArtifactId artifactId = aidService.save(language, groupid, artifact.getKey().getArtifactId());
+			final GroupId groupid = gidService.save(language, artifact.getKey().getGroupIdValue());
+			final ArtifactId artifactId = aidService.save(language, groupid, artifact.getKey().getArtifactIdValue());
 			final Version version = versionService.save(language, groupid, artifactId, artifact.getKey().getVersion());
 			final Packaging packaging = packagingService.save(artifact.getKey().getPackaging());
 
@@ -112,7 +112,7 @@ public class ArtifactApi {
 			ofGavpService.save(ofGavp);
 
 			// save the document itself
-			return service.save(artifact);
+			return savedArtifact;
 		} catch (Exception e) {
 			// TODO change to specific exceptions
 			e.printStackTrace();

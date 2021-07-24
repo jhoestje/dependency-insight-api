@@ -24,9 +24,9 @@ public class ArtifactKey implements Key {
 	@NonNull
 	private String language;
 	@NonNull
-	private String groupId;
+	private String groupIdValue;
 	@NonNull
-	private String artifactId;
+	private String artifactIdValue;
 	@NonNull
 	private String version;
 	@NonNull

@@ -36,26 +36,19 @@ public class ArtifactRepository extends BaseCompositeRepository<Artifact, Artifa
 	}
 
 	public Optional<Artifact> getByKey(final ArtifactKey key) {
-//		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("groupId", key.getGroupId());
-		bindVars.put("artifactId", key.getArtifactId());
-		bindVars.put("version", key.getVersion());
-		bindVars.put("packaging", key.getPackaging());
+		bindVars.put("languageId", key.getLanguage());
+		bindVars.put("groupIdId", key.getGroupIdValue());
+		bindVars.put("artifactIdId", key.getArtifactIdValue());
+		bindVars.put("versionId", key.getVersion());
+		bindVars.put("packagingId", key.getPackaging());
 
 		ArangoCursor<Artifact> cursor = getArangoDb().query(query, bindVars, null, Artifact.class);
 		if (cursor.hasNext()) {
 			return Optional.of(cursor.next());
 		}
 		return Optional.empty();
-//			cursor.forEachRemaining(aDocument -> {
-//				System.out.println("Key: " + aDocument.getKey());
-//			});
-//		} catch (ArangoDBException e) {
-//			System.err.println("Failed to execute query. " + e.getMessage());
-//		}
-//		return null;
 	}
 
 	public Artifact save(final Artifact artifact) {

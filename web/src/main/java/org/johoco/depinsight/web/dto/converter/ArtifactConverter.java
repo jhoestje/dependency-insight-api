@@ -12,16 +12,16 @@ public class ArtifactConverter {
 	}
 
 	public static ArtifactKeyDTO convertToKey(final Artifact a) {
-		return ArtifactKeyDTO.builder().language("").groupId(a.getKey().getGroupId())
-				.artifactId(a.getKey().getArtifactId()).version(a.getKey().getVersion())
+		return ArtifactKeyDTO.builder().language("").groupId(a.getKey().getGroupIdValue())
+				.artifactId(a.getKey().getArtifactIdValue()).version(a.getKey().getVersion())
 				.packaging(a.getKey().getPackaging()).createdDate(a.getCreatedDate())
 				.lastUpdatedDate(a.getLastUpdatedDate()).build();
 	}
 
 	public static Artifact convert(ArtifactKeyDTO artifactDto) {
-		ArtifactKey ak = ArtifactKey.builder().groupId(artifactDto.getGroupId()).artifactId(artifactDto.getArtifactId())
-				.version(artifactDto.getVersion()).language(artifactDto.getLanguage())
-				.packaging(artifactDto.getPackaging()).build();
+		ArtifactKey ak = ArtifactKey.builder().groupIdValue(artifactDto.getGroupId())
+				.artifactIdValue(artifactDto.getArtifactId()).version(artifactDto.getVersion())
+				.language(artifactDto.getLanguage()).packaging(artifactDto.getPackaging()).build();
 
 		return new Artifact(ak);
 	}

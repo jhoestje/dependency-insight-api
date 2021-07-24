@@ -39,8 +39,8 @@ public class OfGavpRepository extends BaseCompositeRepository<OfGavp, OfGavpAran
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("packagingId", ofGavp.getPackaging().getArangoId());
-		bindVars.put("artifact", ofGavp.getArtifact().getArangoId());
+		bindVars.put("packagingVertexId", ofGavp.getPackaging().getArangoId());
+		bindVars.put("artifactVertexId", ofGavp.getArtifact().getArangoId());
 
 		ArangoCursor<OfGavp> cursor = getArangoDb().query(query, bindVars, null, OfGavp.class);
 		if (cursor.hasNext()) {

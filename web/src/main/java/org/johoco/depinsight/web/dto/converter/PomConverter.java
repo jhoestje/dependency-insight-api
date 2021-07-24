@@ -9,13 +9,13 @@ public class PomConverter {
 		// .language("")
 		// .createdDate(a.getCreatedDate())
 		// .lastUpdatedDate(a.getLastUpdatedDate())
-		return Pom.builder().groupId(a.getKey().getGroupId()).artifactId(a.getKey().getArtifactId())
+		return Pom.builder().groupId(a.getKey().getGroupIdValue()).artifactId(a.getKey().getArtifactIdValue())
 				.version(a.getKey().getVersion()).packaging(a.getKey().getPackaging()).build();
 	}
 
 	public static Artifact convert(final Pom p) {
-		ArtifactKey ak = ArtifactKey.builder().language(p.getLanguage()).groupId(p.getGroupId())
-				.artifactId(p.getArtifactId()).version(p.getVersion()).packaging(p.getPackaging()).build();
+		ArtifactKey ak = ArtifactKey.builder().language(p.getLanguage()).groupIdValue(p.getGroupId())
+				.artifactIdValue(p.getArtifactId()).version(p.getVersion()).packaging(p.getPackaging()).build();
 
 		Artifact a = new Artifact(ak);
 
