@@ -4,6 +4,11 @@ import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.dto.Pom;
 
+/**
+ * 
+ * @author John Hoestje
+ *
+ */
 public class PomConverter {
 	public static Pom convert(final Artifact a) {
 		// .language("")

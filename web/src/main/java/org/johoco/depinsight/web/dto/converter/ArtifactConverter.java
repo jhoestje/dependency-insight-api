@@ -11,6 +11,19 @@ public class ArtifactConverter {
 		Artifact a = new Artifact(key);
 		a.setOrganization(OrganizationConverter.convert(dto.getOrganization()));
 		a.setLicenses(LicenseConverter.convert(dto.getLicenses()));
+		a.setDevelopers(DeveloperConverter.convert(dto.getDevelopers()));
+		a.setContributors(ContributorConverter.convert(dto.getContributors()));
+		a.setMailingLists(MailingListConverter.convert(dto.getMailingLists()));
+		a.setPrerequisites(PrerequisiteConverter.convert(dto.getPrerequisites()));
+		a.setModules(dto.getModules());
+		a.setScm(ScmConverter.convert(dto.getScm()));
+		a.setIssueManagement(IssueManagementConverter.convert(dto.getIssueManagement()));
+		a.setCiManagement(CiManagementConverter.convert(dto.getCiManagement()));
+//		 List<DependencyManagement> dependencyManagement;
+//		 List<Dependency> dependencies;
+		a.setProperties(dto.getProperties());
+		a.setRepositories(RepositoryConverter.convert(dto.getRepositories()));
+		a.setPluginRepositories(RepositoryConverter.convert(dto.getPluginRepositories()));
 
 		return a;
 	}

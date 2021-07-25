@@ -26,6 +26,8 @@ public class ArtifactService extends BaseService<Artifact> implements IArtifactS
 	}
 
 	// TODO Change to upsert??
+	// FIXME: save existing entity or set the ID on the new on? Saving new
+	// properties???
 	@Override
 	public Artifact save(final Artifact artifact) {
 
@@ -34,6 +36,11 @@ public class ArtifactService extends BaseService<Artifact> implements IArtifactS
 		Optional<Artifact> existing = Optional.ofNullable(this.getByKey(artifact.getKey()));
 		if (!existing.isEmpty()) {
 			save = existing.get();
+			artifact.setArangoId(save.getArangoId());
+			artifact.setId(save.getId());
+			artifact.setCreatedDate(save.getCreatedDate());
+			save = artifact;
+
 		}
 		super.preSave(save);
 		// upsert - save new or save with last updated timestamp

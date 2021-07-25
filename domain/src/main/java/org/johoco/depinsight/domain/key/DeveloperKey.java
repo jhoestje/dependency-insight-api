@@ -13,9 +13,5 @@ import lombok.ToString;
 public class DeveloperKey implements Key {
 
 	@NonNull
-	private String id;
-	@NonNull
-	private String name;
-	@NonNull
 	private String email;
 }

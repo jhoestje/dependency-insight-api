@@ -10,17 +10,12 @@ import lombok.ToString;
 @RequiredArgsConstructor
 @ToString
 @Getter
-public class ContributorKey implements Key {
-
+public class ExtensionKey implements Key {
 	@NonNull
-	private String name;
+	private String groupId;
 	@NonNull
-	private String email;
+	private String artifactId;
 	@NonNull
-	private String url;
-	@NonNull
-	private String organization;
-	@NonNull
-	private String organizationUrl;
+	private String Version;
 
 }

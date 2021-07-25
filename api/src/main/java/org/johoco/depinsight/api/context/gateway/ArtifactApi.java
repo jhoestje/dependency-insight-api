@@ -11,6 +11,7 @@ import org.johoco.depinsight.domain.relationship.OfArtifactId;
 import org.johoco.depinsight.domain.relationship.OfGavp;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
+import org.johoco.depinsight.domain.relationship.OfOrganization;
 import org.johoco.depinsight.domain.relationship.OfVersion;
 import org.johoco.depinsight.service.IArtifactIdService;
 import org.johoco.depinsight.service.IArtifactService;
@@ -112,6 +113,10 @@ public class ArtifactApi {
 
 			final OfGavp ofGavp = new OfGavp(savedArtifact, packaging);
 			ofGavpService.save(ofGavp);
+
+			if (savedArtifact.getOrganization() != null) {
+				final OfOrganization ofO = new OfOrganization(savedArtifact, savedArtifact.getOrganization());
+			}
 
 			// save the document itself
 			return savedArtifact;

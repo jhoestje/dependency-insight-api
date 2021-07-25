@@ -5,6 +5,11 @@ import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.dto.ArtifactKeyDTO;
 import org.johoco.depinsight.dto.Pom;
 
+/**
+ * 
+ * @author John Hoestje
+ *
+ */
 public class ArtifactKeyConverter {
 	public static ArtifactKey convert(final ArtifactKeyDTO dto) {
 		return new ArtifactKey("java", dto.getGroupId(), dto.getArtifactId(), dto.getVersion(), dto.getPackaging());

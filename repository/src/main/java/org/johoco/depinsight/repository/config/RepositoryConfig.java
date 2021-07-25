@@ -4,10 +4,21 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.johoco.depinsight.domain.ArtifactId;
+import org.johoco.depinsight.domain.CiManagement;
 import org.johoco.depinsight.domain.Classifier;
+import org.johoco.depinsight.domain.Contributor;
+import org.johoco.depinsight.domain.Developer;
+import org.johoco.depinsight.domain.DistributionManagement;
 import org.johoco.depinsight.domain.GroupId;
+import org.johoco.depinsight.domain.IssueManagement;
 import org.johoco.depinsight.domain.Language;
+import org.johoco.depinsight.domain.License;
+import org.johoco.depinsight.domain.MailingList;
+import org.johoco.depinsight.domain.Organization;
 import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.Prerequisite;
+import org.johoco.depinsight.domain.Repository;
+import org.johoco.depinsight.domain.Scm;
 import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.Dependency;
@@ -196,6 +207,21 @@ public class RepositoryConfig implements ArangoConfiguration {
 		operations.collection(Classifier.class);
 		operations.collection(Artifact.class);
 		operations.collection(Dependency.class);
+		operations.collection(Organization.class);
+		operations.collection(License.class);
+
+		operations.collection(Developer.class);
+		operations.collection(Contributor.class);
+		operations.collection(MailingList.class);
+		operations.collection(Prerequisite.class);
+		operations.collection(Scm.class);
+		operations.collection(IssueManagement.class);
+		operations.collection(CiManagement.class);
+		operations.collection(DistributionManagement.class);
+//		operations.collection(Dependency.class);
+//		operations.collection(DependencyManagement.class);
+		operations.collection(Repository.class);
+
 	}
 
 }

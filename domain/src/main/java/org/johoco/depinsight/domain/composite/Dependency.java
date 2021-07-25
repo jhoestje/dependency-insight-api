@@ -1,6 +1,9 @@
 package org.johoco.depinsight.domain.composite;
 
+import java.util.List;
+
 import org.johoco.depinsight.domain.Entity;
+import org.johoco.depinsight.domain.Exclusion;
 import org.johoco.depinsight.domain.composite.key.DependencyKey;
 
 import com.arangodb.springframework.annotation.Document;
@@ -24,6 +27,12 @@ public class Dependency extends Entity<DependencyKey> {
 	private Boolean directDependecy;
 	private Boolean inherited;
 	private Boolean optional;
+	private List<Exclusion> exclusions;
+
+	private String type;
+	private String classifier;
+	private String scope;
+	private String systemPath;
 
 	public Dependency(DependencyKey key) {
 		super(key);

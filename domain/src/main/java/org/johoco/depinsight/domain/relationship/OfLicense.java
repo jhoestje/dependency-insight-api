@@ -18,7 +18,7 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @Getter
-@Edge("ofGroupId")
+@Edge("ofLicense")
 public class OfLicense extends GraphData implements GraphEdge {
 
 	@From
@@ -30,7 +30,7 @@ public class OfLicense extends GraphData implements GraphEdge {
 	private License license;
 
 	public static String getName() {
-		return "ofGroupId";
+		return "ofLicense";
 	}
 
 	public static String getFromName() {

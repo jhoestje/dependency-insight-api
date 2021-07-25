@@ -22,16 +22,11 @@ public class Developer extends Entity<DeveloperKey> {
 		super(key);
 	}
 
+	private String id;
+	private String name;
+
 	public static String getDocumentName() {
 		return "developers";
-	}
-
-	public String getId() {
-		return this.getKey().getId();
-	}
-
-	public String getName() {
-		return this.getKey().getName();
 	}
 
 	public String getEmail() {

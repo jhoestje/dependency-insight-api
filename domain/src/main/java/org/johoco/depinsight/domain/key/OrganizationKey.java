@@ -11,7 +11,6 @@ import lombok.ToString;
 @ToString
 @Getter
 public class OrganizationKey implements Key {
-
 	@NonNull
 	private String name;
 	@NonNull

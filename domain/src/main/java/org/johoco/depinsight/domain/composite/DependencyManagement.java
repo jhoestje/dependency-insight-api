@@ -1,7 +1,9 @@
 package org.johoco.depinsight.domain.composite;
 
 import org.johoco.depinsight.domain.Entity;
-import org.johoco.depinsight.domain.composite.key.DependencyKey;
+import org.johoco.depinsight.domain.composite.key.DependencyManagementKey;
+
+import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +16,8 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class DependencyManagement extends Entity<DependencyKey> {
+@Document("dependencyManagements")
+public class DependencyManagement extends Entity<DependencyManagementKey> {
 
 	private Artifact managedBy;
 	// or Artifact.. prob dep for scope and additional metadata
@@ -23,8 +26,12 @@ public class DependencyManagement extends Entity<DependencyKey> {
 	private Boolean inherited;
 	private Boolean optional;
 
-	public DependencyManagement(DependencyKey key) {
+	public DependencyManagement(DependencyManagementKey key) {
 		super(key);
+	}
+
+	public static String getDocumentName() {
+		return "dependencyManagements";
 	}
 
 }

@@ -19,10 +19,10 @@ import lombok.EqualsAndHashCode;
 public class Notifier extends Entity<NotifierKey> {
 
 	private String type;
-	private String sendOnError; // boolean
-	private String sendOnFailure; // boolean
-	private String sendOnSuccess; // boolean
-	private String sendOnWarning; // boolean
+	private Boolean sendOnError; // boolean
+	private Boolean sendOnFailure; // boolean
+	private Boolean sendOnSuccess; // boolean
+	private Boolean sendOnWarning; // boolean
 
 	public Notifier(NotifierKey key) {
 		super(key);

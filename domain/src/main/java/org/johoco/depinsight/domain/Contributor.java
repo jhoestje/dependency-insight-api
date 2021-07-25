@@ -2,12 +2,13 @@ package org.johoco.depinsight.domain;
 
 import java.util.List;
 
-import org.johoco.depinsight.domain.key.ContributorKey;
-
 import com.arangodb.springframework.annotation.Document;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -17,38 +18,22 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Document("contributors")
-public class Contributor extends Entity<ContributorKey> {
+public class Contributor extends GraphData {
 
+	private String name;
+	private String email;
+	private String url;
+	private String organization;
+	private String organizationUrl;
 	private List<String> roles;
 	private String timezone;
 
-	public Contributor(final ContributorKey key) {
-		super(key);
-	}
-
 	public static String getDocumentName() {
 		return "contributors";
-	}
-
-	public String getName() {
-		return this.getKey().getName();
-	}
-
-	public String getEmail() {
-		return this.getKey().getEmail();
-	}
-
-	public String getUrl() {
-		return this.getKey().getUrl();
-	}
-
-	public String getOrganization() {
-		return this.getKey().getOrganization();
-	}
-
-	public String getOrganizationUrl() {
-		return this.getKey().getOrganizationUrl();
 	}
 
 }

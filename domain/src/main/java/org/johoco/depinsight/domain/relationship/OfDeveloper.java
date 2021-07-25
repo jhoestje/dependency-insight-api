@@ -1,7 +1,7 @@
 package org.johoco.depinsight.domain.relationship;
 
+import org.johoco.depinsight.domain.Developer;
 import org.johoco.depinsight.domain.GraphData;
-import org.johoco.depinsight.domain.Organization;
 import org.johoco.depinsight.domain.composite.Artifact;
 
 import com.arangodb.springframework.annotation.Edge;
@@ -18,8 +18,8 @@ import lombok.ToString;
 @ToString
 @EqualsAndHashCode(callSuper = true)
 @Getter
-@Edge("ofOrganization")
-public class OfOrganization extends GraphData implements GraphEdge {
+@Edge("ofDeveloper")
+public class OfDeveloper extends GraphData implements GraphEdge {
 
 	@From
 	@NonNull
@@ -27,10 +27,10 @@ public class OfOrganization extends GraphData implements GraphEdge {
 
 	@To
 	@NonNull
-	private Organization organization;
+	private Developer developer;
 
 	public static String getName() {
-		return "ofOrganization";
+		return "ofDeveloper";
 	}
 
 	public static String getFromName() {
@@ -38,7 +38,7 @@ public class OfOrganization extends GraphData implements GraphEdge {
 	}
 
 	public static String getToName() {
-		return Organization.getDocumentName();
+		return Developer.getDocumentName();
 	}
 
 }
