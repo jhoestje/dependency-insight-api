@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -23,13 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/artifact")
-public class ArtifactController {
+public class MavenArtifactController {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(ArtifactController.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(MavenArtifactController.class);
 	private ArtifactApi api;
 
 	@Autowired
-	public ArtifactController(final ArtifactApi api) {
+	public MavenArtifactController(final ArtifactApi api) {
 		this.api = api;
 	}
 
@@ -95,19 +94,19 @@ public class ArtifactController {
 		return PomConverter.convert(saved);
 	}
 
-	@PutMapping("/update")
-	public ArtifactKeyDTO updateArtifact(@RequestBody final ArtifactKeyDTO artifactDto) {
-		Artifact artifact = null; // PomConverter.convert(artifactDto);
-
-		Language lang = new Language();
-		lang.setValue(artifactDto.getLanguage());
-
-		Artifact saved = null;
-		try {
-			saved = null;// this.api.save(lang, artifact);
-		} catch (Exception e) {
-			LOGR.error("Bad update", e);
-		}
-		return null; // ArtifactConverter.convert(saved);
-	}
+//	@PutMapping("/update")
+//	public ArtifactKeyDTO updateArtifact(@RequestBody final ArtifactKeyDTO artifactDto) {
+//		Artifact artifact = null; // PomConverter.convert(artifactDto);
+//
+//		Language lang = new Language();
+//		lang.setValue(artifactDto.getLanguage());
+//
+//		Artifact saved = null;
+//		try {
+//			saved = null;// this.api.save(lang, artifact);
+//		} catch (Exception e) {
+//			LOGR.error("Bad update", e);
+//		}
+//		return null; // ArtifactConverter.convert(saved);
+//	}
 }

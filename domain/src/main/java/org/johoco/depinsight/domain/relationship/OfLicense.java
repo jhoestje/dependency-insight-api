@@ -1,8 +1,8 @@
 package org.johoco.depinsight.domain.relationship;
 
-import org.johoco.depinsight.domain.ArtifactId;
 import org.johoco.depinsight.domain.GraphData;
-import org.johoco.depinsight.domain.GroupId;
+import org.johoco.depinsight.domain.License;
+import org.johoco.depinsight.domain.composite.Artifact;
 
 import com.arangodb.springframework.annotation.Edge;
 import com.arangodb.springframework.annotation.From;
@@ -19,26 +19,26 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @Getter
 @Edge("ofGroupId")
-public class OfGroupId extends GraphData implements GraphEdge {
+public class OfLicense extends GraphData implements GraphEdge {
 
 	@From
 	@NonNull
-	private ArtifactId artifactId;
+	private Artifact artifact;
 
 	@To
 	@NonNull
-	private GroupId groupId;
+	private License license;
 
 	public static String getName() {
 		return "ofGroupId";
 	}
 
 	public static String getFromName() {
-		return ArtifactId.getDocumentName();
+		return Artifact.getDocumentName();
 	}
 
 	public static String getToName() {
-		return GroupId.getDocumentName();
+		return License.getDocumentName();
 	}
 
 }

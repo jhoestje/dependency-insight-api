@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.johoco.depinsight.domain.Entity;
+import org.johoco.depinsight.domain.License;
+import org.johoco.depinsight.domain.Organization;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
+import org.johoco.depinsight.domain.relationship.OfOrganization;
 
 import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.Relations;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,8 +35,12 @@ public class Artifact extends Entity<ArtifactKey> {
 	private String description;
 	private String url;
 	private String inceptionYear;
-//	private Organization organization;
-//	private List<License> licenses;
+
+	@Relations(edges = OfOrganization.class, lazy = false)
+	private Organization organization;
+
+	@Relations(edges = OfOrganization.class, lazy = false)
+	private List<License> licenses;
 //	private List<Developer> developers;
 //	private List<Contributor> contributors;
 //	private List<MailingLists> mailingLists;

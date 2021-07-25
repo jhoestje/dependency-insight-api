@@ -1,0 +1,26 @@
+package org.johoco.depinsight.domain.key;
+
+import org.johoco.depinsight.domain.composite.key.Key;
+
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
+@RequiredArgsConstructor
+@ToString
+@Getter
+public class ContributorKey implements Key {
+
+	@NonNull
+	private String name;
+	@NonNull
+	private String email;
+	@NonNull
+	private String url;
+	@NonNull
+	private String organization;
+	@NonNull
+	private String organizationUrl;
+
+}

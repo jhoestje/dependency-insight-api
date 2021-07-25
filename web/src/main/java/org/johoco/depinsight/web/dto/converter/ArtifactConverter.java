@@ -8,7 +8,11 @@ import org.johoco.depinsight.dto.Pom;
 public class ArtifactConverter {
 	public static Artifact convert(final Pom dto) {
 		final ArtifactKey key = ArtifactKeyConverter.convert(dto);
-		return new Artifact(key);
+		Artifact a = new Artifact(key);
+		a.setOrganization(OrganizationConverter.convert(dto.getOrganization()));
+		a.setLicenses(LicenseConverter.convert(dto.getLicenses()));
+
+		return a;
 	}
 
 	public static ArtifactKeyDTO convertToKey(final Artifact a) {
