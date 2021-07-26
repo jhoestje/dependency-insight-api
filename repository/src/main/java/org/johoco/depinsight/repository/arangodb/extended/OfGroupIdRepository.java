@@ -58,7 +58,7 @@ public class OfGroupIdRepository extends BaseCompositeRepository<OfGroupId, OfGr
 	}
 
 	public OfGroupId save(final OfGroupId ofGroupId) {
-		LOGR.debug("Saving OfGroupId id {} - from {} to {}:  ", ofGroupId.getId(), ofGroupId.getArtifactId(),
+		LOGR.debug("Saving OfGroupId id {} - from {} to {}:  ", ofGroupId.getArangoKey(), ofGroupId.getArtifactId(),
 				ofGroupId.getGroupId());
 		return this.getRepository().save(ofGroupId);
 	}

@@ -55,7 +55,7 @@ public class OfChildArtifactRepository
 	}
 
 	public OfChildArtifact save(final OfChildArtifact ofChildArtifact) {
-		LOGR.debug("Saving OfChildArtifact id {} - from {} to {}:  ", ofChildArtifact.getId(),
+		LOGR.debug("Saving OfChildArtifact id {} - from {} to {}:  ", ofChildArtifact.getArangoKey(),
 				ofChildArtifact.getChild(), ofChildArtifact.getParent());
 		return this.getRepository().save(ofChildArtifact);
 	}

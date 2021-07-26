@@ -50,7 +50,7 @@ public class ArtifactRepository extends BaseCompositeRepository<Artifact, Artifa
 	}
 
 	public Artifact save(final Artifact artifact) {
-		LOGR.debug("Saving Artifact id {} key {}:  ", artifact.getId(), artifact.getKey());
+		LOGR.debug("Saving Artifact id {} key {}:  ", artifact.getArangoKey(), artifact.getKey());
 		return this.getRepository().save(artifact);
 	}
 

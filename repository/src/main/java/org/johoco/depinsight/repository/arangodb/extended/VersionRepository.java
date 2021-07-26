@@ -67,7 +67,7 @@ public class VersionRepository extends BaseCompositeRepository<Version, VersionA
 	}
 
 	public Version save(final Version version) {
-		LOGR.debug("Saving ArtifactId id {} - from {} to {}:  ", version.getId(), version.getKey());
+		LOGR.debug("Saving ArtifactId id {} - from {} to {}:  ", version.getArangoKey(), version.getKey());
 		return this.getRepository().save(version);
 	}
 

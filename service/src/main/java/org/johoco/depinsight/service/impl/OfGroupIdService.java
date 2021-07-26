@@ -26,7 +26,7 @@ public class OfGroupIdService extends BaseService<OfGroupId> implements IofGroup
 	public OfGroupId save(final OfGroupId ofGroupId) {
 		// upsert
 		OfGroupId toSave = ofGroupId;
-		if (ofGroupId.getId() == null) {
+		if (ofGroupId.getArangoKey() == null) {
 			toSave = this.repository.getByVertexIds(ofGroupId).orElse(ofGroupId);
 		}
 		super.preSave(toSave);

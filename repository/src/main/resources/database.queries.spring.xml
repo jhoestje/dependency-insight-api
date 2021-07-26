@@ -17,6 +17,16 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
     <import resource="ofversion.aql.spring.xml"/>
     <import resource="ofgavp.aql.spring.xml"/>
     
+    <!-- vertices -->
+    <import resource="developer.aql.spring.xml"/>
+    <import resource="contributor.aql.spring.xml"/>
+    <import resource="license.aql.spring.xml"/>
+    
+    <!-- edges -->
     <import resource="ofchildartifact.aql.spring.xml"/>
+    <import resource="oforganization.aql.spring.xml"/>
+    <import resource="oflicense.aql.spring.xml"/>
+    <import resource="ofdeveloper.aql.spring.xml"/>
+    <import resource="ofcontributor.aql.spring.xml"/>
  
 </beans>

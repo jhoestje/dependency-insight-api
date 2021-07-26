@@ -222,6 +222,11 @@ public class RepositoryConfig implements ArangoConfiguration {
 //		operations.collection(DependencyManagement.class);
 		operations.collection(Repository.class);
 
+		// maybe all of* that are not part of the graph??
+//		operations.collection(OfOrganization.class);
+//		operations.collection(OfDeveloper.class);
+//		operations.collection(OfContributor.class);
+//		operations.collection(OfLicense.class);
 	}
 
 }

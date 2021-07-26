@@ -54,7 +54,7 @@ public class OfGavpRepository extends BaseCompositeRepository<OfGavp, OfGavpAran
 	}
 
 	public OfGavp save(final OfGavp ofGavp) {
-		LOGR.debug("Saving OfGavp id {} - from {} to {}:  ", ofGavp.getId(), ofGavp.getArtifact(),
+		LOGR.debug("Saving OfGavp id {} - from {} to {}:  ", ofGavp.getArangoKey(), ofGavp.getArtifact(),
 				ofGavp.getPackaging());
 		return this.getRepository().save(ofGavp);
 	}

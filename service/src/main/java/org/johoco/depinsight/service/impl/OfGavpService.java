@@ -24,7 +24,7 @@ public class OfGavpService extends BaseService<OfGavp> implements IofGavpService
 	@Override
 	public OfGavp save(final OfGavp ofGavp) {
 		OfGavp toSave = ofGavp;
-		if (ofGavp.getId() == null) {
+		if (ofGavp.getArangoKey() == null) {
 			toSave = this.repository.getByVertexIds(ofGavp).orElse(ofGavp);
 		}
 		super.preSave(toSave);

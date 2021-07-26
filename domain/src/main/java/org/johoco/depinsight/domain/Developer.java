@@ -22,6 +22,7 @@ public class Developer extends Entity<DeveloperKey> {
 		super(key);
 	}
 
+	// maybe move these all to non-nullable in the key
 	private String id;
 	private String name;
 

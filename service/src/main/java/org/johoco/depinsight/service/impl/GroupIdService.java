@@ -50,7 +50,7 @@ public class GroupIdService extends BaseService<GroupId> implements IGroupIdServ
 	@Override
 	public GroupId getByGroupId(final GroupId groupId) {
 		GroupId existing = null;
-		if (groupId.getId() != null) {
+		if (groupId.getArangoKey() != null) {
 			existing = this.repository.get(groupId).get();
 		}
 		if (groupId.getKey() == null) {

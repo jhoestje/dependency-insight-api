@@ -1,32 +1,46 @@
 package org.johoco.depinsight.api.context.gateway;
 
 import org.johoco.depinsight.domain.ArtifactId;
+import org.johoco.depinsight.domain.Contributor;
+import org.johoco.depinsight.domain.Developer;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
+import org.johoco.depinsight.domain.License;
 import org.johoco.depinsight.domain.Packaging;
 import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.domain.relationship.OfContributor;
+import org.johoco.depinsight.domain.relationship.OfDeveloper;
 import org.johoco.depinsight.domain.relationship.OfGavp;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
+import org.johoco.depinsight.domain.relationship.OfLicense;
 import org.johoco.depinsight.domain.relationship.OfOrganization;
 import org.johoco.depinsight.domain.relationship.OfVersion;
 import org.johoco.depinsight.service.IArtifactIdService;
 import org.johoco.depinsight.service.IArtifactService;
+import org.johoco.depinsight.service.IContributorService;
+import org.johoco.depinsight.service.IDeveloperService;
 import org.johoco.depinsight.service.IGroupIdService;
 import org.johoco.depinsight.service.ILanguageService;
+import org.johoco.depinsight.service.ILicenseService;
 import org.johoco.depinsight.service.IPackagingService;
 import org.johoco.depinsight.service.IVersionService;
 import org.johoco.depinsight.service.IofArtifactIdService;
 import org.johoco.depinsight.service.IofChildArtifactService;
+import org.johoco.depinsight.service.IofContributorService;
+import org.johoco.depinsight.service.IofDeveloperService;
 import org.johoco.depinsight.service.IofGavpService;
 import org.johoco.depinsight.service.IofGroupIdService;
 import org.johoco.depinsight.service.IofLanguageService;
+import org.johoco.depinsight.service.IofLicenseService;
+import org.johoco.depinsight.service.IofOrganizationService;
 import org.johoco.depinsight.service.IofVersionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 /**
  * 
@@ -50,13 +64,26 @@ public class ArtifactApi {
 	private IofGavpService ofGavpService;
 	private IofChildArtifactService ofChildArtifactService;
 
+	private ILicenseService licenseService;
+	private IDeveloperService developerService;
+	private IContributorService contributorService;
+
+	private IofOrganizationService ofOrgService;
+	private IofLicenseService ofLicenseService;
+	private IofDeveloperService ofDevService;
+	private IofContributorService ofContributorService;
+
 	@Autowired
 	public ArtifactApi(final IArtifactService service, final IGroupIdService gidService,
 			final IArtifactIdService aidService, final IVersionService versionService,
 			final IPackagingService packagingService, final ILanguageService languaageService,
 			final IofLanguageService ofLanguageService, final IofGroupIdService ofGroupIdService,
 			final IofArtifactIdService ofArtifactIdService, final IofVersionService ofVersionService,
-			final IofGavpService ofGavpService, final IofChildArtifactService ofChildArtifactService) {
+			final IofGavpService ofGavpService, final IofChildArtifactService ofChildArtifactService,
+			final IofOrganizationService ofOrgService, final IofLicenseService ofLicenseService,
+			final IofDeveloperService ofDevService, final IofContributorService ofContributorService,
+			final ILicenseService licenseService, final IDeveloperService developerService,
+			final IContributorService contributorService) {
 		this.service = service;
 		this.gidService = gidService;
 		this.aidService = aidService;
@@ -68,6 +95,14 @@ public class ArtifactApi {
 		this.ofAidService = ofArtifactIdService;
 		this.ofVersionService = ofVersionService;
 		this.ofGavpService = ofGavpService;
+		this.ofChildArtifactService = ofChildArtifactService;
+		this.ofOrgService = ofOrgService;
+		this.ofLicenseService = ofLicenseService;
+		this.ofDevService = ofDevService;
+		this.ofContributorService = ofContributorService;
+		this.licenseService = licenseService;
+		this.developerService = developerService;
+		this.contributorService = contributorService;
 	}
 
 	public Artifact getArtifactByKey(final ArtifactKey key) {
@@ -116,6 +151,31 @@ public class ArtifactApi {
 
 			if (savedArtifact.getOrganization() != null) {
 				final OfOrganization ofO = new OfOrganization(savedArtifact, savedArtifact.getOrganization());
+				ofOrgService.save(ofO);
+			}
+
+			if (!CollectionUtils.isEmpty(savedArtifact.getLicenses())) {
+				for (License l : savedArtifact.getLicenses()) {
+					License savedL = licenseService.save(l);
+					final OfLicense ofL = new OfLicense(savedArtifact, savedL);
+					ofLicenseService.save(ofL);
+				}
+			}
+
+			if (!CollectionUtils.isEmpty(savedArtifact.getDevelopers())) {
+				for (Developer d : savedArtifact.getDevelopers()) {
+					Developer savedD = developerService.save(d);
+					final OfDeveloper ofD = new OfDeveloper(savedArtifact, savedD);
+					ofDevService.save(ofD);
+				}
+			}
+
+			if (!CollectionUtils.isEmpty(savedArtifact.getContributors())) {
+				for (Contributor c : savedArtifact.getContributors()) {
+					Contributor savedC = contributorService.save(c);
+					final OfContributor ofC = new OfContributor(savedArtifact, savedC);
+					ofContributorService.save(ofC);
+				}
 			}
 
 			// save the document itself

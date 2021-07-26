@@ -11,7 +11,7 @@ import lombok.Data;
 public abstract class GraphData {
 
 	@Id // db document field: _key -- ex:1051180
-	private String id;
+	private String arangoKey;
 
 	@ArangoId // db document field: _id -- ex:groupIds/1051180
 	private String arangoId;

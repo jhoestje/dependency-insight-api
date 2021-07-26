@@ -58,7 +58,7 @@ public class OfLanguageRepository extends BaseCompositeRepository<OfLanguage, Of
 	}
 
 	public OfLanguage save(final OfLanguage ofLanguage) {
-		LOGR.debug("Saving ofLanguage id {} - from {} to {}:  ", ofLanguage.getId(), ofLanguage.getGroupId(),
+		LOGR.debug("Saving ofLanguage id {} - from {} to {}:  ", ofLanguage.getArangoKey(), ofLanguage.getGroupId(),
 				ofLanguage.getLanguage());
 		return this.getRepository().save(ofLanguage);
 	}

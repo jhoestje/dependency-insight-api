@@ -37,7 +37,7 @@ public class ArtifactService extends BaseService<Artifact> implements IArtifactS
 		if (!existing.isEmpty()) {
 			save = existing.get();
 			artifact.setArangoId(save.getArangoId());
-			artifact.setId(save.getId());
+			artifact.setArangoKey(save.getArangoKey());
 			artifact.setCreatedDate(save.getCreatedDate());
 			save = artifact;
 

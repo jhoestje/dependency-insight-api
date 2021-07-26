@@ -1,6 +1,6 @@
 package org.johoco.depinsight.repository.arangodb;
 
-import org.johoco.depinsight.domain.relationship.OfGavp;
+import org.johoco.depinsight.domain.relationship.OfLicense;
 
 import com.arangodb.springframework.repository.ArangoRepository;
 
@@ -10,5 +10,5 @@ import com.arangodb.springframework.repository.ArangoRepository;
  * @author John Hoestje
  *
  */
-public interface OfGavpArangoRepository extends ArangoRepository<OfGavp, String> {
+public interface OfLicenseArangoRepository extends ArangoRepository<OfLicense, String> {
 }

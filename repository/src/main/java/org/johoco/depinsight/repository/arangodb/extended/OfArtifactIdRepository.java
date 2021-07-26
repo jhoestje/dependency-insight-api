@@ -58,8 +58,8 @@ public class OfArtifactIdRepository extends BaseCompositeRepository<OfArtifactId
 	}
 
 	public OfArtifactId save(final OfArtifactId ofArtifactId) {
-		LOGR.debug("Saving OfArtifactId id {} - from {} to {}:  ", ofArtifactId.getId(), ofArtifactId.getVersion(),
-				ofArtifactId.getArtifactId());
+		LOGR.debug("Saving OfArtifactId id {} - from {} to {}:  ", ofArtifactId.getArangoKey(),
+				ofArtifactId.getVersion(), ofArtifactId.getArtifactId());
 		return this.getRepository().save(ofArtifactId);
 	}
 

@@ -12,6 +12,7 @@ import lombok.ToString;
 @Getter
 public class DeveloperKey implements Key {
 
+	// something is removing everything after the @ in the collection
 	@NonNull
 	private String email;
 }

@@ -43,7 +43,7 @@ public class GroupIdRepository extends BaseCompositeRepository<GroupId, GroupIdA
 	public Optional<GroupId> get(final GroupId groupId) {
 		String query = getQuery("getById");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("id", groupId.getId());
+		bindVars.put("id", groupId.getArangoKey());
 
 		ArangoCursor<GroupId> cursor = getArangoDb().query(query, bindVars, null, GroupId.class);
 		if (cursor.hasNext()) {
@@ -80,7 +80,7 @@ public class GroupIdRepository extends BaseCompositeRepository<GroupId, GroupIdA
 	}
 
 	public GroupId save(final GroupId groupId) {
-		LOGR.debug("Saving GroupId id {} - from {} to {}:  ", groupId.getId(), groupId.getKey());
+		LOGR.debug("Saving GroupId id {} - from {} to {}:  ", groupId.getArangoKey(), groupId.getKey());
 		return this.getRepository().save(groupId);
 	}
 

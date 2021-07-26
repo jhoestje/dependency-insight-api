@@ -58,7 +58,7 @@ public class OfVersionRepository extends BaseCompositeRepository<OfVersion, OfVe
 	}
 
 	public OfVersion save(final OfVersion ofVersion) {
-		LOGR.debug("Saving OfVersion id {} - from {} to {}:  ", ofVersion.getId(), ofVersion.getPackaging(),
+		LOGR.debug("Saving OfVersion id {} - from {} to {}:  ", ofVersion.getArangoKey(), ofVersion.getPackaging(),
 				ofVersion.getVersion());
 		return this.getRepository().save(ofVersion);
 	}
