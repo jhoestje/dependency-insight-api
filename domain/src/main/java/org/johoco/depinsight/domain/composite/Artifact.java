@@ -18,8 +18,10 @@ import org.johoco.depinsight.domain.Scm;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.domain.relationship.OfContributor;
 import org.johoco.depinsight.domain.relationship.OfDeveloper;
+import org.johoco.depinsight.domain.relationship.OfIssueManagement;
 import org.johoco.depinsight.domain.relationship.OfLicense;
 import org.johoco.depinsight.domain.relationship.OfOrganization;
+import org.johoco.depinsight.domain.relationship.OfScm;
 
 import com.arangodb.springframework.annotation.Document;
 import com.arangodb.springframework.annotation.Relations;
@@ -63,13 +65,19 @@ public class Artifact extends Entity<ArtifactKey> {
 	private List<MailingList> mailingLists;
 	private Prerequisite prerequisites;
 	private List<String> modules;
+
+	@Relations(edges = OfScm.class, lazy = false)
 	private Scm scm;
+
+	@Relations(edges = OfIssueManagement.class, lazy = false)
 	private IssueManagement issueManagement;
 	private CiManagement ciManagement;
 	private DistributionManagement distributionManagement;
 	private List<DependencyManagement> dependencyManagement;
 	private List<Dependency> dependencies;
+
 	private Map<String, String> properties;
+
 	private List<Repository> repositories;
 	private List<Repository> pluginRepositories;
 //	private Build build;

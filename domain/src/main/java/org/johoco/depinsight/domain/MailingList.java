@@ -1,7 +1,5 @@
 package org.johoco.depinsight.domain;
 
-import com.arangodb.springframework.annotation.Document;
-
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder
-@Document("mailinglists")
+//@Document("mailinglists")
 public class MailingList extends GraphData {
 
 	private String name;

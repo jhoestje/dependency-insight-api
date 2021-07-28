@@ -1,32 +1,43 @@
 package org.johoco.depinsight.api.context.gateway;
 
 import org.johoco.depinsight.domain.ArtifactId;
+import org.johoco.depinsight.domain.CiManagement;
 import org.johoco.depinsight.domain.Contributor;
 import org.johoco.depinsight.domain.Developer;
 import org.johoco.depinsight.domain.GroupId;
+import org.johoco.depinsight.domain.IssueManagement;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.domain.License;
 import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.Scm;
 import org.johoco.depinsight.domain.Version;
 import org.johoco.depinsight.domain.composite.Artifact;
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
 import org.johoco.depinsight.domain.relationship.OfArtifactId;
+import org.johoco.depinsight.domain.relationship.OfCiManagement;
 import org.johoco.depinsight.domain.relationship.OfContributor;
 import org.johoco.depinsight.domain.relationship.OfDeveloper;
 import org.johoco.depinsight.domain.relationship.OfGavp;
 import org.johoco.depinsight.domain.relationship.OfGroupId;
+import org.johoco.depinsight.domain.relationship.OfIssueManagement;
 import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.johoco.depinsight.domain.relationship.OfLicense;
 import org.johoco.depinsight.domain.relationship.OfOrganization;
+import org.johoco.depinsight.domain.relationship.OfScm;
 import org.johoco.depinsight.domain.relationship.OfVersion;
 import org.johoco.depinsight.service.IArtifactIdService;
 import org.johoco.depinsight.service.IArtifactService;
+import org.johoco.depinsight.service.ICiManagementService;
 import org.johoco.depinsight.service.IContributorService;
 import org.johoco.depinsight.service.IDeveloperService;
 import org.johoco.depinsight.service.IGroupIdService;
+import org.johoco.depinsight.service.IIssueManagementService;
 import org.johoco.depinsight.service.ILanguageService;
 import org.johoco.depinsight.service.ILicenseService;
+import org.johoco.depinsight.service.IOfCiManagementService;
+import org.johoco.depinsight.service.IOfIssueManagementService;
 import org.johoco.depinsight.service.IPackagingService;
+import org.johoco.depinsight.service.IScmService;
 import org.johoco.depinsight.service.IVersionService;
 import org.johoco.depinsight.service.IofArtifactIdService;
 import org.johoco.depinsight.service.IofChildArtifactService;
@@ -37,6 +48,7 @@ import org.johoco.depinsight.service.IofGroupIdService;
 import org.johoco.depinsight.service.IofLanguageService;
 import org.johoco.depinsight.service.IofLicenseService;
 import org.johoco.depinsight.service.IofOrganizationService;
+import org.johoco.depinsight.service.IofScmService;
 import org.johoco.depinsight.service.IofVersionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +80,15 @@ public class ArtifactApi {
 	private IDeveloperService developerService;
 	private IContributorService contributorService;
 
+	private IScmService scmService;
+	private IofScmService ofScmService;
+
+	private IIssueManagementService issueManagementService;
+	private IOfIssueManagementService ofIssueManagementService;
+
+	private ICiManagementService ciManagementService;
+	private IOfCiManagementService ofCiManagementService;
+
 	private IofOrganizationService ofOrgService;
 	private IofLicenseService ofLicenseService;
 	private IofDeveloperService ofDevService;
@@ -83,7 +104,8 @@ public class ArtifactApi {
 			final IofOrganizationService ofOrgService, final IofLicenseService ofLicenseService,
 			final IofDeveloperService ofDevService, final IofContributorService ofContributorService,
 			final ILicenseService licenseService, final IDeveloperService developerService,
-			final IContributorService contributorService) {
+			final IContributorService contributorService, IScmService scmService, final IofScmService ofScmService,
+			final ICiManagementService ciManagementService, final IOfCiManagementService ofCiManagementService) {
 		this.service = service;
 		this.gidService = gidService;
 		this.aidService = aidService;
@@ -103,6 +125,10 @@ public class ArtifactApi {
 		this.licenseService = licenseService;
 		this.developerService = developerService;
 		this.contributorService = contributorService;
+		this.scmService = scmService;
+		this.ofScmService = ofScmService;
+		this.ciManagementService = ciManagementService;
+		this.ofCiManagementService = ofCiManagementService;
 	}
 
 	public Artifact getArtifactByKey(final ArtifactKey key) {
@@ -177,6 +203,38 @@ public class ArtifactApi {
 					ofContributorService.save(ofC);
 				}
 			}
+
+//			private List<MailingList> mailingLists;
+//			private Prerequisite prerequisites;
+//			private List<String> modules;
+
+			if (savedArtifact.getScm() != null) {
+				Scm s = savedArtifact.getScm();
+				Scm savedS = scmService.save(s);
+				final OfScm ofS = new OfScm(savedArtifact, savedS);
+				ofScmService.save(ofS);
+			}
+
+			if (savedArtifact.getIssueManagement() != null) {
+				IssueManagement s = savedArtifact.getIssueManagement();
+				IssueManagement savedS = issueManagementService.save(s);
+				final OfIssueManagement ofS = new OfIssueManagement(savedArtifact, savedS);
+				ofIssueManagementService.save(ofS);
+			}
+
+			if (savedArtifact.getCiManagement() != null) {
+				CiManagement s = savedArtifact.getCiManagement();
+				CiManagement savedS = ciManagementService.save(s);
+				final OfCiManagement ofcm = new OfCiManagement(savedArtifact, savedS);
+				ofCiManagementService.save(ofcm);
+			}
+
+//			private DistributionManagement distributionManagement;
+//			private List<DependencyManagement> dependencyManagement;
+//			private List<Dependency> dependencies;
+//			private Map<String, String> properties;
+//			private List<Repository> repositories;
+//			private List<Repository> pluginRepositories;
 
 			// save the document itself
 			return savedArtifact;

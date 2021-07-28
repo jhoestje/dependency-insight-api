@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.Developer;
-import org.johoco.depinsight.domain.key.DeveloperKey;
-import org.johoco.depinsight.repository.arangodb.DeveloperArangoRepository;
+import org.johoco.depinsight.domain.Scm;
+import org.johoco.depinsight.domain.key.ScmKey;
+import org.johoco.depinsight.repository.arangodb.ScmArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,13 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class DeveloperRepository extends BaseCompositeRepository<Developer, DeveloperArangoRepository> {
+public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(DeveloperRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(ScmRepository.class);
 
 	@Autowired
-	public DeveloperRepository(@Value("#{developerqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final DeveloperArangoRepository groupdIdRepository) {
+	public ScmRepository(@Value("#{scmqueries}") final Map<String, String> queries, final ArangoOperations aranngoDB,
+			final ScmArangoRepository groupdIdRepository) {
 		super(queries, aranngoDB, groupdIdRepository);
 	}
 
@@ -40,12 +40,12 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 //	 * @param key
 //	 * @return
 //	 */
-//	public Optional<Developer> get(final Developer groupId) {
+//	public Optional<Scm> get(final Scm groupId) {
 //		String query = getQuery("getById");
 //		Map<String, Object> bindVars = new HashMap<String, Object>();
 //		bindVars.put("id", groupId.getId());
 //
-//		ArangoCursor<Developer> cursor = getArangoDb().query(query, bindVars, null, Developer.class);
+//		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
 //		if (cursor.hasNext()) {
 //			return Optional.of(cursor.next());
 //		}
@@ -57,13 +57,13 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 	 * @param key
 	 * @return
 	 */
-	public Optional<Developer> getByKey(final DeveloperKey key) {
+	public Optional<Scm> getByKey(final ScmKey key) {
 //		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("email", key.getEmail());
+		bindVars.put("email", key.getUrl());
 
-		ArangoCursor<Developer> cursor = getArangoDb().query(query, bindVars, null, Developer.class);
+		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
 //		cursor.forEachRemaining(aDocument -> {
 //			System.out.println("Key: " + aDocument.getKey());
 //		});
@@ -78,12 +78,12 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 //		return Optional.empty();
 	}
 
-	public Developer save(final Developer developer) {
-		LOGR.debug("Saving Developer id {} - from {} to {}:  ", developer.getId(), developer.getKey());
-		return this.getRepository().save(developer);
+	public Scm save(final Scm scm) {
+		LOGR.debug("Saving Scm id {} - from {} to {}:  ", scm.getArangoId(), scm.getKey());
+		return this.getRepository().save(scm);
 	}
 
-	public void delete(final DeveloperKey key) {
+	public void delete(final ScmKey key) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
@@ -98,8 +98,8 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 		// }
 	}
 
-	public void delete(final Developer developer) {
-		this.delete(developer.getKey());
+	public void delete(final Scm scm) {
+		this.delete(scm.getKey());
 	}
 
 	public void update() {

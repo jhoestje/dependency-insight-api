@@ -2,8 +2,6 @@ package org.johoco.depinsight.domain;
 
 import java.util.List;
 
-import com.arangodb.springframework.annotation.Document;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -16,7 +14,7 @@ import lombok.NonNull;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Document("prerequisites")
+//@Document("prerequisites")
 public class Prerequisite extends GraphData {
 
 	@NonNull

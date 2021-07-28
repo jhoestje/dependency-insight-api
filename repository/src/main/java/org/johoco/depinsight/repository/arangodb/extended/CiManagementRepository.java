@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.Developer;
-import org.johoco.depinsight.domain.key.DeveloperKey;
-import org.johoco.depinsight.repository.arangodb.DeveloperArangoRepository;
+import org.johoco.depinsight.domain.IssueManagement;
+import org.johoco.depinsight.domain.key.IssueManagementKey;
+import org.johoco.depinsight.repository.arangodb.IssueManagementArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +25,14 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class DeveloperRepository extends BaseCompositeRepository<Developer, DeveloperArangoRepository> {
+public class CiManagementRepository
+		extends BaseCompositeRepository<IssueManagement, IssueManagementArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(DeveloperRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(CiManagementRepository.class);
 
 	@Autowired
-	public DeveloperRepository(@Value("#{developerqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final DeveloperArangoRepository groupdIdRepository) {
+	public CiManagementRepository(@Value("#{issueManagementqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final IssueManagementArangoRepository groupdIdRepository) {
 		super(queries, aranngoDB, groupdIdRepository);
 	}
 
@@ -40,12 +41,12 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 //	 * @param key
 //	 * @return
 //	 */
-//	public Optional<Developer> get(final Developer groupId) {
+//	public Optional<IssueManagement> get(final IssueManagement groupId) {
 //		String query = getQuery("getById");
 //		Map<String, Object> bindVars = new HashMap<String, Object>();
 //		bindVars.put("id", groupId.getId());
 //
-//		ArangoCursor<Developer> cursor = getArangoDb().query(query, bindVars, null, Developer.class);
+//		ArangoCursor<IssueManagement> cursor = getArangoDb().query(query, bindVars, null, IssueManagement.class);
 //		if (cursor.hasNext()) {
 //			return Optional.of(cursor.next());
 //		}
@@ -57,13 +58,13 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 	 * @param key
 	 * @return
 	 */
-	public Optional<Developer> getByKey(final DeveloperKey key) {
+	public Optional<IssueManagement> getByKey(final IssueManagementKey key) {
 //		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("email", key.getEmail());
+		bindVars.put("email", key.getUrl());
 
-		ArangoCursor<Developer> cursor = getArangoDb().query(query, bindVars, null, Developer.class);
+		ArangoCursor<IssueManagement> cursor = getArangoDb().query(query, bindVars, null, IssueManagement.class);
 //		cursor.forEachRemaining(aDocument -> {
 //			System.out.println("Key: " + aDocument.getKey());
 //		});
@@ -78,12 +79,13 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 //		return Optional.empty();
 	}
 
-	public Developer save(final Developer developer) {
-		LOGR.debug("Saving Developer id {} - from {} to {}:  ", developer.getId(), developer.getKey());
-		return this.getRepository().save(developer);
+	public IssueManagement save(final IssueManagement issueManagement) {
+		LOGR.debug("Saving IssueManagement id {} - from {} to {}:  ", issueManagement.getKey().getUrl(),
+				issueManagement.getKey());
+		return this.getRepository().save(issueManagement);
 	}
 
-	public void delete(final DeveloperKey key) {
+	public void delete(final IssueManagementKey key) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
@@ -98,8 +100,8 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 		// }
 	}
 
-	public void delete(final Developer developer) {
-		this.delete(developer.getKey());
+	public void delete(final IssueManagement issueManagement) {
+		this.delete(issueManagement.getKey());
 	}
 
 	public void update() {
