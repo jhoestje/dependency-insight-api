@@ -30,7 +30,7 @@ public class OfScmRepository extends BaseCompositeRepository<OfScm, OfScmArangoR
 	private final static Logger LOGR = LoggerFactory.getLogger(OfScmRepository.class);
 
 	@Autowired
-	public OfScmRepository(@Value("#{ofdeveloperqueries}") final Map<String, String> queries,
+	public OfScmRepository(@Value("#{ofscmqueries}") final Map<String, String> queries,
 			final ArangoOperations aranngoDB, final OfScmArangoRepository ofScmArangoRepository) {
 		super(queries, aranngoDB, ofScmArangoRepository);
 	}

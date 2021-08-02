@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.johoco.depinsight.domain.ArtifactId;
+import org.johoco.depinsight.domain.Build;
 import org.johoco.depinsight.domain.CiManagement;
 import org.johoco.depinsight.domain.Classifier;
 import org.johoco.depinsight.domain.Contributor;
@@ -16,6 +17,7 @@ import org.johoco.depinsight.domain.License;
 import org.johoco.depinsight.domain.MailingList;
 import org.johoco.depinsight.domain.Organization;
 import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.PluginRepository;
 import org.johoco.depinsight.domain.Prerequisite;
 import org.johoco.depinsight.domain.Repository;
 import org.johoco.depinsight.domain.Scm;
@@ -221,7 +223,10 @@ public class RepositoryConfig implements ArangoConfiguration {
 //		operations.collection(Dependency.class);
 //		operations.collection(DependencyManagement.class);
 		operations.collection(Repository.class);
+		operations.collection(PluginRepository.class);
+		operations.collection(Build.class);
 
+//		operations.collection(OfBuild.class);
 		// maybe all of* that are not part of the graph??
 //		operations.collection(OfOrganization.class);
 //		operations.collection(OfDeveloper.class);

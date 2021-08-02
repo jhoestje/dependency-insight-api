@@ -1,9 +1,14 @@
 package org.johoco.depinsight.domain;
 
+import java.util.List;
+
+import org.johoco.depinsight.domain.key.RepositoryKey;
+
 import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 /**
  * Maybe just store this on Artifact.
@@ -13,19 +18,24 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Document("deploymentRepositories")
-public class DeploymentRepository extends GraphData {
+@Document("repositories")
+public class PluginRepository extends Entity<RepositoryKey> {
 
-	private String uniqueVersion; // boolean
 	private RepositoryPolicy releases;
 	private RepositoryPolicy snapshots;
 	private String id;
 	private String name;
-	private String url;
 	private String layout;
 
+	public PluginRepository(final RepositoryKey key) {
+		super(key);
+	}
+
+	@NonNull
+	private List<String> maven;
+
 	public static String getDocumentName() {
-		return "deploymentRepositories";
+		return "repositories";
 	}
 
 }

@@ -5,8 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.johoco.depinsight.domain.composite.key.ArtifactKey;
-import org.johoco.depinsight.domain.relationship.OfCiManagement;
-import org.johoco.depinsight.repository.arangodb.OfCiManagementArangoRepository;
+import org.johoco.depinsight.domain.relationship.OfDistributionManagement;
+import org.johoco.depinsight.repository.arangodb.OfDistributionManagementArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +25,27 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class OfCiManagementRepository extends BaseCompositeRepository<OfCiManagement, OfCiManagementArangoRepository> {
+public class OfDistributionManagementRepository
+		extends BaseCompositeRepository<OfDistributionManagement, OfDistributionManagementArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(OfCiManagementRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(OfDistributionManagementRepository.class);
 
 	@Autowired
-	public OfCiManagementRepository(@Value("#{ofcimanagementqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final OfCiManagementArangoRepository ofCiManagementArangoRepository) {
-		super(queries, aranngoDB, ofCiManagementArangoRepository);
+	public OfDistributionManagementRepository(@Value("#{ofcontributorqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB,
+			final OfDistributionManagementArangoRepository ofDistributionManagementArangoRepository) {
+		super(queries, aranngoDB, ofDistributionManagementArangoRepository);
 	}
 
-	public Optional<OfCiManagement> getByVertexIds(final OfCiManagement ofCiManagement) {
+	public Optional<OfDistributionManagement> getByVertexIds(final OfDistributionManagement ofDistributionManagement) {
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("devVertexId", ofCiManagement.getCiManagement().getArangoId());
-		bindVars.put("artifactVertexId", ofCiManagement.getArtifact().getArangoId());
+		bindVars.put("conVertexId", ofDistributionManagement.getDistributionManagement().getArangoId());
+		bindVars.put("artifactVertexId", ofDistributionManagement.getArtifact().getArangoId());
 
-		ArangoCursor<OfCiManagement> cursor = getArangoDb().query(query, bindVars, null, OfCiManagement.class);
+		ArangoCursor<OfDistributionManagement> cursor = getArangoDb().query(query, bindVars, null,
+				OfDistributionManagement.class);
 		if (cursor.hasNext()) {
 			return Optional.of(cursor.next());
 		}
@@ -53,10 +56,10 @@ public class OfCiManagementRepository extends BaseCompositeRepository<OfCiManage
 //		return null;
 	}
 
-	public OfCiManagement save(final OfCiManagement ofCiManagement) {
-		LOGR.debug("Saving OfCiManagement id {} - from {} to {}:  ", ofCiManagement.getArangoKey(),
-				ofCiManagement.getArtifact(), ofCiManagement.getCiManagement());
-		return this.getRepository().save(ofCiManagement);
+	public OfDistributionManagement save(final OfDistributionManagement ofDistributionManagement) {
+		LOGR.debug("Saving OfDistributionManagement id {} - from {} to {}:  ", ofDistributionManagement.getArangoKey(),
+				ofDistributionManagement.getArtifact(), ofDistributionManagement.getDistributionManagement());
+		return this.getRepository().save(ofDistributionManagement);
 	}
 
 	public void delete(final ArtifactKey key) {
@@ -74,8 +77,8 @@ public class OfCiManagementRepository extends BaseCompositeRepository<OfCiManage
 		// }
 	}
 
-	public void delete(final OfCiManagement ofCiManagement) {
-		this.getRepository().delete(ofCiManagement);
+	public void delete(final OfDistributionManagement ofDistributionManagement) {
+		this.getRepository().delete(ofDistributionManagement);
 	}
 
 //		myObject.addAttribute("c", "Bar");

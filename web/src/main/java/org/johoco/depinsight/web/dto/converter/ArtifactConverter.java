@@ -23,7 +23,7 @@ public class ArtifactConverter {
 //		 List<Dependency> dependencies;
 		a.setProperties(dto.getProperties());
 		a.setRepositories(RepositoryConverter.convert(dto.getRepositories()));
-		a.setPluginRepositories(RepositoryConverter.convert(dto.getPluginRepositories()));
+		// a.setPluginRepositories(PluginRepositoryConverter.convert(dto.getPluginRepositories()));
 
 		return a;
 	}

@@ -4,14 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.Scm;
-import org.johoco.depinsight.domain.key.ScmKey;
-import org.johoco.depinsight.repository.arangodb.ScmArangoRepository;
+import org.johoco.depinsight.domain.Repository;
+import org.johoco.depinsight.domain.key.RepositoryKey;
+import org.johoco.depinsight.repository.arangodb.RepositoryArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Repository;
 
 import com.arangodb.ArangoCursor;
 import com.arangodb.springframework.core.ArangoOperations;
@@ -24,15 +23,15 @@ import com.arangodb.springframework.core.ArangoOperations;
  * @author John Hoestje
  *
  */
-@Repository
-public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoRepository> {
+@org.springframework.stereotype.Repository
+public class RepositoryRepository extends BaseCompositeRepository<Repository, RepositoryArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(ScmRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(RepositoryRepository.class);
 
 	@Autowired
-	public ScmRepository(@Value("#{scmqueries}") final Map<String, String> queries, final ArangoOperations aranngoDB,
-			final ScmArangoRepository scmRepository) {
-		super(queries, aranngoDB, scmRepository);
+	public RepositoryRepository(@Value("#{repositoryqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final RepositoryArangoRepository repoRepository) {
+		super(queries, aranngoDB, repoRepository);
 	}
 
 //	/**
@@ -40,12 +39,12 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 //	 * @param key
 //	 * @return
 //	 */
-//	public Optional<Scm> get(final Scm groupId) {
+//	public Optional<Repository> get(final Repository groupId) {
 //		String query = getQuery("getById");
 //		Map<String, Object> bindVars = new HashMap<String, Object>();
 //		bindVars.put("id", groupId.getId());
 //
-//		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
+//		ArangoCursor<Repository> cursor = getArangoDb().query(query, bindVars, null, Repository.class);
 //		if (cursor.hasNext()) {
 //			return Optional.of(cursor.next());
 //		}
@@ -57,13 +56,13 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 	 * @param key
 	 * @return
 	 */
-	public Optional<Scm> getByKey(final ScmKey key) {
+	public Optional<Repository> getByKey(final RepositoryKey key) {
 //		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
 		bindVars.put("email", key.getUrl());
 
-		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
+		ArangoCursor<Repository> cursor = getArangoDb().query(query, bindVars, null, Repository.class);
 //		cursor.forEachRemaining(aDocument -> {
 //			System.out.println("Key: " + aDocument.getKey());
 //		});
@@ -78,12 +77,12 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 //		return Optional.empty();
 	}
 
-	public Scm save(final Scm scm) {
-		LOGR.debug("Saving Scm id {} - from {} to {}:  ", scm.getArangoId(), scm.getKey());
-		return this.getRepository().save(scm);
+	public Repository save(final Repository repository) {
+		LOGR.debug("Saving Repository id {} - from {} to {}:  ", repository.getKey().getUrl(), repository.getKey());
+		return this.getRepository().save(repository);
 	}
 
-	public void delete(final ScmKey key) {
+	public void delete(final RepositoryKey key) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
@@ -98,8 +97,8 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 		// }
 	}
 
-	public void delete(final Scm scm) {
-		this.delete(scm.getKey());
+	public void delete(final Repository repository) {
+		this.delete(repository.getKey());
 	}
 
 	public void update() {

@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.IssueManagement;
-import org.johoco.depinsight.domain.key.IssueManagementKey;
-import org.johoco.depinsight.repository.arangodb.IssueManagementArangoRepository;
+import org.johoco.depinsight.domain.CiManagement;
+import org.johoco.depinsight.domain.key.CiManagementKey;
+import org.johoco.depinsight.repository.arangodb.CiManagementArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +25,14 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class CiManagementRepository
-		extends BaseCompositeRepository<IssueManagement, IssueManagementArangoRepository> {
+public class CiManagementRepository extends BaseCompositeRepository<CiManagement, CiManagementArangoRepository> {
 
 	private final static Logger LOGR = LoggerFactory.getLogger(CiManagementRepository.class);
 
 	@Autowired
-	public CiManagementRepository(@Value("#{issueManagementqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final IssueManagementArangoRepository groupdIdRepository) {
-		super(queries, aranngoDB, groupdIdRepository);
+	public CiManagementRepository(@Value("#{cimanagementqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final CiManagementArangoRepository ciManagementRepository) {
+		super(queries, aranngoDB, ciManagementRepository);
 	}
 
 //	/**
@@ -41,12 +40,12 @@ public class CiManagementRepository
 //	 * @param key
 //	 * @return
 //	 */
-//	public Optional<IssueManagement> get(final IssueManagement groupId) {
+//	public Optional<CiManagement> get(final CiManagement groupId) {
 //		String query = getQuery("getById");
 //		Map<String, Object> bindVars = new HashMap<String, Object>();
 //		bindVars.put("id", groupId.getId());
 //
-//		ArangoCursor<IssueManagement> cursor = getArangoDb().query(query, bindVars, null, IssueManagement.class);
+//		ArangoCursor<CiManagement> cursor = getArangoDb().query(query, bindVars, null, CiManagement.class);
 //		if (cursor.hasNext()) {
 //			return Optional.of(cursor.next());
 //		}
@@ -58,13 +57,13 @@ public class CiManagementRepository
 	 * @param key
 	 * @return
 	 */
-	public Optional<IssueManagement> getByKey(final IssueManagementKey key) {
+	public Optional<CiManagement> getByKey(final CiManagementKey key) {
 //		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
 		bindVars.put("email", key.getUrl());
 
-		ArangoCursor<IssueManagement> cursor = getArangoDb().query(query, bindVars, null, IssueManagement.class);
+		ArangoCursor<CiManagement> cursor = getArangoDb().query(query, bindVars, null, CiManagement.class);
 //		cursor.forEachRemaining(aDocument -> {
 //			System.out.println("Key: " + aDocument.getKey());
 //		});
@@ -79,13 +78,13 @@ public class CiManagementRepository
 //		return Optional.empty();
 	}
 
-	public IssueManagement save(final IssueManagement issueManagement) {
-		LOGR.debug("Saving IssueManagement id {} - from {} to {}:  ", issueManagement.getKey().getUrl(),
-				issueManagement.getKey());
-		return this.getRepository().save(issueManagement);
+	public CiManagement save(final CiManagement ciManagement) {
+		LOGR.debug("Saving CiManagement id {} - from {} to {}:  ", ciManagement.getKey().getUrl(),
+				ciManagement.getKey());
+		return this.getRepository().save(ciManagement);
 	}
 
-	public void delete(final IssueManagementKey key) {
+	public void delete(final CiManagementKey key) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
@@ -100,8 +99,8 @@ public class CiManagementRepository
 		// }
 	}
 
-	public void delete(final IssueManagement issueManagement) {
-		this.delete(issueManagement.getKey());
+	public void delete(final CiManagement ciManagement) {
+		this.delete(ciManagement.getKey());
 	}
 
 	public void update() {

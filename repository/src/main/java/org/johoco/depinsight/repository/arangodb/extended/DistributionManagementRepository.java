@@ -3,8 +3,8 @@ package org.johoco.depinsight.repository.arangodb.extended;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.Contributor;
-import org.johoco.depinsight.repository.arangodb.ContributorArangoRepository;
+import org.johoco.depinsight.domain.DistributionManagement;
+import org.johoco.depinsight.repository.arangodb.DistributionManagementArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,17 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class ContributorRepository extends BaseCompositeRepository<Contributor, ContributorArangoRepository> {
+public class DistributionManagementRepository
+		extends BaseCompositeRepository<DistributionManagement, DistributionManagementArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(ContributorRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(DistributionManagementRepository.class);
 
 	@Autowired
-	public ContributorRepository(@Value("#{contributorqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final ContributorArangoRepository contributorRepository) {
-		super(queries, aranngoDB, contributorRepository);
+	public DistributionManagementRepository(
+			@Value("#{distributionmanagementqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB,
+			final DistributionManagementArangoRepository distributionManagementRepository) {
+		super(queries, aranngoDB, distributionManagementRepository);
 	}
 
 //	/**
@@ -38,12 +41,12 @@ public class ContributorRepository extends BaseCompositeRepository<Contributor, 
 //	 * @param key
 //	 * @return
 //	 */
-//	public Optional<Contributor> get(final Contributor groupId) {
+//	public Optional<DistributionManagement> get(final DistributionManagement groupId) {
 //		String query = getQuery("getById");
 //		Map<String, Object> bindVars = new HashMap<String, Object>();
 //		bindVars.put("id", groupId.getId());
 //
-//		ArangoCursor<Contributor> cursor = getArangoDb().query(query, bindVars, null, Contributor.class);
+//		ArangoCursor<DistributionManagement> cursor = getArangoDb().query(query, bindVars, null, DistributionManagement.class);
 //		if (cursor.hasNext()) {
 //			return Optional.of(cursor.next());
 //		}
@@ -55,16 +58,17 @@ public class ContributorRepository extends BaseCompositeRepository<Contributor, 
 	 * @param key
 	 * @return
 	 */
-	public Optional<Contributor> findOne(final Contributor contributor) {
-		return getRepository().findOne(Example.of(contributor));
+	public Optional<DistributionManagement> findOne(final DistributionManagement distributionManagement) {
+		return getRepository().findOne(Example.of(distributionManagement));
 	}
 
-	public Contributor save(final Contributor contributor) {
-		LOGR.debug("Saving Contributor id {} ArangoId {}:  ", contributor.getArangoKey(), contributor.getArangoId());
-		return this.getRepository().save(contributor);
+	public DistributionManagement save(final DistributionManagement distributionManagement) {
+		LOGR.debug("Saving DistributionManagement id {} ArangoId {}:  ", distributionManagement.getArangoKey(),
+				distributionManagement.getArangoId());
+		return this.getRepository().save(distributionManagement);
 	}
 
-	public void delete(final Contributor contributor) {
+	public void delete(final DistributionManagement distributionManagement) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";

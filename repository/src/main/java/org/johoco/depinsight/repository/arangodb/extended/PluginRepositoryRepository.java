@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.Scm;
-import org.johoco.depinsight.domain.key.ScmKey;
-import org.johoco.depinsight.repository.arangodb.ScmArangoRepository;
+import org.johoco.depinsight.domain.PluginRepository;
+import org.johoco.depinsight.domain.key.RepositoryKey;
+import org.johoco.depinsight.repository.arangodb.PluginRepositoryArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,14 +25,15 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoRepository> {
+public class PluginRepositoryRepository
+		extends BaseCompositeRepository<PluginRepository, PluginRepositoryArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(ScmRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(PluginRepositoryRepository.class);
 
 	@Autowired
-	public ScmRepository(@Value("#{scmqueries}") final Map<String, String> queries, final ArangoOperations aranngoDB,
-			final ScmArangoRepository scmRepository) {
-		super(queries, aranngoDB, scmRepository);
+	public PluginRepositoryRepository(@Value("#{repositoryqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final PluginRepositoryArangoRepository pluginRepository) {
+		super(queries, aranngoDB, pluginRepository);
 	}
 
 //	/**
@@ -40,12 +41,12 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 //	 * @param key
 //	 * @return
 //	 */
-//	public Optional<Scm> get(final Scm groupId) {
+//	public Optional<PluginRepository> get(final PluginRepository groupId) {
 //		String query = getQuery("getById");
 //		Map<String, Object> bindVars = new HashMap<String, Object>();
 //		bindVars.put("id", groupId.getId());
 //
-//		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
+//		ArangoCursor<PluginRepository> cursor = getArangoDb().query(query, bindVars, null, PluginRepository.class);
 //		if (cursor.hasNext()) {
 //			return Optional.of(cursor.next());
 //		}
@@ -57,13 +58,13 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 	 * @param key
 	 * @return
 	 */
-	public Optional<Scm> getByKey(final ScmKey key) {
+	public Optional<PluginRepository> getByKey(final RepositoryKey key) {
 //		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
 		bindVars.put("email", key.getUrl());
 
-		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
+		ArangoCursor<PluginRepository> cursor = getArangoDb().query(query, bindVars, null, PluginRepository.class);
 //		cursor.forEachRemaining(aDocument -> {
 //			System.out.println("Key: " + aDocument.getKey());
 //		});
@@ -78,12 +79,13 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 //		return Optional.empty();
 	}
 
-	public Scm save(final Scm scm) {
-		LOGR.debug("Saving Scm id {} - from {} to {}:  ", scm.getArangoId(), scm.getKey());
-		return this.getRepository().save(scm);
+	public PluginRepository save(final PluginRepository repository) {
+		LOGR.debug("Saving PluginRepository id {} - from {} to {}:  ", repository.getKey().getUrl(),
+				repository.getKey());
+		return this.getRepository().save(repository);
 	}
 
-	public void delete(final ScmKey key) {
+	public void delete(final RepositoryKey key) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";
@@ -98,8 +100,8 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 		// }
 	}
 
-	public void delete(final Scm scm) {
-		this.delete(scm.getKey());
+	public void delete(final PluginRepository repository) {
+		this.delete(repository.getKey());
 	}
 
 	public void update() {

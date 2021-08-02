@@ -31,8 +31,8 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 
 	@Autowired
 	public DeveloperRepository(@Value("#{developerqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final DeveloperArangoRepository groupdIdRepository) {
-		super(queries, aranngoDB, groupdIdRepository);
+			final ArangoOperations aranngoDB, final DeveloperArangoRepository developerRepository) {
+		super(queries, aranngoDB, developerRepository);
 	}
 
 //	/**

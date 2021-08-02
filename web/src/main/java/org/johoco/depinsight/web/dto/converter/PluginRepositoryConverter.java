@@ -3,7 +3,7 @@ package org.johoco.depinsight.web.dto.converter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.johoco.depinsight.domain.Repository;
+import org.johoco.depinsight.domain.PluginRepository;
 import org.johoco.depinsight.domain.key.RepositoryKey;
 
 /**
@@ -11,11 +11,11 @@ import org.johoco.depinsight.domain.key.RepositoryKey;
  * @author John Hoestje
  *
  */
-public class RepositoryConverter {
-	public static Repository convert(final org.johoco.depinsight.dto.Repository dto) {
+public class PluginRepositoryConverter {
+	public static PluginRepository convert(final org.johoco.depinsight.dto.Repository dto) {
 		if (dto != null) {
 			RepositoryKey key = new RepositoryKey(dto.getUrl());
-			Repository entity = new Repository(key);
+			PluginRepository entity = new PluginRepository(key);
 			entity.setId(dto.getId());
 			entity.setName(dto.getName());
 			entity.setLayout(dto.getLayout());
@@ -26,7 +26,7 @@ public class RepositoryConverter {
 		return null;
 	}
 
-	public static org.johoco.depinsight.dto.Repository convert(final Repository entity) {
+	public static org.johoco.depinsight.dto.Repository convert(final PluginRepository entity) {
 		if (entity != null) {
 			org.johoco.depinsight.dto.Repository dto = org.johoco.depinsight.dto.Repository.builder().id(entity.getId())
 					.name(entity.getName()).url(entity.getKey().getUrl()).layout(entity.getLayout())
@@ -37,9 +37,9 @@ public class RepositoryConverter {
 		return null;
 	}
 
-	public static List<Repository> convert(List<org.johoco.depinsight.dto.Repository> dtos) {
+	public static List<PluginRepository> convert(List<org.johoco.depinsight.dto.Repository> dtos) {
 		if (dtos != null) {
-			List<Repository> entities = new ArrayList<>();
+			List<PluginRepository> entities = new ArrayList<>();
 			for (org.johoco.depinsight.dto.Repository dto : dtos) {
 				entities.add(convert(dto));
 			}
@@ -48,10 +48,10 @@ public class RepositoryConverter {
 		return null;
 	}
 
-	public static List<org.johoco.depinsight.dto.Repository> convertz(final List<Repository> entities) {
+	public static List<org.johoco.depinsight.dto.Repository> convertz(final List<PluginRepository> entities) {
 		if (entities != null) {
 			List<org.johoco.depinsight.dto.Repository> dtos = new ArrayList<>();
-			for (Repository entity : entities) {
+			for (PluginRepository entity : entities) {
 				dtos.add(convert(entity));
 			}
 			return dtos;

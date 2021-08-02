@@ -3,8 +3,8 @@ package org.johoco.depinsight.repository.arangodb.extended;
 import java.util.Map;
 import java.util.Optional;
 
-import org.johoco.depinsight.domain.Contributor;
-import org.johoco.depinsight.repository.arangodb.ContributorArangoRepository;
+import org.johoco.depinsight.domain.Build;
+import org.johoco.depinsight.repository.arangodb.BuildArangoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +23,14 @@ import com.arangodb.springframework.core.ArangoOperations;
  *
  */
 @Repository
-public class ContributorRepository extends BaseCompositeRepository<Contributor, ContributorArangoRepository> {
+public class BuildRepository extends BaseCompositeRepository<Build, BuildArangoRepository> {
 
-	private final static Logger LOGR = LoggerFactory.getLogger(ContributorRepository.class);
+	private final static Logger LOGR = LoggerFactory.getLogger(BuildRepository.class);
 
 	@Autowired
-	public ContributorRepository(@Value("#{contributorqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final ContributorArangoRepository contributorRepository) {
-		super(queries, aranngoDB, contributorRepository);
+	public BuildRepository(@Value("#{buildqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final BuildArangoRepository buildRepository) {
+		super(queries, aranngoDB, buildRepository);
 	}
 
 //	/**
@@ -38,12 +38,12 @@ public class ContributorRepository extends BaseCompositeRepository<Contributor, 
 //	 * @param key
 //	 * @return
 //	 */
-//	public Optional<Contributor> get(final Contributor groupId) {
+//	public Optional<Build> get(final Build groupId) {
 //		String query = getQuery("getById");
 //		Map<String, Object> bindVars = new HashMap<String, Object>();
 //		bindVars.put("id", groupId.getId());
 //
-//		ArangoCursor<Contributor> cursor = getArangoDb().query(query, bindVars, null, Contributor.class);
+//		ArangoCursor<Build> cursor = getArangoDb().query(query, bindVars, null, Build.class);
 //		if (cursor.hasNext()) {
 //			return Optional.of(cursor.next());
 //		}
@@ -55,16 +55,16 @@ public class ContributorRepository extends BaseCompositeRepository<Contributor, 
 	 * @param key
 	 * @return
 	 */
-	public Optional<Contributor> findOne(final Contributor contributor) {
-		return getRepository().findOne(Example.of(contributor));
+	public Optional<Build> findOne(final Build build) {
+		return getRepository().findOne(Example.of(build));
 	}
 
-	public Contributor save(final Contributor contributor) {
-		LOGR.debug("Saving Contributor id {} ArangoId {}:  ", contributor.getArangoKey(), contributor.getArangoId());
-		return this.getRepository().save(contributor);
+	public Build save(final Build build) {
+		LOGR.debug("Saving Build id {} ArangoId {}:  ", build.getArangoKey(), build.getArangoId());
+		return this.getRepository().save(build);
 	}
 
-	public void delete(final Contributor contributor) {
+	public void delete(final Build build) {
 		// try {
 		// String query = "FOR t IN firstCollection FILTER t.name == @name "
 //	    + "REMOVE t IN firstCollection LET removed = OLD RETURN removed";

@@ -31,7 +31,7 @@ public class OfIssueManagementRepository
 	private final static Logger LOGR = LoggerFactory.getLogger(OfIssueManagementRepository.class);
 
 	@Autowired
-	public OfIssueManagementRepository(@Value("#{ofdeveloperqueries}") final Map<String, String> queries,
+	public OfIssueManagementRepository(@Value("#{ofissuemanagementqueries}") final Map<String, String> queries,
 			final ArangoOperations aranngoDB,
 			final OfIssueManagementArangoRepository ofIssueManagementArangoRepository) {
 		super(queries, aranngoDB, ofIssueManagementArangoRepository);

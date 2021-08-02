@@ -31,9 +31,9 @@ public class IssueManagementRepository
 	private final static Logger LOGR = LoggerFactory.getLogger(IssueManagementRepository.class);
 
 	@Autowired
-	public IssueManagementRepository(@Value("#{issueManagementqueries}") final Map<String, String> queries,
-			final ArangoOperations aranngoDB, final IssueManagementArangoRepository groupdIdRepository) {
-		super(queries, aranngoDB, groupdIdRepository);
+	public IssueManagementRepository(@Value("#{issuemanagementqueries}") final Map<String, String> queries,
+			final ArangoOperations aranngoDB, final IssueManagementArangoRepository issueManagementRepository) {
+		super(queries, aranngoDB, issueManagementRepository);
 	}
 
 //	/**
