@@ -39,7 +39,7 @@ public class OfCiManagementRepository extends BaseCompositeRepository<OfCiManage
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("devVertexId", ofCiManagement.getCiManagement().getArangoId());
+		bindVars.put("ciVertexId", ofCiManagement.getCiManagement().getArangoId());
 		bindVars.put("artifactVertexId", ofCiManagement.getArtifact().getArangoId());
 
 		ArangoCursor<OfCiManagement> cursor = getArangoDb().query(query, bindVars, null, OfCiManagement.class);

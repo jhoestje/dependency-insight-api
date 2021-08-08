@@ -17,7 +17,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			 <![CDATA[
 	            WITH ofDistributionManagement
 				FOR ofD IN ofDistributionManagement
-				    FILTER ofD._to == @buildVertexId
+				    FILTER ofD._to == @distroVertexId
 				    AND ofD._from == @artifactVertexId
 				    RETURN ofD
 			  ]]>

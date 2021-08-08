@@ -39,7 +39,7 @@ public class OfScmRepository extends BaseCompositeRepository<OfScm, OfScmArangoR
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("devVertexId", ofScm.getScm().getArangoId());
+		bindVars.put("scmVertexId", ofScm.getScm().getArangoId());
 		bindVars.put("artifactVertexId", ofScm.getArtifact().getArangoId());
 
 		ArangoCursor<OfScm> cursor = getArangoDb().query(query, bindVars, null, OfScm.class);
