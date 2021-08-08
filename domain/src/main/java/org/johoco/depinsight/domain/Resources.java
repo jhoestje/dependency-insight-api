@@ -15,4 +15,5 @@ public class Resources implements Serializable {
 	List<String> includes;
 	// FIXME: what to do about exclues??
 //	List<Excludes> excludes;
+	List<String> excludes;
 }

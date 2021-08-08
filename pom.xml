@@ -103,6 +103,13 @@
 			<artifactId>maven-resolver-api</artifactId> <version>1.6.1</version> </dependency> -->
 
 	</dependencies>
+	
+ 	<!-- <repositories>
+    <repository>
+      <id>local-nexus</id>
+      <url>http://localhost:8081/repository/maven-public/</url>
+    </repository>
+  </repositories> -->
 
 	<modules>
 		<module>domain</module>

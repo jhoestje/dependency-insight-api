@@ -39,8 +39,13 @@ public class LanguageService extends BaseService<Language> implements ILanguageS
 	public Language findByValue(String value) throws Exception {
 		Optional<Language> lang = repository.findByValue(value);
 		if (lang.isEmpty()) {
-			LOGR.warn("An existing Language of {} wasn't findByValue", value);
-			throw new Exception("no lanuage value for " + value);
+			Language l = new Language();
+			l.setValue(value);
+
+			LOGR.error("An existing Language of {} wasn't findByValue", value);
+			return this.repository.save(l);
+			// LOGR.warn("An existing Language of {} wasn't findByValue", value);
+//			throw new Exception("no lanuage value for " + value);
 		}
 		return lang.get();
 	}

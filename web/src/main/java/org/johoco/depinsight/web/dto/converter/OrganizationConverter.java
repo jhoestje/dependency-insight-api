@@ -1,5 +1,6 @@
 package org.johoco.depinsight.web.dto.converter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.johoco.depinsight.domain.Organization;
 import org.johoco.depinsight.domain.key.OrganizationKey;
 
@@ -11,6 +12,10 @@ import org.johoco.depinsight.domain.key.OrganizationKey;
 public class OrganizationConverter {
 	public static Organization convert(final org.johoco.depinsight.dto.Organization dto) {
 		if (dto != null) {
+			if (StringUtils.isBlank(dto.getUrl())) {
+				// add debugging message for this
+				dto.setUrl("_url:" + dto.getName());
+			}
 			OrganizationKey key = new OrganizationKey(dto.getName(), dto.getUrl());
 			Organization o = new Organization(key);
 			return o;

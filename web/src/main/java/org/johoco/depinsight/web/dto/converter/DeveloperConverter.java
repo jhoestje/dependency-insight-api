@@ -17,6 +17,10 @@ public class DeveloperConverter {
 			Developer entity = new Developer();
 			entity.setId(dto.getId());
 			entity.setName(dto.getName());
+			entity.setEmail(dto.getEmail());
+			entity.setOrganization(dto.getOrganization());
+			entity.setOrganizationUrl(dto.getOrganizationUrl());
+
 			return entity;
 		}
 		return null;
@@ -28,6 +32,8 @@ public class DeveloperConverter {
 			dto.setId(entity.getId());
 			dto.setName(entity.getName());
 			dto.setEmail(entity.getEmail());
+			dto.setOrganization(entity.getOrganization());
+			dto.setOrganizationUrl(entity.getOrganizationUrl());
 			return dto;
 		}
 		return null;

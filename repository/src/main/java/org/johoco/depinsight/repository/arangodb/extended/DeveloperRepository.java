@@ -111,6 +111,7 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 	}
 
 	public Optional<Developer> findOne(Developer developer) {
+		LOGR.debug("example:  {}", developer.toString());
 		return getRepository().findOne(Example.of(developer));
 	}
 

@@ -20,6 +20,9 @@ public class Developer extends GraphData {
 	private String id;
 	private String name;
 	private String email;
+	// some don't follow the schema:
+	private String organization;
+	private String organizationUrl;
 
 	public static String getDocumentName() {
 		return "developers";

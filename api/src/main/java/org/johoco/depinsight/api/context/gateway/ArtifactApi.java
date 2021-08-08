@@ -138,7 +138,9 @@ public class ArtifactApi {
 			final IScmService scmService, final IofScmService ofScmService,
 			final IIssueManagementService issueManagementService,
 			final IOfIssueManagementService ofIssueManagementService, final ICiManagementService ciManagementService,
-			final IOfCiManagementService ofCiManagementService) {
+			final IOfCiManagementService ofCiManagementService, final IRepositoryService repoService,
+			final IofRepositoryService ofRepoService, final IPluginRepositoryService pluginRepoService,
+			final IofPluginRepositoryService ofPluginRepoService) {
 		this.service = service;
 		this.gidService = gidService;
 		this.aidService = aidService;
@@ -165,6 +167,10 @@ public class ArtifactApi {
 		this.ofScmService = ofScmService;
 		this.ciManagementService = ciManagementService;
 		this.ofCiManagementService = ofCiManagementService;
+		this.repoService = repoService;
+		this.ofRepoService = ofRepoService;
+		this.pluginRepoService = pluginRepoService;
+		this.ofPluginRepoService = ofPluginRepoService;
 	}
 
 	public Artifact getArtifactByKey(final ArtifactKey key) {

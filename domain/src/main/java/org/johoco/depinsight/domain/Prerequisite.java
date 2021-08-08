@@ -1,7 +1,5 @@
 package org.johoco.depinsight.domain;
 
-import java.util.List;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -18,7 +16,7 @@ import lombok.NonNull;
 public class Prerequisite extends GraphData {
 
 	@NonNull
-	private List<String> maven;
+	private String maven;
 
 	public static String getDocumentName() {
 		return "prerequisites";
