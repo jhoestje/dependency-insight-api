@@ -1,6 +1,5 @@
 package org.johoco.depinsight.repository.arangodb.extended;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
-import com.arangodb.ArangoCursor;
 import com.arangodb.springframework.core.ArangoOperations;
 
 /**
@@ -58,30 +57,33 @@ public class IssueManagementRepository
 	 * @param key
 	 * @return
 	 */
-	public Optional<IssueManagement> getByKey(final IssueManagementKey key) {
-//		try {
-		String query = getQuery("getByKey");
-		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("email", key.getUrl());
-
-		ArangoCursor<IssueManagement> cursor = getArangoDb().query(query, bindVars, null, IssueManagement.class);
-//		cursor.forEachRemaining(aDocument -> {
-//			System.out.println("Key: " + aDocument.getKey());
-//		});
-		// return Optional.of(cursor.next());
-		if (cursor.hasNext()) {
-			return Optional.of(cursor.next());
-		}
-		return Optional.empty();
-//		} catch (ArangoDBException e) {
-//			System.err.println("Failed to execute query. " + e.getMessage());
+//	public Optional<IssueManagement> getByKey(final IssueManagementKey key) {
+////		try {
+//		String query = getQuery("getByKey");
+//		Map<String, Object> bindVars = new HashMap<String, Object>();
+//		bindVars.put("email", key.getUrl());
+//
+//		ArangoCursor<IssueManagement> cursor = getArangoDb().query(query, bindVars, null, IssueManagement.class);
+////		cursor.forEachRemaining(aDocument -> {
+////			System.out.println("Key: " + aDocument.getKey());
+////		});
+//		// return Optional.of(cursor.next());
+//		if (cursor.hasNext()) {
+//			return Optional.of(cursor.next());
 //		}
 //		return Optional.empty();
+////		} catch (ArangoDBException e) {
+////			System.err.println("Failed to execute query. " + e.getMessage());
+////		}
+////		return Optional.empty();
+//	}
+
+	public Optional<IssueManagement> findOne(final IssueManagement issueManagement) {
+		return getRepository().findOne(Example.of(issueManagement));
 	}
 
 	public IssueManagement save(final IssueManagement issueManagement) {
-		LOGR.debug("Saving IssueManagement id {} - from {} to {}:  ", issueManagement.getKey().getUrl(),
-				issueManagement.getKey());
+		LOGR.debug("Saving id {} ArangoId {}:  ", issueManagement.getArangoKey(), issueManagement.getArangoId());
 		return this.getRepository().save(issueManagement);
 	}
 

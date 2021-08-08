@@ -60,7 +60,7 @@ public class BuildRepository extends BaseCompositeRepository<Build, BuildArangoR
 	}
 
 	public Build save(final Build build) {
-		LOGR.debug("Saving Build id {} ArangoId {}:  ", build.getArangoKey(), build.getArangoId());
+		LOGR.debug("Saving id {} ArangoId {}:  ", build.getArangoKey(), build.getArangoId());
 		return this.getRepository().save(build);
 	}
 

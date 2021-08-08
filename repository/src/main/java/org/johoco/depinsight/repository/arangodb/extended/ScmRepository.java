@@ -35,47 +35,21 @@ public class ScmRepository extends BaseCompositeRepository<Scm, ScmArangoReposit
 		super(queries, aranngoDB, scmRepository);
 	}
 
-//	/**
-//	 * 
-//	 * @param key
-//	 * @return
-//	 */
-//	public Optional<Scm> get(final Scm groupId) {
-//		String query = getQuery("getById");
-//		Map<String, Object> bindVars = new HashMap<String, Object>();
-//		bindVars.put("id", groupId.getId());
-//
-//		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
-//		if (cursor.hasNext()) {
-//			return Optional.of(cursor.next());
-//		}
-//		return Optional.empty();
-//	}
-
 	/**
 	 * 
 	 * @param key
 	 * @return
 	 */
 	public Optional<Scm> getByKey(final ScmKey key) {
-//		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("email", key.getUrl());
+		bindVars.put("url", key.getUrl());
 
 		ArangoCursor<Scm> cursor = getArangoDb().query(query, bindVars, null, Scm.class);
-//		cursor.forEachRemaining(aDocument -> {
-//			System.out.println("Key: " + aDocument.getKey());
-//		});
-		// return Optional.of(cursor.next());
 		if (cursor.hasNext()) {
 			return Optional.of(cursor.next());
 		}
 		return Optional.empty();
-//		} catch (ArangoDBException e) {
-//			System.err.println("Failed to execute query. " + e.getMessage());
-//		}
-//		return Optional.empty();
 	}
 
 	public Scm save(final Scm scm) {

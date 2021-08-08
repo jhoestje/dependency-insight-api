@@ -78,7 +78,7 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 //	}
 
 	public Developer save(final Developer developer) {
-		LOGR.debug("Saving Developer id {}:  ", developer.getId());
+		LOGR.debug("Saving id {} ArangoId {}:  ", developer.getArangoKey(), developer.getArangoId());
 		return this.getRepository().save(developer);
 	}
 

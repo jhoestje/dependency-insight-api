@@ -31,35 +31,14 @@ public class ContributorService extends BaseService<Contributor> implements ICon
 	@Override
 	public Contributor findOne(final Contributor contributor) {
 		return this.repository.findOne(contributor).orElse(null);
-
-//		Optional<Contributor> dev = repository.getByKey(key);
-//		if (dev.isEmpty()) {
-//			LOGR.warn("An existing Contributor of {} wasn't getByKey", key);
-//			throw new Exception("no Contributor key for " + key);
-//		}
-//		return dev.get();
 	}
-
-	/**
-	 * This needs to be protected so only an admin can perform it
-	 */
-//	@Override
-//	public Contributor save(final Contributor contributor) {
-//		// TODO: move to business rule
-//		assert contributor.getValue() != null;
-//		super.preSave(contributor);
-//		// upsert
-//		return repo.save(contributor);
-//	}
 
 	@Override
 	public Contributor save(final Contributor contributor) {
-		// TODO: move to business rule
 		Contributor save = this.repository.findOne(contributor).orElse(contributor);
 		super.preSave(save);
 		// upsert - save new or save with last updated timestamp
 		return this.repository.save(save);
-
 	}
 
 }

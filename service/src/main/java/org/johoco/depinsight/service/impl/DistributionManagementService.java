@@ -1,7 +1,5 @@
 package org.johoco.depinsight.service.impl;
 
-import java.util.Optional;
-
 import org.johoco.depinsight.domain.DistributionManagement;
 import org.johoco.depinsight.repository.arangodb.extended.DistributionManagementRepository;
 import org.johoco.depinsight.service.IDistributionManagementService;
@@ -57,16 +55,10 @@ public class DistributionManagementService extends BaseService<DistributionManag
 
 	@Override
 	public DistributionManagement save(final DistributionManagement distributionManagement) {
-		// TODO: move to business rule
-		DistributionManagement save = distributionManagement;
-		Optional<DistributionManagement> existing = Optional.ofNullable(this.findOne(distributionManagement));
-		if (!existing.isEmpty()) {
-			save = existing.get();
-		}
+		DistributionManagement save = this.repository.findOne(distributionManagement).orElse(distributionManagement);
 		super.preSave(save);
 		// upsert - save new or save with last updated timestamp
 		return this.repository.save(save);
-
 	}
 
 }

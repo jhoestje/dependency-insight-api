@@ -1,7 +1,5 @@
 package org.johoco.depinsight.service.impl;
 
-import java.util.Optional;
-
 import org.johoco.depinsight.domain.Build;
 import org.johoco.depinsight.repository.arangodb.extended.BuildRepository;
 import org.johoco.depinsight.service.IBuildService;
@@ -56,16 +54,10 @@ public class BuildService extends BaseService<Build> implements IBuildService {
 
 	@Override
 	public Build save(final Build build) {
-		// TODO: move to business rule
-		Build save = build;
-		Optional<Build> existing = Optional.ofNullable(this.findOne(build));
-		if (!existing.isEmpty()) {
-			save = existing.get();
-		}
+		Build save = this.repository.findOne(build).orElse(build);
 		super.preSave(save);
 		// upsert - save new or save with last updated timestamp
 		return this.repository.save(save);
-
 	}
 
 }

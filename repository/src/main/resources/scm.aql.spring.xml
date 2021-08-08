@@ -15,10 +15,10 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			</key>
 			<value>
 			 <![CDATA[
-	            WITH developers
-				FOR d IN developers
-				    FILTER d.key.email == @email
-				    RETURN d
+	            WITH scms
+				FOR e IN scms
+				    FILTER e.key.url == @url
+				    RETURN e
 			  ]]>
 			</value>
 		</entry>

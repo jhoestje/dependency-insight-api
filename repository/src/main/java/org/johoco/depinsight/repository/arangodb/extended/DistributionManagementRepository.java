@@ -63,7 +63,7 @@ public class DistributionManagementRepository
 	}
 
 	public DistributionManagement save(final DistributionManagement distributionManagement) {
-		LOGR.debug("Saving DistributionManagement id {} ArangoId {}:  ", distributionManagement.getArangoKey(),
+		LOGR.debug("Saving id {} ArangoId {}:  ", distributionManagement.getArangoKey(),
 				distributionManagement.getArangoId());
 		return this.getRepository().save(distributionManagement);
 	}

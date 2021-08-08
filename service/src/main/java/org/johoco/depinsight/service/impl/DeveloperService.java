@@ -33,18 +33,6 @@ public class DeveloperService extends BaseService<Developer> implements IDevelop
 		return this.repository.findOne(developer).orElse(null);
 	}
 
-	/**
-	 * This needs to be protected so only an admin can perform it
-	 */
-//	@Override
-//	public Developer save(final Developer developer) {
-//		// TODO: move to business rule
-//		assert developer.getValue() != null;
-//		super.preSave(developer);
-//		// upsert
-//		return repo.save(developer);
-//	}
-
 	@Override
 	public Developer save(final Developer developer) {
 		Developer save = this.repository.findOne(developer).orElse(developer);

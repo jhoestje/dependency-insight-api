@@ -11,14 +11,11 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 
 		<entry>
 			<key>
-				<value>getByKey</value>
+				<value>findBySomething</value>
 			</key>
 			<value>
 			 <![CDATA[
-	            WITH developers
-				FOR d IN developers
-				    FILTER d.key.email == @email
-				    RETURN d
+	            
 			  ]]>
 			</value>
 		</entry>

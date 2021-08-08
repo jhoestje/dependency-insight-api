@@ -60,7 +60,7 @@ public class ContributorRepository extends BaseCompositeRepository<Contributor, 
 	}
 
 	public Contributor save(final Contributor contributor) {
-		LOGR.debug("Saving Contributor id {} ArangoId {}:  ", contributor.getArangoKey(), contributor.getArangoId());
+		LOGR.debug("Saving id {} ArangoId {}:  ", contributor.getArangoKey(), contributor.getArangoId());
 		return this.getRepository().save(contributor);
 	}
 

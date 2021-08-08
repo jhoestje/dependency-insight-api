@@ -17,7 +17,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			 <![CDATA[
 	            WITH issueManagements
 				FOR im IN issueManagements
-				    FILTER im.key.url == @url
+				    FILTER im.url == @url
 				    RETURN im
 			  ]]>
 			</value>

@@ -60,13 +60,15 @@ public class RepositoryRepository extends BaseCompositeRepository<Repository, Re
 //		try {
 		String query = getQuery("getByKey");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("email", key.getUrl());
+		bindVars.put("url", key.getUrl());
 
 		ArangoCursor<Repository> cursor = getArangoDb().query(query, bindVars, null, Repository.class);
-//		cursor.forEachRemaining(aDocument -> {
-//			System.out.println("Key: " + aDocument.getKey());
-//		});
-		// return Optional.of(cursor.next());
+		if (LOGR.isDebugEnabled()) {
+			cursor.forEachRemaining(entity -> {
+				LOGR.debug("Found byKey: " + entity.getKey());
+			});
+		}
+
 		if (cursor.hasNext()) {
 			return Optional.of(cursor.next());
 		}

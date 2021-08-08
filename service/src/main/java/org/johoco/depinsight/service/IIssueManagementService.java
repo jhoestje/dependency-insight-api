@@ -1,7 +1,6 @@
 package org.johoco.depinsight.service;
 
 import org.johoco.depinsight.domain.IssueManagement;
-import org.johoco.depinsight.domain.key.IssueManagementKey;
 
 /**
  * 
@@ -11,7 +10,7 @@ import org.johoco.depinsight.domain.key.IssueManagementKey;
  */
 public interface IIssueManagementService {
 
-	IssueManagement getByKey(final IssueManagementKey key) throws Exception;
+//	IssueManagement getByKey(final IssueManagementKey key) throws Exception;
 
 	IssueManagement save(final IssueManagement issueManagement);
 
