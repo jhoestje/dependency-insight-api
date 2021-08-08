@@ -23,10 +23,7 @@ public class OfRepositoryService extends BaseService<OfRepository> implements Io
 
 	@Override
 	public OfRepository save(final OfRepository ofRepository) {
-		OfRepository toSave = ofRepository;
-		if (ofRepository.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofRepository).orElse(ofRepository);
-		}
+		OfRepository toSave = this.repository.getByVertexIds(ofRepository).orElse(ofRepository);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

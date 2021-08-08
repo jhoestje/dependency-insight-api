@@ -23,10 +23,7 @@ public class OfScmService extends BaseService<OfScm> implements IofScmService {
 
 	@Override
 	public OfScm save(final OfScm ofScm) {
-		OfScm toSave = ofScm;
-		if (ofScm.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofScm).orElse(ofScm);
-		}
+		OfScm toSave = this.repository.getByVertexIds(ofScm).orElse(ofScm);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

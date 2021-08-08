@@ -14,8 +14,10 @@ import org.johoco.depinsight.domain.key.LicenseKey;
 public class LicenseConverter {
 	public static License convert(final org.johoco.depinsight.dto.License dto) {
 		if (dto != null) {
-			LicenseKey key = new LicenseKey(dto.getName(), dto.getUrl(), dto.getDistribution());
-			return new License(key);
+			LicenseKey key = new LicenseKey(dto.getName(), dto.getUrl());
+			License l = new License(key);
+			l.setDistribution(dto.getDistribution());
+			return l;
 		}
 		return null;
 	}

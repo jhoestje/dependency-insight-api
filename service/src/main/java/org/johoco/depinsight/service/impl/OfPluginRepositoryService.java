@@ -23,10 +23,7 @@ public class OfPluginRepositoryService extends BaseService<OfPluginRepository> i
 
 	@Override
 	public OfPluginRepository save(final OfPluginRepository ofPluginRepository) {
-		OfPluginRepository toSave = ofPluginRepository;
-		if (ofPluginRepository.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofPluginRepository).orElse(ofPluginRepository);
-		}
+		OfPluginRepository toSave = this.repository.getByVertexIds(ofPluginRepository).orElse(ofPluginRepository);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

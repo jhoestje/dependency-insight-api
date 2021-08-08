@@ -15,11 +15,11 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			</key>
 			<value>
 			 <![CDATA[
-	            WITH ofContributor
-				FOR ofC IN ofContributor
-				    FILTER ofC._to == @conVertexId
-				    AND ofC._from == @artifactVertexId
-				    RETURN ofC
+	            WITH ofBuild
+				FOR ofB IN ofBuild
+				    FILTER ofB._to == @buildVertexId
+				    AND ofB._from == @artifactVertexId
+				    RETURN ofB
 			  ]]>
 			</value>
 		</entry>

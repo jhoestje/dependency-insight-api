@@ -44,6 +44,8 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<import resource="ofissuemanagement.aql.spring.xml" />
 
 	<import resource="ofchildartifact.aql.spring.xml" />
+	
+	<import resource="organization.aql.spring.xml" />
 	<import resource="oforganization.aql.spring.xml" />
 
     <import resource="build.aql.spring.xml" />

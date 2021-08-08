@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.johoco.depinsight.domain.Developer;
-import org.johoco.depinsight.domain.key.DeveloperKey;
 
 /**
  * 
@@ -14,8 +13,8 @@ import org.johoco.depinsight.domain.key.DeveloperKey;
 public class DeveloperConverter {
 	public static Developer convert(final org.johoco.depinsight.dto.Developer dto) {
 		if (dto != null) {
-			DeveloperKey key = new DeveloperKey(dto.getId());
-			Developer entity = new Developer(key);
+//			DeveloperKey key = new DeveloperKey(dto.getId());
+			Developer entity = new Developer();
 			entity.setId(dto.getId());
 			entity.setName(dto.getName());
 			return entity;

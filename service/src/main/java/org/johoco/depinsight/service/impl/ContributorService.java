@@ -1,7 +1,5 @@
 package org.johoco.depinsight.service.impl;
 
-import java.util.Optional;
-
 import org.johoco.depinsight.domain.Contributor;
 import org.johoco.depinsight.repository.arangodb.extended.ContributorRepository;
 import org.johoco.depinsight.service.IContributorService;
@@ -57,11 +55,7 @@ public class ContributorService extends BaseService<Contributor> implements ICon
 	@Override
 	public Contributor save(final Contributor contributor) {
 		// TODO: move to business rule
-		Contributor save = contributor;
-		Optional<Contributor> existing = Optional.ofNullable(this.findOne(contributor));
-		if (!existing.isEmpty()) {
-			save = existing.get();
-		}
+		Contributor save = this.repository.findOne(contributor).orElse(contributor);
 		super.preSave(save);
 		// upsert - save new or save with last updated timestamp
 		return this.repository.save(save);

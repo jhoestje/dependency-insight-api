@@ -23,10 +23,7 @@ public class OfOrganizationService extends BaseService<OfOrganization> implement
 
 	@Override
 	public OfOrganization save(final OfOrganization ofGavp) {
-		OfOrganization toSave = ofGavp;
-		if (ofGavp.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofGavp).orElse(ofGavp);
-		}
+		OfOrganization toSave = this.repository.getByVertexIds(ofGavp).orElse(ofGavp);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

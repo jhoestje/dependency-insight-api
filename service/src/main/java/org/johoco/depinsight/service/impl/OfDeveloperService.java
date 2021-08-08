@@ -23,10 +23,7 @@ public class OfDeveloperService extends BaseService<OfDeveloper> implements IofD
 
 	@Override
 	public OfDeveloper save(final OfDeveloper ofDeveloper) {
-		OfDeveloper toSave = ofDeveloper;
-		if (ofDeveloper.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofDeveloper).orElse(ofDeveloper);
-		}
+		OfDeveloper toSave = this.repository.getByVertexIds(ofDeveloper).orElse(ofDeveloper);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

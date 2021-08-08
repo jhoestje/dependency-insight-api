@@ -1,7 +1,6 @@
 package org.johoco.depinsight.service;
 
 import org.johoco.depinsight.domain.Developer;
-import org.johoco.depinsight.domain.key.DeveloperKey;
 
 /**
  * 
@@ -11,7 +10,7 @@ import org.johoco.depinsight.domain.key.DeveloperKey;
  */
 public interface IDeveloperService {
 
-	Developer getByKey(final DeveloperKey key) throws Exception;
+	Developer findOne(final Developer developer) throws Exception;
 
 	Developer save(final Developer developer);
 }

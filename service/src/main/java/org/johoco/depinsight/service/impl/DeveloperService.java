@@ -1,9 +1,6 @@
 package org.johoco.depinsight.service.impl;
 
-import java.util.Optional;
-
 import org.johoco.depinsight.domain.Developer;
-import org.johoco.depinsight.domain.key.DeveloperKey;
 import org.johoco.depinsight.repository.arangodb.extended.DeveloperRepository;
 import org.johoco.depinsight.service.IDeveloperService;
 import org.slf4j.Logger;
@@ -32,15 +29,8 @@ public class DeveloperService extends BaseService<Developer> implements IDevelop
 	 * TODO: change exception to daoexception
 	 */
 	@Override
-	public Developer getByKey(final DeveloperKey key) {
-		return this.repository.getByKey(key).orElse(null);
-
-//		Optional<Developer> dev = repository.getByKey(key);
-//		if (dev.isEmpty()) {
-//			LOGR.warn("An existing Developer of {} wasn't getByKey", key);
-//			throw new Exception("no Developer key for " + key);
-//		}
-//		return dev.get();
+	public Developer findOne(final Developer developer) {
+		return this.repository.findOne(developer).orElse(null);
 	}
 
 	/**
@@ -57,12 +47,7 @@ public class DeveloperService extends BaseService<Developer> implements IDevelop
 
 	@Override
 	public Developer save(final Developer developer) {
-		// TODO: move to business rule
-		Developer save = developer;
-		Optional<Developer> existing = Optional.ofNullable(this.getByKey(developer.getKey()));
-		if (!existing.isEmpty()) {
-			save = existing.get();
-		}
+		Developer save = this.repository.findOne(developer).orElse(developer);
 		super.preSave(save);
 		// upsert - save new or save with last updated timestamp
 		return this.repository.save(save);

@@ -24,10 +24,8 @@ public class OfDistributionManagementService extends BaseService<OfDistributionM
 
 	@Override
 	public OfDistributionManagement save(final OfDistributionManagement ofDistributionManagement) {
-		OfDistributionManagement toSave = ofDistributionManagement;
-		if (ofDistributionManagement.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofDistributionManagement).orElse(ofDistributionManagement);
-		}
+		OfDistributionManagement toSave = this.repository.getByVertexIds(ofDistributionManagement)
+				.orElse(ofDistributionManagement);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

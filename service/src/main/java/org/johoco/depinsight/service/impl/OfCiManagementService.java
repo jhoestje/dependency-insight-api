@@ -23,10 +23,7 @@ public class OfCiManagementService extends BaseService<OfCiManagement> implement
 
 	@Override
 	public OfCiManagement save(final OfCiManagement ofCiManagement) {
-		OfCiManagement toSave = ofCiManagement;
-		if (ofCiManagement.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofCiManagement).orElse(ofCiManagement);
-		}
+		OfCiManagement toSave = this.repository.getByVertexIds(ofCiManagement).orElse(ofCiManagement);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

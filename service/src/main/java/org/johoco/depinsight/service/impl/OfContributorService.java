@@ -23,10 +23,7 @@ public class OfContributorService extends BaseService<OfContributor> implements 
 
 	@Override
 	public OfContributor save(final OfContributor ofContributor) {
-		OfContributor toSave = ofContributor;
-		if (ofContributor.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofContributor).orElse(ofContributor);
-		}
+		OfContributor toSave = this.repository.getByVertexIds(ofContributor).orElse(ofContributor);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

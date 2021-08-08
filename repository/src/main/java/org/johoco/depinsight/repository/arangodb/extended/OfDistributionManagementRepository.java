@@ -31,7 +31,8 @@ public class OfDistributionManagementRepository
 	private final static Logger LOGR = LoggerFactory.getLogger(OfDistributionManagementRepository.class);
 
 	@Autowired
-	public OfDistributionManagementRepository(@Value("#{ofcontributorqueries}") final Map<String, String> queries,
+	public OfDistributionManagementRepository(
+			@Value("#{ofdistributionmanagementqueries}") final Map<String, String> queries,
 			final ArangoOperations aranngoDB,
 			final OfDistributionManagementArangoRepository ofDistributionManagementArangoRepository) {
 		super(queries, aranngoDB, ofDistributionManagementArangoRepository);
@@ -41,7 +42,7 @@ public class OfDistributionManagementRepository
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("conVertexId", ofDistributionManagement.getDistributionManagement().getArangoId());
+		bindVars.put("distroVertexId", ofDistributionManagement.getDistributionManagement().getArangoId());
 		bindVars.put("artifactVertexId", ofDistributionManagement.getArtifact().getArangoId());
 
 		ArangoCursor<OfDistributionManagement> cursor = getArangoDb().query(query, bindVars, null,

@@ -24,10 +24,7 @@ public class OfChildArtifactService extends BaseService<OfChildArtifact> impleme
 
 	@Override
 	public OfChildArtifact save(final OfChildArtifact ofChildArtifact) {
-		OfChildArtifact toSave = ofChildArtifact;
-		if (ofChildArtifact.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofChildArtifact).orElse(ofChildArtifact);
-		}
+		OfChildArtifact toSave = this.repository.getByVertexIds(ofChildArtifact).orElse(ofChildArtifact);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

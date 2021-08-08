@@ -23,10 +23,7 @@ public class OfIssueManagementService extends BaseService<OfIssueManagement> imp
 
 	@Override
 	public OfIssueManagement save(final OfIssueManagement ofIssueManagement) {
-		OfIssueManagement toSave = ofIssueManagement;
-		if (ofIssueManagement.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofIssueManagement).orElse(ofIssueManagement);
-		}
+		OfIssueManagement toSave = this.repository.getByVertexIds(ofIssueManagement).orElse(ofIssueManagement);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

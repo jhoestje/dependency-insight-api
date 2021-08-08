@@ -29,7 +29,7 @@ public class OfBuildRepository extends BaseCompositeRepository<OfBuild, OfBuildA
 	private final static Logger LOGR = LoggerFactory.getLogger(OfBuildRepository.class);
 
 	@Autowired
-	public OfBuildRepository(@Value("#{ofcontributorqueries}") final Map<String, String> queries,
+	public OfBuildRepository(@Value("#{ofbuildqueries}") final Map<String, String> queries,
 			final ArangoOperations aranngoDB, final OfBuildArangoRepository ofBuildArangoRepository) {
 		super(queries, aranngoDB, ofBuildArangoRepository);
 	}
@@ -38,7 +38,7 @@ public class OfBuildRepository extends BaseCompositeRepository<OfBuild, OfBuildA
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("conVertexId", ofBuild.getBuild().getArangoId());
+		bindVars.put("buildVertexId", ofBuild.getBuild().getArangoId());
 		bindVars.put("artifactVertexId", ofBuild.getArtifact().getArangoId());
 
 		ArangoCursor<OfBuild> cursor = getArangoDb().query(query, bindVars, null, OfBuild.class);

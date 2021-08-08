@@ -19,6 +19,8 @@ import lombok.NonNull;
 @Document("licenses")
 public class License extends Entity<LicenseKey> {
 
+	private String distribution;
+
 	public License(@NonNull final LicenseKey key) {
 		super(key);
 	}
@@ -33,10 +35,6 @@ public class License extends Entity<LicenseKey> {
 
 	public String getUrl() {
 		return this.getKey().getUrl();
-	}
-
-	public String getDistribution() {
-		return this.getKey().getDistribution();
 	}
 
 }

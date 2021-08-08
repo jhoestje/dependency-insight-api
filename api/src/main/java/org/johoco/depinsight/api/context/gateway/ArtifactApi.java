@@ -10,6 +10,7 @@ import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.IssueManagement;
 import org.johoco.depinsight.domain.Language;
 import org.johoco.depinsight.domain.License;
+import org.johoco.depinsight.domain.Organization;
 import org.johoco.depinsight.domain.Packaging;
 import org.johoco.depinsight.domain.Repository;
 import org.johoco.depinsight.domain.Scm;
@@ -44,6 +45,7 @@ import org.johoco.depinsight.service.ILanguageService;
 import org.johoco.depinsight.service.ILicenseService;
 import org.johoco.depinsight.service.IOfCiManagementService;
 import org.johoco.depinsight.service.IOfIssueManagementService;
+import org.johoco.depinsight.service.IOrganizationService;
 import org.johoco.depinsight.service.IPackagingService;
 import org.johoco.depinsight.service.IPluginRepositoryService;
 import org.johoco.depinsight.service.IRepositoryService;
@@ -115,7 +117,9 @@ public class ArtifactApi {
 	private IBuildService buildService;
 	private IofBuildService ofBuildService;
 
+	private IOrganizationService orgService;
 	private IofOrganizationService ofOrgService;
+
 	private IofLicenseService ofLicenseService;
 	private IofDeveloperService ofDevService;
 	private IofContributorService ofContributorService;
@@ -127,11 +131,14 @@ public class ArtifactApi {
 			final IofLanguageService ofLanguageService, final IofGroupIdService ofGroupIdService,
 			final IofArtifactIdService ofArtifactIdService, final IofVersionService ofVersionService,
 			final IofGavpService ofGavpService, final IofChildArtifactService ofChildArtifactService,
-			final IofOrganizationService ofOrgService, final IofLicenseService ofLicenseService,
-			final IofDeveloperService ofDevService, final IofContributorService ofContributorService,
-			final ILicenseService licenseService, final IDeveloperService developerService,
-			final IContributorService contributorService, IScmService scmService, final IofScmService ofScmService,
-			final ICiManagementService ciManagementService, final IOfCiManagementService ofCiManagementService) {
+			final IOrganizationService orgService, final IofOrganizationService ofOrgService,
+			final IofLicenseService ofLicenseService, final IofDeveloperService ofDevService,
+			final IofContributorService ofContributorService, final ILicenseService licenseService,
+			final IDeveloperService developerService, final IContributorService contributorService,
+			final IScmService scmService, final IofScmService ofScmService,
+			final IIssueManagementService issueManagementService,
+			final IOfIssueManagementService ofIssueManagementService, final ICiManagementService ciManagementService,
+			final IOfCiManagementService ofCiManagementService) {
 		this.service = service;
 		this.gidService = gidService;
 		this.aidService = aidService;
@@ -144,6 +151,7 @@ public class ArtifactApi {
 		this.ofVersionService = ofVersionService;
 		this.ofGavpService = ofGavpService;
 		this.ofChildArtifactService = ofChildArtifactService;
+		this.orgService = orgService;
 		this.ofOrgService = ofOrgService;
 		this.ofLicenseService = ofLicenseService;
 		this.ofDevService = ofDevService;
@@ -152,6 +160,8 @@ public class ArtifactApi {
 		this.developerService = developerService;
 		this.contributorService = contributorService;
 		this.scmService = scmService;
+		this.issueManagementService = issueManagementService;
+		this.ofIssueManagementService = ofIssueManagementService;
 		this.ofScmService = ofScmService;
 		this.ciManagementService = ciManagementService;
 		this.ofCiManagementService = ofCiManagementService;
@@ -202,7 +212,8 @@ public class ArtifactApi {
 			ofGavpService.save(ofGavp);
 
 			if (savedArtifact.getOrganization() != null) {
-				final OfOrganization ofO = new OfOrganization(savedArtifact, savedArtifact.getOrganization());
+				Organization o = orgService.save(savedArtifact.getOrganization());
+				final OfOrganization ofO = new OfOrganization(savedArtifact, o);
 				ofOrgService.save(ofO);
 			}
 

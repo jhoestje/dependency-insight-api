@@ -29,10 +29,7 @@ public class OfArtifactIdService extends BaseService<OfArtifactId> implements Io
 
 	@Override
 	public OfArtifactId save(final OfArtifactId ofArtifactId) {
-		OfArtifactId toSave = ofArtifactId;
-		if (ofArtifactId.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofArtifactId).orElse(ofArtifactId);
-		}
+		OfArtifactId toSave = this.repository.getByVertexIds(ofArtifactId).orElse(ofArtifactId);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

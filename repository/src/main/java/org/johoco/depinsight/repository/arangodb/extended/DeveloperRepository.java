@@ -1,6 +1,5 @@
 package org.johoco.depinsight.repository.arangodb.extended;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -11,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Repository;
 
-import com.arangodb.ArangoCursor;
 import com.arangodb.springframework.core.ArangoOperations;
 
 /**
@@ -57,29 +56,29 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 	 * @param key
 	 * @return
 	 */
-	public Optional<Developer> getByKey(final DeveloperKey key) {
-//		try {
-		String query = getQuery("getByKey");
-		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("email", key.getEmail());
-
-		ArangoCursor<Developer> cursor = getArangoDb().query(query, bindVars, null, Developer.class);
-//		cursor.forEachRemaining(aDocument -> {
-//			System.out.println("Key: " + aDocument.getKey());
-//		});
-		// return Optional.of(cursor.next());
-		if (cursor.hasNext()) {
-			return Optional.of(cursor.next());
-		}
-		return Optional.empty();
-//		} catch (ArangoDBException e) {
-//			System.err.println("Failed to execute query. " + e.getMessage());
+//	public Optional<Developer> getByKey(final DeveloperKey key) {
+////		try {
+//		String query = getQuery("getByKey");
+//		Map<String, Object> bindVars = new HashMap<String, Object>();
+//		bindVars.put("email", key.getEmail());
+//
+//		ArangoCursor<Developer> cursor = getArangoDb().query(query, bindVars, null, Developer.class);
+////		cursor.forEachRemaining(aDocument -> {
+////			System.out.println("Key: " + aDocument.getKey());
+////		});
+//		// return Optional.of(cursor.next());
+//		if (cursor.hasNext()) {
+//			return Optional.of(cursor.next());
 //		}
 //		return Optional.empty();
-	}
+////		} catch (ArangoDBException e) {
+////			System.err.println("Failed to execute query. " + e.getMessage());
+////		}
+////		return Optional.empty();
+//	}
 
 	public Developer save(final Developer developer) {
-		LOGR.debug("Saving Developer id {} - from {} to {}:  ", developer.getId(), developer.getKey());
+		LOGR.debug("Saving Developer id {}:  ", developer.getId());
 		return this.getRepository().save(developer);
 	}
 
@@ -99,7 +98,7 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 	}
 
 	public void delete(final Developer developer) {
-		this.delete(developer.getKey());
+//		this.delete(developer);
 	}
 
 	public void update() {
@@ -109,6 +108,10 @@ public class DeveloperRepository extends BaseCompositeRepository<Developer, Deve
 //		} catch (ArangoDBException e) {
 //		  System.err.println("Failed to update document. " + e.getMessage());
 //		}
+	}
+
+	public Optional<Developer> findOne(Developer developer) {
+		return getRepository().findOne(Example.of(developer));
 	}
 
 }

@@ -41,7 +41,7 @@ public class OfIssueManagementRepository
 //		try {
 		String query = getQuery("getByVertexIds");
 		Map<String, Object> bindVars = new HashMap<String, Object>();
-		bindVars.put("devVertexId", ofIssueManagement.getIssueManagement().getArangoId());
+		bindVars.put("imVertexId", ofIssueManagement.getIssueManagement().getArangoId());
 		bindVars.put("artifactVertexId", ofIssueManagement.getArtifact().getArangoId());
 
 		ArangoCursor<OfIssueManagement> cursor = getArangoDb().query(query, bindVars, null, OfIssueManagement.class);

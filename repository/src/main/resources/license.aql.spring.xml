@@ -19,7 +19,6 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 				FOR l IN licenses
 				    FILTER l.key.name == @name
 				    AND l.key.url == @url
-				    AND l.key.distribution == @distribution
 				    RETURN l
 			  ]]>
 			</value>

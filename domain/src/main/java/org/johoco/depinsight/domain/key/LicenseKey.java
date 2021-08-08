@@ -16,6 +16,5 @@ public class LicenseKey implements Key {
 	private String name;
 	@NonNull
 	private String url;
-	@NonNull
-	private String distribution;
+
 }

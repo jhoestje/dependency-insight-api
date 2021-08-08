@@ -23,10 +23,7 @@ public class OfLicenseService extends BaseService<OfLicense> implements IofLicen
 
 	@Override
 	public OfLicense save(final OfLicense ofLicense) {
-		OfLicense toSave = ofLicense;
-		if (ofLicense.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofLicense).orElse(ofLicense);
-		}
+		OfLicense toSave = this.repository.getByVertexIds(ofLicense).orElse(ofLicense);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

@@ -23,10 +23,7 @@ public class OfBuildService extends BaseService<OfBuild> implements IofBuildServ
 
 	@Override
 	public OfBuild save(final OfBuild ofBuild) {
-		OfBuild toSave = ofBuild;
-		if (ofBuild.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofBuild).orElse(ofBuild);
-		}
+		OfBuild toSave = this.repository.getByVertexIds(ofBuild).orElse(ofBuild);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

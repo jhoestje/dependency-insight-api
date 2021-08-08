@@ -24,10 +24,7 @@ public class OfVersionService extends BaseService<OfVersion> implements IofVersi
 
 	@Override
 	public OfVersion save(final OfVersion ofVersion) {
-		OfVersion toSave = ofVersion;
-		if (ofVersion.getArangoKey() == null) {
-			toSave = this.repository.getByVertexIds(ofVersion).orElse(ofVersion);
-		}
+		OfVersion toSave = this.repository.getByVertexIds(ofVersion).orElse(ofVersion);
 		super.preSave(toSave);
 		return repository.save(toSave);
 	}

@@ -16,7 +16,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
 			<value>
 			 <![CDATA[
 	            WITH ofLicense
-				FOR ofD IN ofLicense
+				FOR ofL IN ofLicense
 				    FILTER ofL._to == @artifactVertexId
 				    AND ofL._from == @licVertexId
 				    RETURN ofL

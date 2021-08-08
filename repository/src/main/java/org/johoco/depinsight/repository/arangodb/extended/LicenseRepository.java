@@ -45,7 +45,7 @@ public class LicenseRepository extends BaseCompositeRepository<License, LicenseA
 		Map<String, Object> bindVars = new HashMap<String, Object>();
 		bindVars.put("name", key.getName());
 		bindVars.put("url", key.getUrl());
-		bindVars.put("distribution", key.getDistribution());
+//		bindVars.put("distribution", key.getDistribution());
 
 		ArangoCursor<License> cursor = getArangoDb().query(query, bindVars, null, License.class);
 		if (cursor.hasNext()) {

@@ -1,7 +1,5 @@
 package org.johoco.depinsight.service.impl;
 
-import java.util.Optional;
-
 import org.johoco.depinsight.domain.relationship.OfLanguage;
 import org.johoco.depinsight.repository.arangodb.extended.OfLanguageRepository;
 import org.johoco.depinsight.service.IofLanguageService;
@@ -28,12 +26,9 @@ public class OfLanguageService extends BaseService<OfLanguage> implements IofLan
 	 */
 	@Override
 	public OfLanguage save(final OfLanguage ofLanguage) {
-		Optional<OfLanguage> exists = repository.getByVertexIds(ofLanguage);
-		if (exists.isEmpty()) {
-			super.preSave(ofLanguage);
-			return repository.save(ofLanguage);
-		}
-		return exists.get();
+		OfLanguage toSave = this.repository.getByVertexIds(ofLanguage).orElse(ofLanguage);
+		super.preSave(toSave);
+		return repository.save(toSave);
 	}
 
 	@Override
