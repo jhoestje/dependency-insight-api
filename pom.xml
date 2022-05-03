@@ -18,65 +18,67 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<!-- <spring-data.version>5.3.0.RELEASE</spring-data.version> -->
-		<!-- <spring-boot.version>2.4.1</spring-boot.version> --> <!-- neo 4 compatible -->
-		<spring-boot.version>2.6.7</spring-boot.version> <!-- lastest ogndb/neo 3 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>
+		<arango.spring.data>3.5.0</arango.spring.data>
 	</properties>
 
-	<!-- Evemtually switch to this -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-parent</artifactId>
-				<!-- <artifactId>spring-data-bom</artifactId> -->
-				<version>${spring-boot.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>org.springframework.data</groupId>
-						<artifactId>spring-data-neo4j</artifactId>
-					</exclusion>
-				</exclusions>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
-			<!-- <dependency>
-				<groupId>org.springframework.data</groupId>
-				<artifactId>spring-data-neo4j</artifactId>
-				
-			</dependency> -->
-			
-			      <dependency>
-	        <groupId>org.springframework.boot</groupId>
-	        <artifactId>spring-boot-starter-data-neo4j</artifactId>
-	        <version>${spring-boot.version}</version>
-	      </dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 
-			</dependency> -->
+		<!-- SPRING STUFF -->
+		<dependency>
+			<groupId>com.arangodb</groupId>
+			<artifactId>arangodb-spring-data</artifactId>
+			<version>${arango.spring.data}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- ALL OTHERS -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+		<!-- OPTIONALS -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.16</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- TESTS -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -84,26 +86,37 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
-		
-		<!-- dont know if the maven model is needed
-		<dependency>
-		    <groupId>org.apache.maven.resolver</groupId>
-		    <artifactId>maven-resolver-api</artifactId>
-		    <version>1.6.1</version>
-		</dependency>
- -->
-		
-	</dependencies>
 
-	<modules>
-		<module>domain</module>
-		<module>repository</module>
-		<module>service</module>
-		<module>api</module>
-		<module>web</module>
-	</modules>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<layers>
+						<enabled>true</enabled>
+					</layers>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-image</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
