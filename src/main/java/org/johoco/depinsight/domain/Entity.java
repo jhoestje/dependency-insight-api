@@ -1,47 +1,18 @@
 package org.johoco.depinsight.domain;
 
-import org.johoco.depinsight.domain.key.Key;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
+import org.johoco.depinsight.domain.composite.key.Key;
 
-public abstract class Entity<KEY extends Key> {
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
-//	@Id
-//	@GeneratedValue
-//	private UUID id;
-//
-//	private KEY key;
-//
-//	public UUID getId() {
-//		return id;
-//	}
-//
-//	public KEY getKey() {
-//		return key;
-//	}
-	@Id
-	@GeneratedValue
-	private Long id;
+@RequiredArgsConstructor
+@ToString
+@Getter
+public abstract class Entity<KEY extends Key> extends GraphData {
 
-//	@Id
-//	@GeneratedValue
-//	private Long id;
-//
-//	@Property
-//	private KEY key;
-//
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public KEY getKey() {
-//		return key;
-//	}
-//
-//	void setKey(final KEY key) {
-//		this.key = key;
-//	}
+	@NonNull
+	private KEY key;
 
-	// save with new ojbects UUID uuid = UUID.randomUUID();
-	// using KernelExtensionFactory to auto set uuid on save
 }

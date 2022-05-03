@@ -1,13 +1,16 @@
 package org.johoco.depinsight.web.controller;
 
-import java.util.Date;
-
-import org.johoco.depinsight.api.context.bounded.GroupIdApi;
+import org.johoco.depinsight.api.context.gateway.ArtifactApi;
 import org.johoco.depinsight.domain.ArtifactId;
 import org.johoco.depinsight.domain.GroupId;
 import org.johoco.depinsight.domain.Language;
-import org.johoco.depinsight.domain.relationship.LanguageType;
-import org.johoco.depinsight.domain.relationship.PartOfGroupId;
+import org.johoco.depinsight.domain.Packaging;
+import org.johoco.depinsight.domain.Version;
+import org.johoco.depinsight.domain.composite.Artifact;
+import org.johoco.depinsight.domain.composite.key.ArtifactKey;
+import org.johoco.depinsight.domain.key.ArtifactIdKey;
+import org.johoco.depinsight.domain.key.GroupIdKey;
+import org.johoco.depinsight.domain.key.VersionKey;
 import org.johoco.depinsight.service.ILanguageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +34,7 @@ public class TestController {
 	private ILanguageService languageService;
 
 	@Autowired
-	private GroupIdApi groupIdApi;
+	private ArtifactApi artifactApi;
 
 	@Value("${messagez:Hello default}")
 	private String message;
@@ -44,35 +47,30 @@ public class TestController {
 		// LanguageKey lk = new LanguageKey("JAVA");
 		Language javaLang = new Language();
 		javaLang.setValue("SMALLTALK");
+		javaLang = languageService.save(javaLang);
 
-		GroupId gId1 = new GroupId();
-		gId1.setValue("st2");
+		GroupIdKey gidKey = new GroupIdKey(javaLang.getValue(), "st2");
+		GroupId gId1 = new GroupId(gidKey);
 
-		LanguageType lt = new LanguageType();
-		lt.setGroupId(gId1);
-		lt.setLanguage(javaLang);
-		lt.setCreatedDate(new Date());
+		ArtifactIdKey aidKey = new ArtifactIdKey(gidKey.getLanguage(), gidKey.getGroupIdValue(), "aid1");
+		ArtifactId aid1 = new ArtifactId(aidKey);
 
-		gId1.setLanguage(lt);
+		VersionKey vKey = new VersionKey(gidKey.getLanguage(), gidKey.getGroupIdValue(), aid1.getValue(), "1.0.0");
+		Version v = new Version(vKey);
 
-		ArtifactId aid1 = new ArtifactId();
-		aid1.setValue("aid1");
+		Packaging p = new Packaging();
+		p.setValue("JAR");
 
-		PartOfGroupId pgid = new PartOfGroupId();
-		pgid.setArtifactId(aid1);
-		pgid.setGroupId(gId1);
-		pgid.setCreatedDate(new Date());
+		ArtifactKey akey = new ArtifactKey("java", gId1.getKey().getGroupIdValue(), aid1.getValue(), v.getValue(),
+				p.getValue());
+		Artifact art = new Artifact(akey);
 
-		aid1.setPartOfGroupId(pgid);
-
-		GroupId savedgid = groupIdApi.save(gId1);
-
-//		List<GroupId> gids = new ArrayList<>();
-//		gids.add(gId1);
-
-//		javaLang.setGroupIds(gids);
-
-//		languageService.save(javaLang);
+		try {
+			artifactApi.save(javaLang, art);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		return languageService.findAll();
 	}

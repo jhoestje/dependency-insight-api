@@ -1,15 +1,22 @@
 package org.johoco.depinsight.domain;
 
-import java.util.Date;
+import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
 
-import org.neo4j.ogm.annotation.Property;
+import com.arangodb.springframework.annotation.ArangoId;
 
 import lombok.Data;
 
 @Data
-public class GraphData {
+public abstract class GraphData {
 
-	@Property
-	private Date createdDate;
-	
+	@Id // db document field: _key -- ex:1051180
+	private String arangoKey;
+
+	@ArangoId // db document field: _id -- ex:groupIds/1051180
+	private String arangoId;
+
+	private DateTime createdDate;
+	private DateTime lastUpdatedDate;
+
 }

@@ -1,11 +1,9 @@
 spring:  data:    neo4j:      uri: bolt://localhost:7687
 
 ---
-spring:
-    profiles: local    data:      neo4j:        uri: bolt://localhost:7687name: local-YAML
+spring:    config:      activate:        on-profile: local     data:      neo4j:        uri: bolt://localhost:7687name: local-YAML
 environment: local
 ---
-spring:
-    profiles: prod
+spring:    config:      activate:        on-profile: prod 
 name: prod-YAML
 environment: production

@@ -1,7 +1,14 @@
 package org.johoco.depinsight.domain;
 
-import org.johoco.depinsight.domain.key.ArtifactKey;
+import org.johoco.depinsight.domain.composite.key.ExclusionKey;
 
-public class Exclusion extends Entity<ArtifactKey> {
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class Exclusion extends Entity<ExclusionKey> {
+	public Exclusion(ExclusionKey key) {
+		super(key);
+	}
 }

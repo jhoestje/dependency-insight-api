@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<import resource="artifact.aql.spring.xml" />
+
+	<import resource="groupid.aql.spring.xml" />
+	<import resource="ofgroupid.aql.spring.xml" />
+
+	<import resource="artifactid.aql.spring.xml" />
+	<import resource="ofartifactid.aql.spring.xml" />
+
+	<import resource="version.aql.spring.xml" />
+	<import resource="ofversion.aql.spring.xml" />
+
+	<import resource="oflanguage.aql.spring.xml" />
+	<import resource="ofgavp.aql.spring.xml" />
+
+	<import resource="developer.aql.spring.xml" />
+	<import resource="ofdeveloper.aql.spring.xml" />
+
+	<import resource="contributor.aql.spring.xml" />
+	<import resource="ofcontributor.aql.spring.xml" />
+
+	<import resource="license.aql.spring.xml" />
+	<import resource="oflicense.aql.spring.xml" />
+
+	<import resource="scm.aql.spring.xml" />
+	<import resource="ofscm.aql.spring.xml" />
+
+	<import resource="repository.aql.spring.xml" />
+	<import resource="ofrepository.aql.spring.xml" />
+	<import resource="ofpluginrepository.aql.spring.xml" />
+
+	<import resource="distributionmanagement.aql.spring.xml" />
+	<import resource="ofdistributionmanagement.aql.spring.xml" />
+
+	<import resource="cimanagement.aql.spring.xml" />
+	<import resource="ofcimanagement.aql.spring.xml" />
+
+	<import resource="issuemanagement.aql.spring.xml" />
+	<import resource="ofissuemanagement.aql.spring.xml" />
+
+	<import resource="ofchildartifact.aql.spring.xml" />
+	
+	<import resource="organization.aql.spring.xml" />
+	<import resource="oforganization.aql.spring.xml" />
+
+    <import resource="build.aql.spring.xml" />
+    <import resource="ofbuild.aql.spring.xml" />
+
+</beans>

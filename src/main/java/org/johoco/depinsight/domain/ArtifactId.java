@@ -1,28 +1,40 @@
 package org.johoco.depinsight.domain;
 
-import org.johoco.depinsight.domain.relationship.PartOfGroupId;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.johoco.depinsight.domain.key.ArtifactIdKey;
+import org.johoco.depinsight.domain.relationship.OfGroupId;
 
-//import org.neo4j.ogm.annotation.Id;
-//import org.neo4j.ogm.annotation.NodeEntity;
-//import org.neo4j.ogm.annotation.Relationship;
+import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.Relations;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Data
-@NodeEntity("ArtifactId")
-public class ArtifactId {
-//	@Id @GeneratedValue private Long id;
+@EqualsAndHashCode(callSuper = true)
+@Document("artifactIds")
+public class ArtifactId extends Entity<ArtifactIdKey> {
 
-	@Id
-	private String value;
-	
-	// not sure about how to do/if need to do keys (lang + gid + aid)
-//	@org.neo4j.ogm.annotation.Transient
-//	private String key;
+	@Relations(edges = OfGroupId.class, lazy = false)
+	private GroupId groupId;
 
-	@Relationship(type = "PART_OF_GROUP", direction = Relationship.OUTGOING)
-	private PartOfGroupId partOfGroupId;
+	public ArtifactId(ArtifactIdKey key) {
+		super(key);
+	}
+
+	public static String getDocumentName() {
+		return "artifactIds";
+	}
+
+	public String getValue() {
+		if (this.getKey() != null) {
+			return this.getKey().getArtifactIdValue();
+		}
+		return null;
+	}
 }

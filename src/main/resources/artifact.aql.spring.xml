@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<util:map id="artifactqueries" map-class="java.util.HashMap"
+		key-type="java.lang.String" value-type="java.lang.String">
+		<entry>
+			<key><value>getByKey</value></key>
+			<value>
+			<![CDATA[
+                WITH artifacts
+				FOR a IN artifacts
+				    FILTER a.key.groupIdValue == @groupIdId
+				        AND a.key.artifactIdValue == @artifactIdId
+				        AND a.key.version == @versionId
+				        AND a.key.packaging == @packagingId
+				        AND a.key.language == @languageId
+				    RETURN a
+	        ]]></value>
+		</entry>
+	</util:map>
+
+</beans>

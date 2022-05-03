@@ -1,29 +1,38 @@
 package org.johoco.depinsight.domain;
 
-import org.johoco.depinsight.domain.relationship.LanguageType;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.johoco.depinsight.domain.key.GroupIdKey;
+import org.johoco.depinsight.domain.relationship.OfLanguage;
+
+import com.arangodb.springframework.annotation.Document;
+import com.arangodb.springframework.annotation.Relations;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper=true)
-@NodeEntity
-public class GroupId extends GraphData {
-//	@Id
-//	@GeneratedValue
-//	private Long id;
+@EqualsAndHashCode(callSuper = true)
+@Document("groupIds")
+public class GroupId extends Entity<GroupIdKey> {
 
-//	@Property(name = "value")
-	@Id
-	private String value;
-	
-	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.OUTGOING)
-	private LanguageType language;
+	@Relations(edges = OfLanguage.class, lazy = false)
+	private Language language;
+
+	public GroupId(GroupIdKey key) {
+		super(key);
+	}
 
 //	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
 //	private Set<ArtifactId> artifactIds;
+
+	public static String getDocumentName() {
+		return "groupIds";
+	}
+
+	public String getValue() {
+		if (this.getKey() != null) {
+			return this.getKey().getGroupIdValue();
+		}
+		return null;
+	}
 
 }

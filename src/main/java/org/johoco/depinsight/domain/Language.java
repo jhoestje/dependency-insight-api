@@ -1,15 +1,23 @@
 package org.johoco.depinsight.domain;
 
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
+import com.arangodb.springframework.annotation.Document;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+/**
+ * 
+ * 
+ * @author John Hoestje
+ *
+ */
 @Data
-@NodeEntity
-public class Language { //extends Entity<LanguageKey> {
+@EqualsAndHashCode(callSuper = true)
+@Document("languages")
+public class Language extends GraphData { // extends Entity<LanguageKey> {
 
-	@Id
+	// neo4j attributes
+//	@Id
 	private String value;
 
 //	public Language(LanguageKey key) {
@@ -18,5 +26,9 @@ public class Language { //extends Entity<LanguageKey> {
 
 //	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
 //	public List<Lan> groupIds;
+
+	public static String getDocumentName() {
+		return "languages";
+	}
 
 }
