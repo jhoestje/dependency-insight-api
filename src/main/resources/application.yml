@@ -1,10 +1,11 @@
-#spring:
-#    profiles: test
-#name: test-YAML
-#environment: test
-# 
-#---
-#spring:
-#    profiles: prod
-#name: prod-YAML
-#environment: production
+spring:  data:    neo4j:      uri: bolt://localhost:7687
+
+---
+spring:
+    profiles: local    data:      neo4j:        uri: bolt://localhost:7687name: local-YAML
+environment: local
+---
+spring:
+    profiles: prod
+name: prod-YAML
+environment: production
