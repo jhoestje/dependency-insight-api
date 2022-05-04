@@ -13,14 +13,12 @@
 	<artifactId>dependency-insight-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dependency-insight-api</name>
-	<packaging>pom</packaging>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
-		<java.version>1.8</java.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>11</java.version>
 		<spring-cloud.version>Hoxton.SR11</spring-cloud.version>
-		<arango.spring.data>3.5.0</arango.spring.data>
+		<arango.spring.data>3.6.0</arango.spring.data>
 	</properties>
 
 	<dependencyManagement>
@@ -42,13 +40,17 @@
 			<artifactId>arangodb-spring-data</artifactId>
 			<version>${arango.spring.data}</version>
 		</dependency>
+		<!-- <dependency> <groupId>com.arangodb</groupId> <artifactId>arangodb-spring-boot-starter</artifactId> 
+			<version>2.3.3.RELEASE</version> </dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-web</artifactId> 
+			</dependency> -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-jersey</artifactId>
 		</dependency>
 
 		<!-- ALL OTHERS -->
@@ -57,13 +59,13 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
+		<!-- OPTIONALS -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		<!-- OPTIONALS -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -72,6 +74,16 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-actuator</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-actuator-autoconfigure</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<!-- TESTS -->

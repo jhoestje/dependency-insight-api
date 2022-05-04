@@ -1,6 +1,7 @@
 package org.johoco.depinsight.domain;
 
-import org.joda.time.DateTime;
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 
 import com.arangodb.springframework.annotation.ArangoId;
@@ -16,7 +17,7 @@ public abstract class GraphData {
 	@ArangoId // db document field: _id -- ex:groupIds/1051180
 	private String arangoId;
 
-	private DateTime createdDate;
-	private DateTime lastUpdatedDate;
+	private Date createdDate;
+	private Date lastUpdatedDate;
 
 }
