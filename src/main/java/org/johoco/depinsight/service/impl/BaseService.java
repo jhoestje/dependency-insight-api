@@ -23,7 +23,7 @@ public abstract class BaseService<E extends GraphData> {
 	 * @return
 	 */
 	protected E preSave(final E data) {
-		final Date dt = Date.now();
+		final Date dt = new Date();
 		if (data.getCreatedDate() == null) {
 			data.setCreatedDate(dt);
 		}

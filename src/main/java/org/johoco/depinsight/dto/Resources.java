@@ -15,7 +15,12 @@ public class Resources {
 	private String targetPath;
 	private String filtering;
 	private String directory;
-	// example includes <code>**&#47;*.xml</code>
+	// includes pattern: A list of patterns to exclude, e.g.
+	// <code>**&#47;*.xml</code>
+	// IncludesPattern or String?
 	List<String> includes;
-	List<Excludes> excludes;
+	// excludes pattern: A list of patterns to excludes, e.g.
+	// <code>**&#47;*.xml</code>
+	// ExcludesPattern or String?
+	List<String> excludes;
 }

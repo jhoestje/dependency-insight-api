@@ -18,6 +18,6 @@ public class DependencyDTO {
 	private String classifier;
 	private String scope;
 	private String systemPath;
-	List<Exclusion> exclusions;
+	private List<Exclusion> exclusions;
 	private String optional;
 }

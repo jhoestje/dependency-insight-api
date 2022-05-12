@@ -3,6 +3,7 @@ package org.johoco.depinsight.dto;
 import java.util.List;
 import java.util.Map;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,18 +15,23 @@ import lombok.NoArgsConstructor;
  *
  */
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
-//@Builder
+@Builder
 public class Pom {
 	// TODO: add language?
 
 	private String modelVersion;
 	private Gav parent;
 
+	@Builder.Default
+	private String language = "java";
+
 	private String groupId;
 	private String artifactId;
 	private String version;
-	private String packaging;
+	@Builder.Default
+	private String packaging = "pom";
 	private String name;
 	private String description;
 	private String url;
