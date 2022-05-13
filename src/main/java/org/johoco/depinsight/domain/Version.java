@@ -15,8 +15,6 @@ import lombok.NonNull;
 @Document("versions")
 public class Version extends Entity<VersionKey> {
 
-//	private String value;
-
 	@Relations(edges = OfArtifactId.class, lazy = false)
 	private ArtifactId artifactId;
 

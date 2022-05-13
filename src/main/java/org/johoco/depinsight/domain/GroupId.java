@@ -21,9 +21,6 @@ public class GroupId extends Entity<GroupIdKey> {
 		super(key);
 	}
 
-//	@Relationship(type = "LANGUAGE_TYPE", direction = Relationship.INCOMING)
-//	private Set<ArtifactId> artifactIds;
-
 	public static String getDocumentName() {
 		return "groupIds";
 	}
